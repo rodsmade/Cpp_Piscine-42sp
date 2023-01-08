@@ -6,12 +6,16 @@ PhoneBook::PhoneBook() {};
 
 PhoneBook::~PhoneBook() {};
 
+void PhoneBook::ListContactByIndex(int index) {
+    allContacts[index].ListDetails();
+}
+
 void PhoneBook::ListAllContacts() {
-    std::cout << "Index | First Name | Last Name | Nickname | Phone Number | Darkest Secret";
+    std::cout << "Index | First Name | Last Name | Nickname\n";
 
     for (int i = 0; i < PHONEBOOK_SIZE; i++) {
         std::cout << i << " | ";
-        allContacts[i].ListDetails();
+        allContacts[i].ListDetailsShort();
         std::cout << '\n';
     }
 }

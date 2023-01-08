@@ -14,6 +14,8 @@ class PhoneBook {
 
         ~PhoneBook() ;
 
+        void ListContactByIndex(int index) ;
+
         void ListAllContacts() ;
 
         void AddNewContact(Contact newContact, int index) ;

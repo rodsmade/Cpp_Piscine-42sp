@@ -7,6 +7,8 @@ std::string getUserInput(std::string prompt) {
     std::string input;
 
     do {
+        // proteger contra ctrl+D aqui, acho q retorna -1 ou algo assim.
+        // tratar tb o momento do index, tvz criar outra função sei lá
         std::cout << prompt;
         std::getline(std::cin, input);
     } while (input.compare("") == 0);
@@ -15,6 +17,7 @@ std::string getUserInput(std::string prompt) {
 
 int main()
 {
+    int index;
     std::string user_input;
     std::string cleanLine;
     bool        pgm_exit = false;
@@ -43,6 +46,9 @@ int main()
 
         } else if (user_input.compare("SEARCH") == 0) {
             std::cout << "deu um SEARCH\n";
+            myPhoneBook.ListAllContacts();
+            index = std::stoi(getUserInput("Select a contact by index to see full entry: "));
+            myPhoneBook.ListContactByIndex(index);
         } else if (user_input.compare("EXIT") == 0) {
             std::cout << "deu um EXIT\n";
             std::cout << "Exiting program . . .\n";

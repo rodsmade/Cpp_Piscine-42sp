@@ -24,3 +24,10 @@ void    Contact::ListDetails() {
                 << this->darkestSecret;
     std::cout << '\n';
 }
+
+void    Contact::ListDetailsShort() {
+    std::cout << this->firstName << " | "
+                << this->lastName << " | "
+                << this->nickname;
+    std::cout << '\n';
+}

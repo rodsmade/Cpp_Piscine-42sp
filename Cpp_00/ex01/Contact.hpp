@@ -23,6 +23,8 @@ class Contact {
         ~Contact() ;
 
         void    ListDetails() ;
+
+        void    ListDetailsShort() ;
 };
 
 #endif

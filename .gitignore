@@ -33,3 +33,6 @@
 
 # VSC
 *.vscode
+
+# Others
+teste*.cpp

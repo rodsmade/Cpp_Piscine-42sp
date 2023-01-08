@@ -1,10 +1,10 @@
+
+# c++ -Wall -Wextra -Werror -std=c++98 myAwesomePhoneBook.cpp PhoneBook.cpp Contact.cpp
+
 all: myAwesomePhoneBook.out
 
-myAwesomePhoneBook.out: myAwesomePhoneBook.o
-	c++ -Wall -Wextra -Werror -std=c++98 myAwesomePhoneBook.o -o myAwesomePhoneBook.out
-
-myAwesomePhoneBook.o: myAwesomePhoneBook.cpp
-	c++ -Wall -Wextra -Werror -std=c++98 -c myAwesomePhoneBook.cpp -o myAwesomePhoneBook.o
+myAwesomePhoneBook.out: PhoneBook.cpp Contact.cpp
+	c++ -Wall -Wextra -Werror -std=c++98 -g3 myAwesomePhoneBook.cpp PhoneBook.cpp Contact.cpp -o myAwesomePhoneBook.out
 
 clean:
 	rm -f myAwesomePhoneBook.o

@@ -1,5 +1,7 @@
-all: myAwesomePhoneBook.o
-	c++ -Wall -Wextra -Werror -std=c++98 myAwesomePhoneBook.cpp -o myAwesomePhoneBook.out
+all: myAwesomePhoneBook.out
+
+myAwesomePhoneBook.out: myAwesomePhoneBook.o
+	c++ -Wall -Wextra -Werror -std=c++98 myAwesomePhoneBook.o -o myAwesomePhoneBook.out
 
 myAwesomePhoneBook.o: myAwesomePhoneBook.cpp
 	c++ -Wall -Wextra -Werror -std=c++98 -c myAwesomePhoneBook.cpp -o myAwesomePhoneBook.o

@@ -1,2 +1,11 @@
-all:
-	c++ -Wall -Wextra -Werror -std=c++98 megaphone.cpp -o megaphone
+all: megaphone.o
+	c++ -Wall -Wextra -Werror -std=c++98 megaphone.cpp -o megaphone.out
+
+megaphone.o: megaphone.cpp
+	c++ -Wall -Wextra -Werror -std=c++98 -c megaphone.cpp -o megaphone.o
+
+clean:
+	rm -f megaphone.o
+
+fclean: clean
+	rm -f megaphone.out

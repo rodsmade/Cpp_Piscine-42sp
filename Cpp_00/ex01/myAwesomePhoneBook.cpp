@@ -39,7 +39,8 @@ int main()
 			newContact.phoneNumber = getUserInput("Insert Phone Number: ");
 			newContact.darkestSecret = getUserInput("Insert Darkest Secret: ");
 
-			std::cout << "\nNew contact details: ";
+			std::cout << '\n';
+			std::cout << "New contact details: ";
 			newContact.ListDetails();
 			std::cout << '\n';
 
@@ -53,11 +54,10 @@ int main()
 
 			bool break_loop = false;
 			do {
-				std::stringstream s(getUserInput("Select a contact by index to see full entry: "));
+				std::string indexString = getUserInput("Select a contact by index to see full entry: ");
+				std::stringstream s(indexString);
 				s >> index;
-				if (index < 1 || index > 8)
-					std::cout << "Wrong index. Input a number between 1 and 8.";
-				else {
+				if (index >= 1 && index <= 8) {
 					myPhoneBook.ListContactByIndex(index - 1);
 					std::cout << '\n';
 					break_loop = true;

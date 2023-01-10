@@ -8,7 +8,7 @@ PhoneBook::~PhoneBook(){};
 
 void PhoneBook::ListContactByIndex(int index)
 {
-	std::cout << "Entry " << index + 1 << ":\n";
+	std::cout << "Entry " << index + 1 << ":" << std::endl;
 	allContacts[index].ListDetails();
 }
 
@@ -25,7 +25,7 @@ void PhoneBook::ListAllContacts()
 	std::cout << " | ";
 	std::cout << std::setw(10);
 	std::cout << "Nickname";
-	std::cout << '\n';
+	std::cout << std::endl;
 
 	for (int i = 0; i < PHONEBOOK_SIZE; i++)
 	{

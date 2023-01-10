@@ -21,19 +21,19 @@ void Contact::ListDetails()
 {
 	std::cout << "  First Name:\t\t";
 	std::cout << this->firstName;
-	std::cout << '\n';
+	std::cout << std::endl;
 	std::cout << "  Last Name:\t\t";
 	std::cout << this->lastName;
-	std::cout << '\n';
+	std::cout << std::endl;
 	std::cout << "  Nickname:\t\t";
 	std::cout << this->nickname;
-	std::cout << '\n';
+	std::cout << std::endl;
 	std::cout << "  Phone Number:\t\t";
 	std::cout << this->phoneNumber;
-	std::cout << '\n';
+	std::cout << std::endl;
 	std::cout << "  Darkest Secret:\t";
 	std::cout << this->darkestSecret;
-	std::cout << '\n';
+	std::cout << std::endl;
 }
 
 void printShortened(std::string str)
@@ -60,5 +60,5 @@ void Contact::ListDetailsShort()
 	printShortened(this->lastName);
 	std::cout << " | ";
 	printShortened(this->nickname);
-	std::cout << '\n';
+	std::cout << std::endl;
 }

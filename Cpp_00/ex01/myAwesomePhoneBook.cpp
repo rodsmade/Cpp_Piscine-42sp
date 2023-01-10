@@ -8,31 +8,29 @@ std::string getUserInput(std::string prompt) {
 	std::string input;
 
 	do {
-		// proteger contra ctrl+D aqui, acho q retorna -1 ou algo assim.
-		// tratar tb o momento do index, tvz criar outra função sei lá
 		std::cout << prompt;
 		std::getline(std::cin, input);
-	} while (input.compare("") == 0);
+	} while (input.compare("") == 0 && std::cin.eof() == false);
 	return (input);
 }
 
 int main()
 {
 	int index;
-	std::string user_input;
-	std::string cleanLine;
+	std::string	user_input;
+	std::string	cleanLine;
 	bool		pgm_exit = false;
-	int		 contacts_count = 0;
+	int			contacts_count = 0;
 
 	Contact newContact;
 	PhoneBook myPhoneBook;
 
 	do {
 		std::cout << "Enter `ADD` to add a new contact; `SEARCH` to see details for a contact; or `EXIT` to exit program: ";
-		std::cin >> user_input;
+		std::getline(std::cin, user_input);
+		if (std::cin.eof()) { break ; };
 
 		if (user_input.compare("ADD") == 0) {
-			std::getline(std::cin, cleanLine);
 			newContact.firstName = getUserInput("Insert First Name: ");
 			newContact.lastName = getUserInput("Insert Last Name: ");
 			newContact.nickname = getUserInput("Insert Nickname: ");

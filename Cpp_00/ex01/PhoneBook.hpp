@@ -4,21 +4,22 @@
 #include "Contact.hpp"
 #include <iostream>
 
-const int   PHONEBOOK_SIZE = 8;
+const int PHONEBOOK_SIZE = 8;
 
-class PhoneBook {
-    public:
-        Contact allContacts[PHONEBOOK_SIZE];
+class PhoneBook
+{
+public:
+	Contact allContacts[PHONEBOOK_SIZE];
 
-        PhoneBook() ;
+	PhoneBook();
 
-        ~PhoneBook() ;
+	~PhoneBook();
 
-        void ListContactByIndex(int index) ;
+	void ListContactByIndex(int index);
 
-        void ListAllContacts() ;
+	void ListAllContacts();
 
-        void AddNewContact(Contact newContact, int index) ;
+	void AddNewContact(Contact newContact, int index);
 };
 
 #endif

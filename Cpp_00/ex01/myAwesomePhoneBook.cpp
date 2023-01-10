@@ -40,9 +40,6 @@ int main()
 			newContact.darkestSecret = getUserInput("Insert Darkest Secret: ");
 
 			std::cout << '\n';
-			std::cout << "New contact details: ";
-			newContact.ListDetails();
-			std::cout << '\n';
 
 			myPhoneBook.AddNewContact(newContact, contacts_count);
 			contacts_count = (contacts_count + 1) % PHONEBOOK_SIZE;

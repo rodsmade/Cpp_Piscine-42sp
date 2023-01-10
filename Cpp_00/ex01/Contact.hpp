@@ -6,26 +6,26 @@
 #include <iomanip>
 
 class Contact {
-    public:
-        std::string firstName;
-        std::string lastName;
-        std::string nickname;
-        std::string phoneNumber;
-        std::string darkestSecret;
+	public:
+		std::string firstName;
+		std::string lastName;
+		std::string nickname;
+		std::string phoneNumber;
+		std::string darkestSecret;
 
-        Contact() ;
+		Contact() ;
 
-        Contact(std::string firstName,
-                std::string lastName,
-                std::string nickname,
-                std::string phoneNumber,
-                std::string darkestSecret) ;
+		Contact(std::string firstName,
+				std::string lastName,
+				std::string nickname,
+				std::string phoneNumber,
+				std::string darkestSecret) ;
 
-        ~Contact() ;
+		~Contact() ;
 
-        void    ListDetails() ;
+		void	ListDetails() ;
 
-        void    ListDetailsShort() ;
+		void	ListDetailsShort() ;
 };
 
 #endif

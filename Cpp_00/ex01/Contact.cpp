@@ -17,15 +17,26 @@ Contact::Contact(std::string firstName,
 Contact::~Contact() {};
 
 void	Contact::ListDetails() {
+	// std::cout << std::setw(20);
+	std::cout << "  First Name:\t\t";
 	std::cout << this->firstName;
-	std::cout << " | ";
+	std::cout << '\n';
+	// std::cout << std::setw(20);
+	std::cout << "  Last Name:\t\t";
 	std::cout << this->lastName;
-	std::cout << " | ";
+	std::cout << '\n';
+	// std::cout << std::setw(20);
+	std::cout << "  Nickname:\t\t";
 	std::cout << this->nickname;
-	std::cout << " | ";
+	std::cout << '\n';
+	// std::cout << std::setw(20);
+	std::cout << "  Phone Number:\t\t";
 	std::cout << this->phoneNumber;
-	std::cout << " | ";
+	std::cout << '\n';
+	// std::cout << std::setw(20);
+	std::cout << "  Darkest Secret:\t";
 	std::cout << this->darkestSecret;
+	std::cout << '\n';
 }
 
 void	Contact::ListDetailsShort() {

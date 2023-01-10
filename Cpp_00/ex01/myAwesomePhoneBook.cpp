@@ -55,6 +55,8 @@ int main()
 			bool break_loop = false;
 			do {
 				std::string indexString = getUserInput("Select a contact by index to see full entry: ");
+				std::cout << '\n';
+
 				std::stringstream s(indexString);
 				s >> index;
 				if (index >= 1 && index <= 8) {

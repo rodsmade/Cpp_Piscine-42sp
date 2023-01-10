@@ -7,15 +7,30 @@ PhoneBook::PhoneBook() {};
 PhoneBook::~PhoneBook() {};
 
 void PhoneBook::ListContactByIndex(int index) {
-	std::cout << index + 1 << " | ";
+	std::cout << std::setw(10);
+	std::cout << index + 1;
+	std::cout << " | ";
 	allContacts[index].ListDetails();
 }
 
 void PhoneBook::ListAllContacts() {
-	std::cout << "Index | First Name | Last Name | Nickname\n";
+	std::cout << std::setw(10);
+	std::cout << "Index";
+	std::cout << " | ";
+	std::cout << std::setw(10);
+	std::cout << "First Name";
+	std::cout << " | ";
+	std::cout << std::setw(10);
+	std::cout << "Last Name";
+	std::cout << " | ";
+	std::cout << std::setw(10);
+	std::cout << "Nickname";
+	std::cout << '\n';
 
 	for (int i = 0; i < PHONEBOOK_SIZE; i++) {
-		std::cout << i + 1 << " | ";
+		std::cout << std::setw(10);
+		std::cout << i + 1;
+		std::cout << " | ";
 		allContacts[i].ListDetailsShort();
 	}
 }

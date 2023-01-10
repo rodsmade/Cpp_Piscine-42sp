@@ -39,14 +39,25 @@ void	Contact::ListDetails() {
 	std::cout << '\n';
 }
 
+void	printShortened(std::string str) {
+	std::string strCopy;
+
+	std::cout << std::setw(10);
+	if (str.size() > 10) {
+		strCopy = str.substr(0,10);
+		strCopy[9] = '.';
+		std::cout << strCopy;
+	}
+	else {
+		std::cout << str;
+	}
+}
+
 void	Contact::ListDetailsShort() {
-	std::cout << std::setw(10);
-	std::cout << this->firstName;
+	printShortened(this->firstName);
 	std::cout << " | ";
-	std::cout << std::setw(10);
-	std::cout << this->lastName;
+	printShortened(this->lastName);
 	std::cout << " | ";
-	std::cout << std::setw(10);
-	std::cout << this->nickname;
+	printShortened(this->nickname);
 	std::cout << '\n';
 }

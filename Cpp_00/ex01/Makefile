@@ -1,6 +1,4 @@
 
-# c++ -Wall -Wextra -Werror -std=c++98 myAwesomePhoneBook.cpp PhoneBook.cpp Contact.cpp
-
 all: myAwesomePhoneBook.out
 
 myAwesomePhoneBook.out: PhoneBook.o Contact.o myAwesomePhoneBook.cpp

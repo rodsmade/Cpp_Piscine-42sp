@@ -8,7 +8,8 @@ std::string getUserInput(std::string prompt)
 {
 	std::string input;
 
-	if (std::cin.eof() == false) {
+	if (std::cin.eof() == false)
+	{
 		do
 		{
 			std::cout << prompt;
@@ -35,11 +36,11 @@ int main()
 
 		if (user_input.compare("ADD") == 0)
 		{
-			newContact.firstName = getUserInput("Insert First Name: ");
-			newContact.lastName = getUserInput("Insert Last Name: ");
-			newContact.nickname = getUserInput("Insert Nickname: ");
-			newContact.phoneNumber = getUserInput("Insert Phone Number: ");
-			newContact.darkestSecret = getUserInput("Insert Darkest Secret: ");
+			newContact.setFirstName(getUserInput("Insert First Name: "));
+			newContact.setLastName(getUserInput("Insert Last Name: "));
+			newContact.setNickname(getUserInput("Insert Nickname: "));
+			newContact.setPhoneNumber(getUserInput("Insert Phone Number: "));
+			newContact.setDarkestSecret(getUserInput("Insert Darkest Secret: "));
 
 			std::cout << std::endl;
 

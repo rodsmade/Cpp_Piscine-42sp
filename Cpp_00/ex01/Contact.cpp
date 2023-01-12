@@ -3,28 +3,44 @@
 Contact::Contact(){};
 
 Contact::Contact(std::string firstName, std::string lastName, std::string nickname, std::string phoneNumber, std::string darkestSecret)
-	: firstName(firstName), lastName(lastName), nickname(nickname), phoneNumber(phoneNumber), darkestSecret(darkestSecret)
+	: _firstName(firstName), _lastName(lastName), _nickname(nickname), _phoneNumber(phoneNumber), _darkestSecret(darkestSecret)
 {
 }
 
 Contact::~Contact(){};
 
+void Contact::setFirstName(std::string firstName) {
+	this->_firstName = firstName;
+};
+void Contact::setLastName(std::string lastName) {
+	this->_lastName = lastName;
+};
+void Contact::setNickname(std::string nickname) {
+	this->_nickname = nickname;
+};
+void Contact::setPhoneNumber(std::string phoneNumber) {
+	this->_phoneNumber = phoneNumber;
+};
+void Contact::setDarkestSecret(std::string darkestSecret) {
+	this->_darkestSecret = darkestSecret;
+};
+
 void Contact::ListDetails()
 {
 	std::cout << "  First Name:\t\t";
-	std::cout << this->firstName;
+	std::cout << this->_firstName;
 	std::cout << std::endl;
 	std::cout << "  Last Name:\t\t";
-	std::cout << this->lastName;
+	std::cout << this->_lastName;
 	std::cout << std::endl;
 	std::cout << "  Nickname:\t\t";
-	std::cout << this->nickname;
+	std::cout << this->_nickname;
 	std::cout << std::endl;
 	std::cout << "  Phone Number:\t\t";
-	std::cout << this->phoneNumber;
+	std::cout << this->_phoneNumber;
 	std::cout << std::endl;
 	std::cout << "  Darkest Secret:\t";
-	std::cout << this->darkestSecret;
+	std::cout << this->_darkestSecret;
 	std::cout << std::endl;
 }
 
@@ -47,10 +63,10 @@ void printShortened(std::string str)
 
 void Contact::ListDetailsShort()
 {
-	printShortened(this->firstName);
+	printShortened(this->_firstName);
 	std::cout << " | ";
-	printShortened(this->lastName);
+	printShortened(this->_lastName);
 	std::cout << " | ";
-	printShortened(this->nickname);
+	printShortened(this->_nickname);
 	std::cout << std::endl;
 }

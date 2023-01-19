@@ -21,3 +21,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+
+valgrind: all
+	valgrind --leak-check=full --show-leak-kinds=all --quiet ./$(NAME)

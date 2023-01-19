@@ -7,6 +7,9 @@ Contact::Contact(std::string firstName, std::string lastName, std::string nickna
 {
 }
 
+// Construtor vazio com valores inicializados padrão:
+// Contact::Contact() : _firstName("default"), etc etc etc.
+
 Contact::~Contact(){};
 
 void Contact::setFirstName(std::string firstName) {

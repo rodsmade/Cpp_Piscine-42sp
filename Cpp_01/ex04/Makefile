@@ -13,6 +13,9 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
+run: all
+	./$(NAME) hello.txt abc def
+
 valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all --quiet ./$(NAME)
 

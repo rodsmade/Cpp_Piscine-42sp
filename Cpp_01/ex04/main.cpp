@@ -10,6 +10,8 @@ int main(int argc, char** argv) {
 	}
 
 	std::string lineRead;
+	std::string find = argv[2];
+	std::string replace = argv[3];
 
 	std::string outputFileName(argv[1]);
 	outputFileName += ".replace";
@@ -22,21 +24,24 @@ int main(int argc, char** argv) {
 		return (-42);
 	}
 
-	std::cout << "String to searched for: " << argv[2] << std::endl;
-	std::cout << "String to replace it by: " << argv[3] << std::endl;
-
 	while(inputFile.good()) {
 		std::getline(inputFile, lineRead);
-		std::size_t pos = 0;
+		std::size_t pos = -1;
 
-		while (true) {
-			pos = lineRead.find("fl", pos);
-			std::cout << pos << std::endl;
-			if (pos != std::string::npos)
-				pos++;
-			else
-				break;
-		}
+		do {
+			pos++;
+			pos = lineRead.find(find, pos);
+			if (pos != std::string::npos){
+				std::string remainder = lineRead.substr(pos + find.size());
+				lineRead.erase(pos);
+				lineRead += replace;
+				lineRead += remainder;
+			}
+		} while (pos != std::string::npos);
+
+		outputFile << lineRead;
+		if (lineRead[0])
+			outputFile << "\n";
 	}
 
 	inputFile.close();

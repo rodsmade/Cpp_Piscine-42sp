@@ -14,9 +14,9 @@ fclean: clean
 	rm -f $(NAME)
 
 run: all
-	./$(NAME) hello.txt abc def
+	./$(NAME) hello.txt ee EE
 
 valgrind: all
-	valgrind --leak-check=full --show-leak-kinds=all --quiet ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --quiet ./$(NAME) hello.txt ee EE
 
 .PHONY: all $(NAME) clean fclean valgrind

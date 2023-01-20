@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __ACCOUNT_H__
-#define __ACCOUNT_H__
+#ifndef __ZOMBIE_H__
+#define __ZOMBIE_H__
 
 #include <iostream>
 

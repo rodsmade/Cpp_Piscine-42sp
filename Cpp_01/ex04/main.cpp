@@ -39,8 +39,13 @@ int main(int argc, char** argv) {
 		return (-42);
 	}
 
-	std::ifstream myfile(argv[1]);
-	if (!myfile.is_open()) {
+	std::string outputFileName(argv[1]);
+	outputFileName += ".replace";
+
+	std::ofstream outputFile(outputFileName.c_str());
+
+	std::ifstream inputFile(argv[1]);
+	if (!inputFile.is_open()) {
 		std::cout << "Error opening file `" << argv[1] << "´." << std::endl;
 		return (-42);
 	}
@@ -48,7 +53,11 @@ int main(int argc, char** argv) {
 	std::cout << "String to searched for: " << argv[2] << std::endl;
 	std::cout << "String to replace it by: " << argv[3] << std::endl;
 
-	myfile.close();
+
+	// <filename>.replace
+
+	inputFile.close();
+	outputFile.close();
 
 	return 0;
 }

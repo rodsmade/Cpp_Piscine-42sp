@@ -19,5 +19,9 @@ int main()
         club.setType("some other type of club");
         bob.attack();
     }
+	{
+		HumanB beyonce("Queen B");
+		beyonce.attack();
+	}
     return 0;
 }

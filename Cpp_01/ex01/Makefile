@@ -22,4 +22,4 @@ fclean: clean
 valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all --quiet ./$(NAME)
 
-.PHONY: all clean fclean valgrind
+.PHONY: all clean fclean re valgrind

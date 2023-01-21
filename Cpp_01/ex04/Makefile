@@ -1,6 +1,6 @@
 NAME	= sed.out
 CC		= c++
-CFLAGS	= -Wall -Wextra -Werror -std=c++98
+CFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 
 all:	$(NAME)
 
@@ -13,10 +13,12 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
+re: fclean all
+
 run: all
 	./$(NAME) hello.txt ee EE
 
 valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all --quiet ./$(NAME) hello.txt ee EE
 
-.PHONY: all clean fclean run valgrind
+.PHONY: all clean fclean re run valgrind

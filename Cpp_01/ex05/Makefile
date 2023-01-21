@@ -16,10 +16,12 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
+re: fclean all
+
 run: all
 	./$(NAME)
 
 valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all --quiet ./$(NAME)
 
-.PHONY: all clean fclean run valgrind
+.PHONY: all clean fclean re run valgrind

@@ -12,4 +12,6 @@ clean:
 fclean: clean
 	rm -f megaphone.out
 
-.PHONY:	all megaphone.out clean fclean
+re: fclean all
+
+.PHONY:	all megaphone.out clean fclean re

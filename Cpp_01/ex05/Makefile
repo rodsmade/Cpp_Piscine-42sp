@@ -11,7 +11,7 @@ Harl.o:	Harl.cpp Harl.hpp
 	$(CC) $(CFLAGS) $< -c -o $@
 
 clean:
-	@echo "no .o files to be cleaned. . ."
+	rm -f Harl.o
 
 fclean: clean
 	rm -f $(NAME)

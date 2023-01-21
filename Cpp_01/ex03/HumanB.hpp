@@ -3,20 +3,21 @@
 #define __HUMANB_H__
 
 #include <iostream>
+
 #include "Weapon.hpp"
 
 class HumanB {
-private:
+   private:
     std::string _name;
     Weapon *_weapon;
 
-public:
-    HumanB( std::string name );
-    ~HumanB( void );
+   public:
+    HumanB(std::string name);
+    ~HumanB(void);
 
-    void setWeapon( Weapon *weapon ) ;
+    void setWeapon(Weapon *weapon);
 
-    void attack( void ) ;
+    void attack(void);
 };
 
 #endif

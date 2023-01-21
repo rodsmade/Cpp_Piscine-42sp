@@ -15,3 +15,5 @@ clean:
 
 fclean: clean
 	rm -f myAwesomePhoneBook.out
+
+.PHONY: all clean fclean

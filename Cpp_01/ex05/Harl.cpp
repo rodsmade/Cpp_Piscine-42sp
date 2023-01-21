@@ -14,7 +14,7 @@ Harl::~Harl(void){
 
 void Harl::complain(std::string level)
 {
-	std::string levels[] = {"DEBUG", "ERROR", "WARNING", "INFO"};
+	std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
 	for (int i = 0; i < 4; i++) {
 		if (level == levels[i]) {

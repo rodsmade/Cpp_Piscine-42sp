@@ -18,6 +18,11 @@ int main(int argc, char** argv) {
 
 	std::ofstream outputFile(outputFileName.c_str());
 
+	if (find.empty()){
+		std::cout << "sed: -e expression #1, char 0: no previous regular expression" << std::endl;
+		return (-42);
+	}
+
 	std::ifstream inputFile(argv[1]);
 	if (!inputFile.is_open()) {
 		std::cout << "Error opening file `" << argv[1] << "´." << std::endl;

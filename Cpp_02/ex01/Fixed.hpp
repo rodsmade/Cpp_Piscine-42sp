@@ -25,4 +25,6 @@ class Fixed {
     static const int _binaryPointPosition = 8;
 };
 
+std::ostream & operator<<(std::ostream &o, Fixed const &rightHandSide);
+
 #endif

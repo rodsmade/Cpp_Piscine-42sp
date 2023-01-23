@@ -67,3 +67,9 @@ float Fixed::toFloat( void ) const {
 int Fixed::toInt( void ) const {
     return (this->getRawBits() >> 8);
 };
+
+std::ostream & operator<<(std::ostream &o, Fixed const &rightHandSide) {
+    std::cout << "Insertion operator called" << std::endl;
+    o << rightHandSide.toFloat();
+    return (o);
+};

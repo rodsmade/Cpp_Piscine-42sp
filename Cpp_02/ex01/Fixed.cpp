@@ -50,3 +50,20 @@ void Fixed::setRawBits(int const raw) {
     std::cout << "setRawBits member function called" << std::endl;
     _rawBits = raw;
 };
+
+float Fixed::toFloat( void ) const {
+    int integerPart = this->getRawBits() >> 8;
+    int rawBitsTemp = this->getRawBits();
+    float fractionalPart = 0.0;
+
+    for (int i = this->_binaryPointPosition; i > 0; i--) {
+        fractionalPart += 1 / pow(2, i) * (rawBitsTemp & 0x0001);
+        rawBitsTemp = rawBitsTemp >> 1;
+    }
+
+    return (integerPart + fractionalPart);
+};
+
+int Fixed::toInt( void ) const {
+    return (this->getRawBits() >> 8);
+};

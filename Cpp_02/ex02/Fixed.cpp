@@ -111,3 +111,26 @@ bool Fixed::operator*(const Fixed &other) {
 bool Fixed::operator/(const Fixed &other) {
     return (this->getRawBits() / other.getRawBits());
 };
+
+Fixed& Fixed::operator++() {
+    this->setRawBits(this->getRawBits() + 0x0001);
+    return *(this);
+};
+
+Fixed Fixed::operator++(int) {
+    Fixed temp(*this);
+    temp.setRawBits(temp.getRawBits() + 0x0001);
+    return (temp);
+};
+
+Fixed& Fixed::operator--() {
+    this->setRawBits(this->getRawBits() - 0x0001);
+    return *(this);
+};
+
+Fixed Fixed::operator--(int) {
+    Fixed temp(*this);
+    temp.setRawBits(temp.getRawBits() - 0x0001);
+    return (temp);
+};
+

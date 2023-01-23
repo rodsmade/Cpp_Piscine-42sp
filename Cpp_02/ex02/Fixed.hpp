@@ -11,6 +11,7 @@ class Fixed {
     Fixed(const Fixed &other);
     Fixed(int const integer);
     Fixed(float const bobber);
+    ~Fixed(void);
     Fixed &operator=(const Fixed &other);
     bool operator>(const Fixed &other);
     bool operator<(const Fixed &other);
@@ -22,7 +23,10 @@ class Fixed {
     bool operator-(const Fixed &other);
     bool operator*(const Fixed &other);
     bool operator/(const Fixed &other);
-    ~Fixed(void);
+    Fixed& operator++();       // Prefix increment operator.
+    Fixed operator++(int);     // Postfix increment operator.
+    Fixed& operator--();       // Prefix decrement operator.
+    Fixed operator--(int);     // Postfix decrement operator.
 
     int getRawBits(void) const;
     void setRawBits(int const raw);

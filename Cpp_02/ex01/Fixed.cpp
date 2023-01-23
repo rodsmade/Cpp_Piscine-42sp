@@ -42,7 +42,6 @@ Fixed& Fixed::operator=(const Fixed& other) {
 Fixed::~Fixed(void) { std::cout << "Destructor called" << std::endl; };
 
 int Fixed::getRawBits(void) const {
-    std::cout << "getRawBits member function called" << std::endl;
     return (_rawBits);
 };
 
@@ -69,7 +68,6 @@ int Fixed::toInt( void ) const {
 };
 
 std::ostream & operator<<(std::ostream &o, Fixed const &rightHandSide) {
-    std::cout << "Insertion operator called" << std::endl;
     o << rightHandSide.toFloat();
     return (o);
 };

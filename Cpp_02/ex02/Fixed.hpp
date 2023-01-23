@@ -12,6 +12,12 @@ class Fixed {
     Fixed(int const integer);
     Fixed(float const bobber);
     Fixed &operator=(const Fixed &other);
+    bool operator>(const Fixed &other);
+    bool operator<(const Fixed &other);
+    bool operator>=(const Fixed &other);
+    bool operator<=(const Fixed &other);
+    bool operator==(const Fixed &other);
+    bool operator!=(const Fixed &other);
     ~Fixed(void);
 
     int getRawBits(void) const;

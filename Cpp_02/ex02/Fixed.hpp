@@ -27,6 +27,10 @@ class Fixed {
     Fixed operator++(int);     // Postfix increment operator.
     Fixed& operator--();       // Prefix decrement operator.
     Fixed operator--(int);     // Postfix decrement operator.
+    Fixed min(Fixed &a, Fixed &b);
+    Fixed min(Fixed const &a, Fixed const &b);
+    Fixed max(Fixed &a, Fixed &b);
+    Fixed max(Fixed const &a, Fixed const &b);
 
     int getRawBits(void) const;
     void setRawBits(int const raw);

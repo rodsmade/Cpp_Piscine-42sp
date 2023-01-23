@@ -134,3 +134,28 @@ Fixed Fixed::operator--(int) {
     return (temp);
 };
 
+Fixed min(Fixed &a, Fixed &b) {
+    if (a > b) { return (b); }
+    else { return (a); }
+};
+
+Fixed min(Fixed const &a, Fixed const &b) {
+    Fixed copyA(a);
+    Fixed copyB(b);
+
+    if (copyA > copyB) { return (b); }
+    else { return (a); }
+};
+
+Fixed max(Fixed &a, Fixed &b) {
+    if (a > b) { return (a); }
+    else { return (b); }
+};
+
+Fixed max(Fixed const &a, Fixed const &b) {
+    Fixed copyA(a);
+    Fixed copyB(b);
+
+    if (copyA > copyB) { return (a); }
+    else { return (b); }
+};

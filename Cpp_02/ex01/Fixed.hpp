@@ -3,12 +3,14 @@
 #define __FIXED_H__
 
 #include <iostream>
+#include <cmath>
 
 class Fixed {
    public:
     Fixed(void);
     Fixed(const Fixed &other);
     Fixed(int const integer);
+    Fixed(float const bobber);
     Fixed &operator=(const Fixed &other);
     ~Fixed(void);
 

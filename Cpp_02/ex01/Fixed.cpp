@@ -12,6 +12,25 @@ Fixed::Fixed(int const integer) {
     this->_rawBits = integer << this->_binaryPointPosition;
 };
 
+Fixed::Fixed(float const bobber) {
+    std::cout << "Float constructor called" << std::endl;
+    int roundNumber = (int) bobber;
+    this->_rawBits = roundNumber << this->_binaryPointPosition;
+
+    float sum = 0.0;
+    int fractPartToBin = 0;
+
+    double fractPart, intPart;
+    fractPart = std::modf(bobber, &intPart);
+    
+    while (sum < fractPart) {
+        sum += 0.00390625;
+        fractPartToBin++;
+    }
+
+    this->_rawBits += fractPartToBin;
+};
+
 Fixed& Fixed::operator=(const Fixed& other) {
     std::cout << "Copy assignment operator called" << std::endl;
     if (this != &other) {

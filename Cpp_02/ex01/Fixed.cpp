@@ -7,6 +7,11 @@ Fixed::Fixed(const Fixed& other) {
     *this = other;
 };
 
+Fixed::Fixed(int const integer) {
+    std::cout << "Integer constructor called" << std::endl;
+    this->_rawBits = integer << this->_binaryPointPosition;
+};
+
 Fixed& Fixed::operator=(const Fixed& other) {
     std::cout << "Copy assignment operator called" << std::endl;
     if (this != &other) {

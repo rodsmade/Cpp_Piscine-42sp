@@ -46,13 +46,12 @@ class Fixed {
     Fixed &operator--();    // Prefix decrement operator.
     Fixed operator--(int);  // Postfix decrement operator.
 
-
-	// Member functions
-	// -- Object level
+    // Member functions
+    // -- Object level
     float toFloat(void) const;
     int toInt(void) const;
-	
-	// -- Class level
+
+    // -- Class level
     static Fixed const &min(Fixed &a, Fixed &b);
     static Fixed const &min(Fixed const &a, Fixed const &b);
     static Fixed const &max(Fixed &a, Fixed &b);

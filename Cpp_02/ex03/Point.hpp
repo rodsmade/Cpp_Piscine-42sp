@@ -10,21 +10,21 @@ class Point {
     Fixed const _y;
 
    public:
-   // Constructors/Destructor
+    // Constructors/Destructor
     Point(void);
     Point(float const x, float const y);
     Point(const Point &other);
     ~Point(void);
 
-	// Accessors
+    // Accessors
     Fixed const getX(void) const;
     Fixed const getY(void) const;
 
-	// Operator overloads
-	// -- Assignment operator
+    // Operator overloads
+    // -- Assignment operator
     const Point &operator=(const Point &other);
-	
-	// -- Logical operators
+
+    // -- Logical operators
     bool operator==(const Point &other) const;
 };
 

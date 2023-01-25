@@ -13,32 +13,31 @@ Point::~Point(void){};
 
 // ACCESSORS ===================================================================
 Fixed const Point::getX(void) const {
-	return this->_x;
+    return this->_x;
 }
 
 Fixed const Point::getY(void) const {
-	return this->_y;
+    return this->_y;
 }
 
 // OPERATOR OVERLOADS ==========================================================
 // ASSIGNMENT OPERATOR -------------------------------------------------
-const Point &Point::operator=(const Point &other){
-	(Fixed &) _x = other._x;
-	(Fixed &) _y = other._y;
-	return (*this);
+const Point &Point::operator=(const Point &other) {
+    (Fixed &)_x = other._x;
+    (Fixed &)_y = other._y;
+    return (*this);
 };
 
 // LOGICAL OPERATORS ---------------------------------------------------
 bool Point::operator==(const Point &other) const {
-	if (this->_x == other._x
-		&& this->_y == other._y)
-		return (true);
-	else
-		return (false);
+    if (this->_x == other._x && this->_y == other._y)
+        return (true);
+    else
+        return (false);
 };
 
 // OUTPUT STREAM OPERATOR ----------------------------------------------
 std::ostream &operator<<(std::ostream &o, Point const &rightHandSide) {
-    o << "[" << rightHandSide.getX() << " , " <<  rightHandSide.getY() << "]";
+    o << "[" << rightHandSide.getX() << " , " << rightHandSide.getY() << "]";
     return (o);
 };

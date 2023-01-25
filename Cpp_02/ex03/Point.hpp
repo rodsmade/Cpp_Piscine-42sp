@@ -17,8 +17,8 @@ class Point {
     ~Point(void);
 
 	// Accessors
-    Fixed const getX(void);
-    Fixed const getY(void);
+    Fixed const getX(void) const;
+    Fixed const getY(void) const;
 
 	// Operator overloads
 	// -- Assignment operator
@@ -26,7 +26,9 @@ class Point {
 	
 	// -- Logical operators
     bool operator==(const Point &other) const;
-
 };
+
+// Output stream operator overload
+std::ostream &operator<<(std::ostream &o, Point const &rightHandSide);
 
 #endif

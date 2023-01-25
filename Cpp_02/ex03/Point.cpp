@@ -12,11 +12,11 @@ Point::Point(const Point &other) {
 Point::~Point(void){};
 
 // ACCESSORS ===================================================================
-Fixed const Point::getX(void) {
+Fixed const Point::getX(void) const {
 	return this->_x;
 }
 
-Fixed const Point::getY(void) {
+Fixed const Point::getY(void) const {
 	return this->_y;
 }
 
@@ -35,4 +35,10 @@ bool Point::operator==(const Point &other) const {
 		return (true);
 	else
 		return (false);
+};
+
+// OUTPUT STREAM OPERATOR ----------------------------------------------
+std::ostream &operator<<(std::ostream &o, Point const &rightHandSide) {
+    o << "[" << rightHandSide.getX() << " , " <<  rightHandSide.getY() << "]";
+    return (o);
 };

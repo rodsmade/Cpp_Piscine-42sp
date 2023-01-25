@@ -1,5 +1,6 @@
 #include "Fixed.hpp"
 
+// CONSTRUCTORS / DESTRUCTOR ---------------------------------------------------
 Fixed::Fixed(void) : _rawBits(0){};
 
 Fixed::Fixed(const Fixed &other) {
@@ -28,15 +29,9 @@ Fixed::Fixed(float const bobber) {
     this->_rawBits += fractPartToBin;
 };
 
-Fixed &Fixed::operator=(const Fixed &other) {
-    if (this != &other) {
-        _rawBits = other.getRawBits();
-    }
-    return (*this);
-};
-
 Fixed::~Fixed(void){};
 
+// ACCESSORS -------------------------------------------------------------------
 int Fixed::getRawBits(void) const {
     return (_rawBits);
 };
@@ -45,52 +40,40 @@ void Fixed::setRawBits(int const raw) {
     _rawBits = raw;
 };
 
-float Fixed::toFloat(void) const {
-    int integerPart = this->getRawBits() >> 8;
-    int rawBitsTemp = this->getRawBits();
-    float fractionalPart = 0.0;
-
-    for (int i = this->_binaryPointPosition; i > 0; i--) {
-        fractionalPart += 1 / pow(2, i) * (rawBitsTemp & 0x0001);
-        rawBitsTemp = rawBitsTemp >> 1;
+// OPERATOR OVERLOADS ----------------------------------------------------------
+// ASSIGNMENT OPERATOR ---------------------------------------------------------
+Fixed &Fixed::operator=(const Fixed &other) {
+    if (this != &other) {
+        _rawBits = other.getRawBits();
     }
-
-    return (integerPart + fractionalPart);
+    return (*this);
 };
 
-int Fixed::toInt(void) const {
-    return (this->getRawBits() >> 8);
-};
-
-std::ostream &operator<<(std::ostream &o, Fixed const &rightHandSide) {
-    o << rightHandSide.toFloat();
-    return (o);
-};
-
-bool Fixed::operator>(const Fixed &other) {
+// LOGICAL OPERATORS
+bool Fixed::operator>(const Fixed &other) const {
     return (this->getRawBits() > other.getRawBits());
 };
 
-bool Fixed::operator<(const Fixed &other) {
+bool Fixed::operator<(const Fixed &other) const {
     return (this->getRawBits() < other.getRawBits());
 };
 
-bool Fixed::operator>=(const Fixed &other) {
+bool Fixed::operator>=(const Fixed &other) const {
     return (this->getRawBits() >= other.getRawBits());
 };
 
-bool Fixed::operator<=(const Fixed &other) {
+bool Fixed::operator<=(const Fixed &other) const {
     return (this->getRawBits() <= other.getRawBits());
 };
 
-bool Fixed::operator==(const Fixed &other) {
+bool Fixed::operator==(const Fixed &other) const {
     return (this->getRawBits() == other.getRawBits());
 };
 
-bool Fixed::operator!=(const Fixed &other) {
+bool Fixed::operator!=(const Fixed &other) const {
     return (this->getRawBits() != other.getRawBits());
 };
-
+// ARITHMETIC OPERATOR ---------------------------------------------------------
 Fixed Fixed::operator+(const Fixed &other) {
     Fixed result;
 
@@ -124,6 +107,7 @@ Fixed Fixed::operator/(const Fixed &other) {
     return (result);
 };
 
+// INCREMENT OPERATORS ---------------------------------------------------------
 Fixed &Fixed::operator++() {
     this->setRawBits(this->getRawBits() + 0x0001);
     return *(this);
@@ -146,6 +130,13 @@ Fixed Fixed::operator--(int) {
     return (temp);
 };
 
+// OUTPUT STREAM OPERATOR ------------------------------------------------------
+std::ostream &operator<<(std::ostream &o, Fixed const &rightHandSide) {
+    o << rightHandSide.toFloat();
+    return (o);
+};
+
+// MEMBER FUNCTIONS ------------------------------------------------------------
 Fixed const &Fixed::min(Fixed &a, Fixed &b) {
     if (a > b) {
         return (b);
@@ -182,4 +173,21 @@ Fixed const &Fixed::max(Fixed const &a, Fixed const &b) {
     } else {
         return (b);
     }
+};
+
+float Fixed::toFloat(void) const {
+    int integerPart = this->getRawBits() >> 8;
+    int rawBitsTemp = this->getRawBits();
+    float fractionalPart = 0.0;
+
+    for (int i = this->_binaryPointPosition; i > 0; i--) {
+        fractionalPart += 1 / pow(2, i) * (rawBitsTemp & 0x0001);
+        rawBitsTemp = rawBitsTemp >> 1;
+    }
+
+    return (integerPart + fractionalPart);
+};
+
+int Fixed::toInt(void) const {
+    return (this->getRawBits() >> 8);
 };

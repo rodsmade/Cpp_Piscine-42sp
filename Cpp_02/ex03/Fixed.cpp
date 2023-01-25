@@ -73,6 +73,7 @@ bool Fixed::operator==(const Fixed &other) const {
 bool Fixed::operator!=(const Fixed &other) const {
     return (this->getRawBits() != other.getRawBits());
 };
+
 // ARITHMETIC OPERATOR -------------------------------------------------
 Fixed Fixed::operator+(const Fixed &other) {
     Fixed result;

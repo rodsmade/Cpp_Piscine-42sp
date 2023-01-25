@@ -59,6 +59,7 @@ class Fixed {
     static Fixed const &max(Fixed const &a, Fixed const &b);
 };
 
+// Output stream operator overload
 std::ostream &operator<<(std::ostream &o, Fixed const &rightHandSide);
 
 #endif

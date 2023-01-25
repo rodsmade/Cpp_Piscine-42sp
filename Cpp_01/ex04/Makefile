@@ -16,9 +16,9 @@ fclean: clean
 re: fclean all
 
 run: all
-	./$(NAME) hello.txt ee EE
+	./$(NAME) tests/hello.txt ee EE
 
 valgrind: all
-	valgrind --leak-check=full --show-leak-kinds=all --quiet ./$(NAME) hello.txt ee EE
+	valgrind --leak-check=full --show-leak-kinds=all --quiet ./$(NAME) tests/hello.txt ee EE
 
 .PHONY: all clean fclean re run valgrind

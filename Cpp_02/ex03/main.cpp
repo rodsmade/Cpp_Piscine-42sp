@@ -1,22 +1,27 @@
-#include "Fixed.hpp"
+#include "Point.hpp"
+
+bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 int main(void) {
-    Fixed a;
-    Fixed const b(Fixed(5.6f));
+    Point a = Point(2.0f, 2.0f);
+    Point b = Point(9.0f, 17.0f);
+    Point c = Point(18.0f, 2.0f);
 
-    std::cout << a << std::endl;
-    std::cout << ++a << std::endl;
-    std::cout << a << std::endl;
-    std::cout << a++ << std::endl;
-    std::cout << a << std::endl;
-    std::cout << b << std::endl;
-    std::cout << b.getRawBits() << std::endl;
-    std::cout << Fixed::max(a, b) << std::endl;
+    // Point point = Point(0.5f, 1.0f);
 
-    Fixed c(4.2f);
-    Fixed d;
-    d = Fixed(5.6f);
-    std::cout << "c: " << c << " e d: " << d << std::endl;
-    std::cout << (c / d) << std::endl;
+    Point point;
+    // point = a;
+
+    for (int i = 0; i < 20; i++) {
+        for (int j = 0; j < 20; j++) {
+            point = Point(j * 1.0f, (20 - i) * 1.0f);
+            if (bsp(a, b, c, point))
+                std::cout << "O ";
+            else
+                std::cout << "- ";
+        }
+        std::cout << std::endl;
+    }
+
     return 0;
 }

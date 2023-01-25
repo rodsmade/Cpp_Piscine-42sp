@@ -48,12 +48,15 @@ class Fixed {
 
 
 	// Member functions
+	// Object level
+    float toFloat(void) const;
+    int toInt(void) const;
+	
+	// Class level
     static Fixed const &min(Fixed &a, Fixed &b);
     static Fixed const &min(Fixed const &a, Fixed const &b);
     static Fixed const &max(Fixed &a, Fixed &b);
     static Fixed const &max(Fixed const &a, Fixed const &b);
-    float toFloat(void) const;
-    int toInt(void) const;
 };
 
 std::ostream &operator<<(std::ostream &o, Fixed const &rightHandSide);

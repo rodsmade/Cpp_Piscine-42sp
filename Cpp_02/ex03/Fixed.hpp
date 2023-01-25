@@ -23,10 +23,10 @@ class Fixed {
     void setRawBits(int const raw);
 
     // Operator Overloads
-    //  Assignment operator
+    // -- Assignment operator
     Fixed &operator=(const Fixed &other);
 
-    // Logical operators
+    // -- Logical operators
     bool operator>(const Fixed &other) const;
     bool operator<(const Fixed &other) const;
     bool operator>=(const Fixed &other) const;
@@ -34,13 +34,13 @@ class Fixed {
     bool operator==(const Fixed &other) const;
     bool operator!=(const Fixed &other) const;
 
-    // Arithmetic operators
+    // -- Arithmetic operators
     Fixed operator+(const Fixed &other);
     Fixed operator-(const Fixed &other);
     Fixed operator*(const Fixed &other);
     Fixed operator/(const Fixed &other);
 
-    // Increment/Decrement operators
+    // -- Increment/Decrement operators
     Fixed &operator++();    // Prefix increment operator.
     Fixed operator++(int);  // Postfix increment operator.
     Fixed &operator--();    // Prefix decrement operator.
@@ -48,11 +48,11 @@ class Fixed {
 
 
 	// Member functions
-	// Object level
+	// -- Object level
     float toFloat(void) const;
     int toInt(void) const;
 	
-	// Class level
+	// -- Class level
     static Fixed const &min(Fixed &a, Fixed &b);
     static Fixed const &min(Fixed const &a, Fixed const &b);
     static Fixed const &max(Fixed &a, Fixed &b);

@@ -75,21 +75,21 @@ bool Fixed::operator!=(const Fixed &other) const {
 };
 
 // ARITHMETIC OPERATOR -------------------------------------------------
-Fixed Fixed::operator+(const Fixed &other) {
+Fixed Fixed::operator+(const Fixed &other) const {
     Fixed result;
 
     result.setRawBits(this->getRawBits() + other.getRawBits());
     return (result);
 };
 
-Fixed Fixed::operator-(const Fixed &other) {
+Fixed Fixed::operator-(const Fixed &other) const {
     Fixed result;
 
     result.setRawBits(this->getRawBits() - other.getRawBits());
     return (result);
 };
 
-Fixed Fixed::operator*(const Fixed &other) {
+Fixed Fixed::operator*(const Fixed &other) const {
     Fixed result;
 
     // faço um shift right no final da multiplicação porque fica com 8 bits a mais o final da multiplicação do raw pelo raw.
@@ -97,7 +97,7 @@ Fixed Fixed::operator*(const Fixed &other) {
     return (result);
 };
 
-Fixed Fixed::operator/(const Fixed &other) {
+Fixed Fixed::operator/(const Fixed &other) const {
     Fixed result;
 
     long int a = this->getRawBits() << this->_binaryPointPosition;

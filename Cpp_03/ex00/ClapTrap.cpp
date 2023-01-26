@@ -57,6 +57,9 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
     std::cout << "Assignment operator called" << std::endl;
     if (this != &other) {
         this->_name = other.getName();
+        this->_attackDamage = other.getAttackDamage();
+        this->_hitPoints = other.getHitPoints();
+        this->_energyPoints = other.getEnergyPoints();
     }
     return (*this);
 };

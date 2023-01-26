@@ -2,7 +2,7 @@
 
 #include "ClapTrap.hpp"
 
-class FragTrap : public ClapTrap {
+class FragTrap : virtual public ClapTrap {
    public:
     using ClapTrap::_hitPoints;
     using ClapTrap::_attackDamage;

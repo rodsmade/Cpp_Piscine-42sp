@@ -2,9 +2,9 @@
 
 #include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap {
+class ScavTrap : virtual public ClapTrap {
    public:
-   using ClapTrap::_energyPoints;
+    using ClapTrap::_energyPoints;
 
     // Constructors/Destructor
     ScavTrap(void);
@@ -17,7 +17,7 @@ class ScavTrap : public ClapTrap {
     ScavTrap &operator=(const ScavTrap &other);
 
     // Member functions
-	using ClapTrap::attack;
+    using ClapTrap::attack;
     void attack(const std::string &target);
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);

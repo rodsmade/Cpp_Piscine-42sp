@@ -40,6 +40,42 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
 };
 
 // MEMBER FUNCTIONS ============================================================
+void ScavTrap::attack(const std::string &target) {
+    if (this->getEnergyPoints() > 0 && this->getHitPoints() > 0) {
+        this->setEnergyPoints(this->getEnergyPoints() - 1);
+        std::cout << "ScavTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
+    } else {
+        if (this->getHitPoints() <= 0) {
+            std::cout << "ScavTrap " << this->getName() << " has no HP left!" << std::endl;
+        } else {
+            std::cout << "ScavTrap " << this->getName() << " has no Energy Points left to perform this action!" << std::endl;
+        }
+    }
+};
+
+void ScavTrap::takeDamage(unsigned int amount) {
+    if (this->getHitPoints() > 0) {
+        std::cout << "ScavTrap " << this->_name << " takes " << amount << " points of damage!" << std::endl;
+        this->setHitPoints(this->getHitPoints() - amount);
+    } else {
+        std::cout << "ScavTrap " << this->getName() << " has no HP left!" << std::endl;
+    }
+};
+
+void ScavTrap::beRepaired(unsigned int amount) {
+    if (this->getEnergyPoints() > 0 && this->getHitPoints() > 0) {
+        std::cout << "ScavTrap " << this->_name << " heals " << amount << " hit points." << std::endl;
+        this->setHitPoints(this->getHitPoints() + amount);
+        this->setEnergyPoints(this->getEnergyPoints() - 1);
+    } else {
+        if (this->getHitPoints() <= 0) {
+            std::cout << "ScavTrap " << this->getName() << " has no HP left!" << std::endl;
+        } else {
+            std::cout << "ScavTrap " << this->getName() << " has no Energy Points left to perform this action!" << std::endl;
+        }
+    }
+};
+
 void ScavTrap::guardGate() {
     std::cout << "ScavTrap " << this->getName() << " has entered Gatekeeper Mode" << std::endl;
 };

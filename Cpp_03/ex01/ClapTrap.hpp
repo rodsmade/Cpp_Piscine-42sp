@@ -13,7 +13,7 @@ class ClapTrap {
     // Constructors/Destructor
     ClapTrap(void);
     ClapTrap(std::string name);
-	ClapTrap(const ClapTrap &other);
+    ClapTrap(const ClapTrap &other);
     ~ClapTrap(void);
 
     // Accessors
@@ -31,9 +31,9 @@ class ClapTrap {
     ClapTrap &operator=(const ClapTrap &other);
 
     // Member functions
-    void attack(const std::string& target);
+    void attack(const std::string &target);
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
 
-	void printStatus(void);
+    void printStatus(void);
 };

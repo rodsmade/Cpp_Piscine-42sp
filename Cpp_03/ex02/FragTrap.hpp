@@ -16,5 +16,5 @@ class FragTrap : public ClapTrap {
 
     // Member functions
     void highFivesGuys(void);
-	void printStatus();
+    void printStatus();
 };

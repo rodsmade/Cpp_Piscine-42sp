@@ -1,6 +1,6 @@
 #include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
 #include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main() {
     ClapTrap gandalf = ClapTrap("Gandalf");
@@ -11,6 +11,6 @@ int main() {
     speedy.printStatus();
     std::cout << std::endl;
 
-	speedy.highFivesGuys();
+    speedy.highFivesGuys();
     std::cout << std::endl;
 }

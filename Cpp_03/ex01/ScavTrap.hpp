@@ -10,6 +10,10 @@ class ScavTrap : public ClapTrap {
     ScavTrap(const ScavTrap &other);
     ~ScavTrap(void);
 
+    // Operator Overloads
+    // -- Assignment operator
+    ClapTrap &operator=(const ClapTrap &other);
+
     // Member functions
     void guardGate();
 };

@@ -27,6 +27,18 @@ ScavTrap::~ScavTrap(void) {
     std::cout << "Destructor called for ScavTrap " << this->getName() << std::endl;
 };
 
+// OPERATOR OVERLOADS ==========================================================
+// ASSIGNMENT OPERATOR -------------------------------------------------
+ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
+    if (this != &other) {
+        this->_name = other.getName();
+        this->_attackDamage = other.getAttackDamage();
+        this->_hitPoints = other.getHitPoints();
+        this->_energyPoints = other.getEnergyPoints();
+    }
+    return (*this);
+};
+
 // MEMBER FUNCTIONS ============================================================
 void ScavTrap::guardGate() {
     std::cout << "ScavTrap " << this->getName() << " has entered Gatekeeper Mode" << std::endl;

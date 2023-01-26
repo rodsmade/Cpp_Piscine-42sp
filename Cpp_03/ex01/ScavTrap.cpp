@@ -29,7 +29,7 @@ ScavTrap::~ScavTrap(void) {
 
 // OPERATOR OVERLOADS ==========================================================
 // ASSIGNMENT OPERATOR -------------------------------------------------
-ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
+ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
     std::cout << "Assignment operator called" << std::endl;
     if (this != &other) {
         this->_name = other.getName();

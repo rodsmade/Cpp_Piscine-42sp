@@ -3,16 +3,20 @@
 int main() {
 	ClapTrap gandalf = ClapTrap("Gandalf");
 
-	std::cout << "Gandalf has " << gandalf.getHitPoints() << " HP" << std::endl;
-	std::cout << "Gandalf has " << gandalf.getEnergyPoints() << " energy" << std::endl;
+	gandalf.printStatus();
+	std::cout << std::endl;
+	
 	gandalf.attack("Balrog");
-	std::cout << "Gandalf has " << gandalf.getHitPoints() << " HP" << std::endl;
-	std::cout << "Gandalf has " << gandalf.getEnergyPoints() << " energy" << std::endl;
+	gandalf.printStatus();
+	gandalf.attack("Balrog");
+	gandalf.attack("Balrog");
+	gandalf.printStatus();
+	std::cout << std::endl;
 
-	gandalf.attack("Balrog");
-	gandalf.attack("Balrog");
-	std::cout << "Gandalf has " << gandalf.getHitPoints() << " HP" << std::endl;
-	std::cout << "Gandalf has " << gandalf.getEnergyPoints() << " energy" << std::endl;
+	gandalf.takeDamage(9);
+	gandalf.printStatus();
+	std::cout << std::endl;
+
 	gandalf.beRepaired(1);
 	gandalf.beRepaired(1);
 	gandalf.beRepaired(1);
@@ -21,7 +25,6 @@ int main() {
 	gandalf.beRepaired(1);
 	gandalf.beRepaired(1);
 	gandalf.beRepaired(1);
-	gandalf.beRepaired(1);
-	gandalf.beRepaired(1);
-	gandalf.beRepaired(1);
+	std::cout << std::endl;
+	gandalf.printStatus();
 }

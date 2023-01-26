@@ -12,9 +12,12 @@ class ScavTrap : public ClapTrap {
 
     // Operator Overloads
     // -- Assignment operator
-    ClapTrap &operator=(const ClapTrap &other);
+    ScavTrap &operator=(const ScavTrap &other);
 
     // Member functions
+    void attack(const std::string &target);
+    void takeDamage(unsigned int amount);
+    void beRepaired(unsigned int amount);
     void guardGate();
 	void printStatus();
 };

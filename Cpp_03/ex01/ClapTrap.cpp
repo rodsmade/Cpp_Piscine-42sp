@@ -54,7 +54,6 @@ void ClapTrap::setAttackDamage(int const attackDamage) {
 // OPERATOR OVERLOADS ==========================================================
 // ASSIGNMENT OPERATOR -------------------------------------------------
 ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
-    std::cout << "Assignment operator called" << std::endl;
     if (this != &other) {
         this->_name = other.getName();
         this->_attackDamage = other.getAttackDamage();

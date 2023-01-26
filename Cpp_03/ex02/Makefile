@@ -4,8 +4,8 @@ CFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 
 all:	$(NAME)
 
-$(NAME): main.cpp ClapTrap.o ScavTrap.o
-	$(CC) $(CFLAGS) main.cpp ClapTrap.o ScavTrap.o -o $(NAME)
+$(NAME): main.cpp ClapTrap.o ScavTrap.o FragTrap.o
+	$(CC) $(CFLAGS) main.cpp ClapTrap.o ScavTrap.o FragTrap.o -o $(NAME)
 
 ClapTrap.o:	ClapTrap.cpp ClapTrap.hpp
 	$(CC) $(CFLAGS) $< -c -o $@
@@ -13,8 +13,11 @@ ClapTrap.o:	ClapTrap.cpp ClapTrap.hpp
 ScavTrap.o:	ScavTrap.cpp ScavTrap.hpp
 	$(CC) $(CFLAGS) $< -c -o $@
 
+FragTrap.o:	FragTrap.cpp FragTrap.hpp
+	$(CC) $(CFLAGS) $< -c -o $@
+
 clean:
-	rm -f ClapTrap.o ScavTrap.o
+	rm -f ClapTrap.o ScavTrap.o FragTrap.o
 
 fclean: clean
 	rm -f $(NAME)

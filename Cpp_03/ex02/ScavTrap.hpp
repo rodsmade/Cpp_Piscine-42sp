@@ -16,4 +16,5 @@ class ScavTrap : public ClapTrap {
 
     // Member functions
     void guardGate();
+    void printStatus();
 };

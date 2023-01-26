@@ -40,6 +40,42 @@ FragTrap &FragTrap::operator=(const FragTrap &other) {
 };
 
 // MEMBER FUNCTIONS ============================================================
+void FragTrap::attack(const std::string &target) {
+    if (this->getEnergyPoints() > 0 && this->getHitPoints() > 0) {
+        this->setEnergyPoints(this->getEnergyPoints() - 1);
+        std::cout << "FragTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
+    } else {
+        if (this->getHitPoints() <= 0) {
+            std::cout << "FragTrap " << this->getName() << " has no HP left!" << std::endl;
+        } else {
+            std::cout << "FragTrap " << this->getName() << " has no Energy Points left to perform this action!" << std::endl;
+        }
+    }
+};
+
+void FragTrap::takeDamage(unsigned int amount) {
+    if (this->getHitPoints() > 0) {
+        std::cout << "FragTrap " << this->_name << " takes " << amount << " points of damage!" << std::endl;
+        this->setHitPoints(this->getHitPoints() - amount);
+    } else {
+        std::cout << "FragTrap " << this->getName() << " has no HP left!" << std::endl;
+    }
+};
+
+void FragTrap::beRepaired(unsigned int amount) {
+    if (this->getEnergyPoints() > 0 && this->getHitPoints() > 0) {
+        std::cout << "FragTrap " << this->_name << " heals " << amount << " hit points." << std::endl;
+        this->setHitPoints(this->getHitPoints() + amount);
+        this->setEnergyPoints(this->getEnergyPoints() - 1);
+    } else {
+        if (this->getHitPoints() <= 0) {
+            std::cout << "FragTrap " << this->getName() << " has no HP left!" << std::endl;
+        } else {
+            std::cout << "FragTrap " << this->getName() << " has no Energy Points left to perform this action!" << std::endl;
+        }
+    }
+};
+
 void FragTrap::highFivesGuys(void) {
     std::cout << "High Five, my G's!" << std::endl;
 };

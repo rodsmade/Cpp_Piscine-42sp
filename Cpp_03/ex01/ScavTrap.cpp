@@ -44,3 +44,7 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
 void ScavTrap::guardGate() {
     std::cout << "ScavTrap " << this->getName() << " has entered Gatekeeper Mode" << std::endl;
 };
+
+void ScavTrap::printStatus(void) {
+    std::cout << "ScavTrap " << this->getName() << " has " << this->getHitPoints() << " HP and " << this->getEnergyPoints() << " energy" << std::endl;
+};

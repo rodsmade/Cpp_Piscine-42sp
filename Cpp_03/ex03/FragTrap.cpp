@@ -81,5 +81,5 @@ void FragTrap::highFivesGuys(void) {
 };
 
 void FragTrap::printStatus(void) {
-    std::cout << "FragTrap " << this->getName() << " has " << this->getHitPoints() << " HP and " << this->getEnergyPoints() << " energy" << std::endl;
+    std::cout << "FragTrap " << this->getName() << " has " << this->getHitPoints() << " HP and " << this->getEnergyPoints() << " energy and " << this->getAttackDamage() << " attack damage" << std::endl;
 };

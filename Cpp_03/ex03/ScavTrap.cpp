@@ -81,5 +81,5 @@ void ScavTrap::guardGate() {
 };
 
 void ScavTrap::printStatus(void) {
-    std::cout << "ScavTrap " << this->getName() << " has " << this->getHitPoints() << " HP and " << this->getEnergyPoints() << " energy" << std::endl;
+    std::cout << "ScavTrap " << this->getName() << " has " << this->getHitPoints() << " HP and " << this->getEnergyPoints() << " energy and " << this->getAttackDamage() << " attack damage" << std::endl;
 };

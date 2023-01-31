@@ -101,5 +101,5 @@ void ClapTrap::beRepaired(unsigned int amount) {
 };
 
 void ClapTrap::printStatus(void) {
-    std::cout << "ClapTrap " << this->getName() << " has " << this->getHitPoints() << " HP and " << this->getEnergyPoints() << " energy" << std::endl;
+    std::cout << "ClapTrap " << this->getName() << " has " << this->getHitPoints() << " HP and " << this->getEnergyPoints() << " energy and " << this->getAttackDamage() << " attack damage" << std::endl;
 };

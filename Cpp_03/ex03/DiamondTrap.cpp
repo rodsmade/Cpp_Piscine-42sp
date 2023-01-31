@@ -7,6 +7,9 @@ DiamondTrap::DiamondTrap(void) : ScavTrap(), FragTrap() {
 
 DiamondTrap::DiamondTrap(std::string name) : ScavTrap(name), FragTrap(name) {
     this->_name = name;
+    this->_attackDamage = FragTrap::getAttackDamage();
+    this->_hitPoints = FragTrap::getHitPoints();
+    this->_energyPoints = ScavTrap::getEnergyPoints();
     std::cout << "Name constructor called for DiamondTrap " << this->getName() << std::endl;
 };
 
@@ -61,5 +64,5 @@ void DiamondTrap::whoAmI(void) {
 };
 
 void DiamondTrap::printStatus(void) {
-    std::cout << "DiamondTrap " << this->getName() << " has " << this->getHitPoints() << " HP and " << this->getEnergyPoints() << " energy" << std::endl;
+    std::cout << "DiamondTrap " << this->getName() << " has " << this->getHitPoints() << " HP and " << this->getEnergyPoints() << " energy and " << this->getAttackDamage() << " attack damage" << std::endl;
 };

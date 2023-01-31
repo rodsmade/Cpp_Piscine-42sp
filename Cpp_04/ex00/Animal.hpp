@@ -2,11 +2,13 @@
 
 class Animal {
     private:
-    std::string type;
+    std::string _type;
 
     public:
     Animal() ;
-    Animal(std::string type);
-    Animal(Animal &other);
+    Animal(const std::string type);
+    Animal(const Animal &other);
     ~Animal();
+
+    void makeSound();
 };

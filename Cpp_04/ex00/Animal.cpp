@@ -15,3 +15,8 @@ Animal::~Animal() {};
 void Animal::makeSound() {
     std::cout << "* makes weird noises *" << std::endl;
 };
+
+Animal &Animal::operator=(const Animal &other) {
+    this->_type = other._type;
+    return (*this);
+};

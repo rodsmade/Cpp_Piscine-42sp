@@ -1,7 +1,7 @@
 #include <iostream>
 
 class Animal {
-    private:
+    protected:
     std::string _type;
 
     public:
@@ -10,5 +10,8 @@ class Animal {
     Animal(const Animal &other);
     ~Animal();
 
+    Animal &operator=(const Animal &other);
+
     void makeSound();
+
 };

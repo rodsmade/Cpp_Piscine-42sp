@@ -1,4 +1,4 @@
-NAME	= clapclap.out
+NAME	= escave.out
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 

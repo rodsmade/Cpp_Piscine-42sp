@@ -63,10 +63,6 @@ void ScavTrap::beRepaired(unsigned int amount){
     std::cout << "ScavTrap " << this->_name << " heals " << amount << " HP !" << std::endl;
 };
 
-void ScavTrap::guardGate() {
-    std::cout << "ScavTrap " << this->get_name() << " is now on gate keeper mode." << std::endl;
-};
-
 void ScavTrap::printStatus(void) {
     std::cout << std::endl;
     std::cout << "ScavTrap " << this->_name << " has:" << std::endl;
@@ -74,4 +70,8 @@ void ScavTrap::printStatus(void) {
     std::cout << "  " << this->_energyPoints << " energy points;" << std::endl;
     std::cout << "  " << this->_hitPoints << " hit points;" << std::endl;
     std::cout << std::endl;
+};
+
+void ScavTrap::guardGate() {
+    std::cout << "ScavTrap " << this->get_name() << " is now on gate keeper mode." << std::endl;
 };

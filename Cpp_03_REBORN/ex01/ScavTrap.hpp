@@ -19,6 +19,8 @@ class ScavTrap : virtual public ClapTrap {
 
     void attack(const std::string &target);
     void beRepaired(unsigned int amount);
-    void guardGate();
     void printStatus(void);
+
+    // ScavTrap's exclusive function:
+    void guardGate();
 };

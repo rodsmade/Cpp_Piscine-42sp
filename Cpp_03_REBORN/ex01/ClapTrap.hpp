@@ -3,7 +3,7 @@
 #include <iostream>
 
 class ClapTrap {
-   private:
+   protected:
     std::string _name;
     int _hitPoints;
     int _energyPoints;
@@ -20,16 +20,15 @@ class ClapTrap {
     // operator=
     ClapTrap &operator=(const ClapTrap &other);
 
-    //Getters e Setters
-	std::string get_name(void);
-	int get_hitPoints(void);
-	int get_energyPoints(void);
-	int get_attackDamage(void);
-	void set_name(std::string name);
-	void set_hitPoints(int hitPoints);
-	void set_energyPoints(int energyPoints);
-	void set_attackDamage(int attackDamage);
-
+    // Getters e Setters
+    std::string get_name(void) const;
+    int get_hitPoints(void) const;
+    int get_energyPoints(void) const;
+    int get_attackDamage(void) const;
+    void set_name(std::string name);
+    void set_hitPoints(int hitPoints);
+    void set_energyPoints(int energyPoints);
+    void set_attackDamage(int attackDamage);
 
     void attack(const std::string &target);
     void takeDamage(unsigned int amount);

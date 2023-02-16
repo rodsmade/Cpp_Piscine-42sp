@@ -30,8 +30,8 @@ class ClapTrap {
     void set_energyPoints(int energyPoints);
     void set_attackDamage(int attackDamage);
 
-    void attack(const std::string &target);
-    void takeDamage(unsigned int amount);
-    void beRepaired(unsigned int amount);
-    void printStatus(void);
+    virtual void attack(const std::string &target);
+    virtual void takeDamage(unsigned int amount);
+    virtual void beRepaired(unsigned int amount);
+    virtual void printStatus(void);
 };

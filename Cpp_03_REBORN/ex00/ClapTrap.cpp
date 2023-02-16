@@ -1,7 +1,11 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+ClapTrap::ClapTrap() : _name("undefined"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
     std::cout << "Default constructor called." << std::endl;
+};
+
+ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+    std::cout << "Name constructor called." << std::endl;
 };
 
 ClapTrap::~ClapTrap() {
@@ -17,8 +21,42 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other){
     this->_hitPoints = other._hitPoints;
     this->_energyPoints = other._energyPoints;
     this->_attackDamage = other._attackDamage;
+    std::cout << "Assignment operator (operator=) called." << std::endl;
     return (*this);
 };
+
+std::string ClapTrap::get_name(void) {
+    return (this->_name);
+};
+
+int ClapTrap::get_hitPoints(void) {
+    return (this->_hitPoints);
+};
+
+int ClapTrap::get_energyPoints(void) {
+    return (this->_energyPoints);
+};
+
+int ClapTrap::get_attackDamage(void) {
+    return (this->_attackDamage);
+};
+
+void ClapTrap::set_name(std::string name) {
+    this->_name = name;
+};
+
+void ClapTrap::set_hitPoints(int hitPoints) {
+    this->_hitPoints = hitPoints;
+};
+
+void ClapTrap::set_energyPoints(int energyPoints) {
+    this->_energyPoints = energyPoints;
+};
+
+void ClapTrap::set_attackDamage(int attackDamage) {
+    this->_attackDamage = attackDamage;
+};
+
 
 void ClapTrap::attack(const std::string &target) {
     if (this->_hitPoints <= 0) {
@@ -50,5 +88,15 @@ void ClapTrap::beRepaired(unsigned int amount){
         return;
     }
     this->_hitPoints += amount;
+    this->_energyPoints -= 1;
     std::cout << "ClapTrap " << this->_name << " heals " << amount << " HP !" << std::endl;
+};
+
+void ClapTrap::printStatus(void) {
+    std::cout << std::endl;
+    std::cout << "ClapTrap " << this->_name << " has:" << std::endl;
+    std::cout << "  " << this->_attackDamage << " attack damage;" << std::endl;
+    std::cout << "  " << this->_energyPoints << " energy points;" << std::endl;
+    std::cout << "  " << this->_hitPoints << " hit points;" << std::endl;
+    std::cout << std::endl;
 };

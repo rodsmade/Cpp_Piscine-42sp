@@ -18,9 +18,12 @@ class ScavTrap : virtual public ClapTrap {
     ScavTrap &operator=(const ScavTrap &other);
 
     void attack(const std::string &target);
-    void beRepaired(unsigned int amount);
-    void printStatus(void);
 
     // ScavTrap's exclusive function:
     void guardGate();
+
+   private:
+    const static int DEFAULT_HIT_POINTS = 100;
+    const static int DEFAULT_ENERGY_POINTS = 50;
+    const static int DEFAULT_ATTACK_DAMAGE = 20;
 };

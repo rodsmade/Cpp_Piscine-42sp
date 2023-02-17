@@ -31,7 +31,6 @@ class ClapTrap {
     void set_attackDamage(int attackDamage);
 
     virtual void attack(const std::string &target);
-    virtual void takeDamage(unsigned int amount);
-    virtual void beRepaired(unsigned int amount);
-    virtual void printStatus(void);
+    void takeDamage(unsigned int amount);
+    void beRepaired(unsigned int amount);
 };

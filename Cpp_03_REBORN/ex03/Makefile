@@ -11,15 +11,6 @@ all:	$(NAME)
 $(NAME): main.cpp $(OBJECTS)
 	$(CC) $(CFLAGS) main.cpp $(OBJECTS) -o $(NAME)
 
-# ClapTrap.o:	ClapTrap.cpp ClapTrap.hpp
-# 	$(CC) $(CFLAGS) $< -c -o $@
-
-# ScavTrap.o:	ScavTrap.cpp ScavTrap.hpp
-# 	$(CC) $(CFLAGS) $< -c -o $@
-
-# FragTrap.o:	FragTrap.cpp FragTrap.hpp
-# 	$(CC) $(CFLAGS) $< -c -o $@
-
 %.o : %.cpp %.hpp
 	$(CC) -c $(CFLAGS) $< -c -o $@
 

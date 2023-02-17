@@ -1,6 +1,7 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int main() {
     // {
@@ -50,27 +51,33 @@ int main() {
     //     base_ptr->printStatus();
     //     escave.guardGate();
     // }
+    // {
+    //     std::cout << std::endl << "========================================= FragTrap Tests ==========" << std::endl << std::endl;
+    //     ClapTrap *base_ptr;
+
+    //     ClapTrap clepiClepi = ClapTrap("Crépe-crépe");
+    //     base_ptr = &clepiClepi;
+    //     // clepiClepi.printStatus();
+    //     base_ptr = &clepiClepi;
+    //     // base_ptr->printStatus();
+
+    //     FragTrap speedy = FragTrap("Speedy Fragger");
+    //     // speedy.printStatus();
+    //     base_ptr = &speedy;
+    //     // base_ptr->printStatus();
+    //     speedy.highFivesGuys();
+
+    //     speedy.attack("Crépe-crépe");
+    //     clepiClepi.takeDamage(speedy.get_attackDamage());
+    //     clepiClepi.beRepaired(10);
+    //     // speedy.printStatus();
+    //     // clepiClepi.printStatus();
+    // }
     {
-        std::cout << std::endl << "========================================= FragTrap Tests ==========" << std::endl << std::endl;
-        ClapTrap *base_ptr;
+        std::cout << std::endl << "====================================== DiamondTrap Tests ==========" << std::endl << std::endl;
+        DiamondTrap rihanna = DiamondTrap("Badgal Riri");
+        
 
-        ClapTrap clepiClepi = ClapTrap("Crépe-crépe");
-        base_ptr = &clepiClepi;
-        clepiClepi.printStatus();
-        base_ptr = &clepiClepi;
-        base_ptr->printStatus();
-
-        FragTrap speedy = FragTrap("Speedy Fragger");
-        speedy.printStatus();
-        base_ptr = &speedy;
-        base_ptr->printStatus();
-        speedy.highFivesGuys();
-
-        speedy.attack("Crépe-crépe");
-        clepiClepi.takeDamage(speedy.get_attackDamage());
-        clepiClepi.beRepaired(10);
-        speedy.printStatus();
-        clepiClepi.printStatus();
     }
 
     return (0);

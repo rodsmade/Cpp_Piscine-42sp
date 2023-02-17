@@ -1,17 +1,17 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() {
-    this->set_hitPoints(100);
-    this->set_energyPoints(50);
-    this->set_attackDamage(20);
+ScavTrap::ScavTrap() : ClapTrap() {
+    this->set_hitPoints(this->DEFAULT_HIT_POINTS);
+    this->set_energyPoints(this->DEFAULT_ENERGY_POINTS);
+    this->set_attackDamage(this->DEFAULT_ATTACK_DAMAGE);
     std::cout << "ScavTrap's default constructor called." << std::endl;
 };
 
-ScavTrap::ScavTrap(std::string name) {
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
     this->set_name(name);
-    this->set_hitPoints(100);
-    this->set_energyPoints(50);
-    this->set_attackDamage(20);
+    this->set_hitPoints(this->DEFAULT_HIT_POINTS);
+    this->set_energyPoints(this->DEFAULT_ENERGY_POINTS);
+    this->set_attackDamage(this->DEFAULT_ATTACK_DAMAGE);
     std::cout << "ScavTrap's name constructor called." << std::endl;
 };
 
@@ -47,29 +47,6 @@ void ScavTrap::attack(const std::string &target) {
     }
     this->_energyPoints -= 1;
     std::cout << "ScavTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
-};
-
-void ScavTrap::beRepaired(unsigned int amount){
-    if (this->_hitPoints <= 0) {
-        std::cout << "ScavTrap " << this->_name << " has no HP left!" << std::endl;
-        return;
-    }
-    if (this->_energyPoints <= 0) {
-        std::cout << "ScavTrap " << this->_name << " has no energy left!" << std::endl;
-        return;
-    }
-    this->_hitPoints += amount;
-    this->_energyPoints -= 1;
-    std::cout << "ScavTrap " << this->_name << " heals " << amount << " HP !" << std::endl;
-};
-
-void ScavTrap::printStatus(void) {
-    std::cout << std::endl;
-    std::cout << "ScavTrap " << this->_name << " has:" << std::endl;
-    std::cout << "  " << this->_attackDamage << " attack damage;" << std::endl;
-    std::cout << "  " << this->_energyPoints << " energy points;" << std::endl;
-    std::cout << "  " << this->_hitPoints << " hit points;" << std::endl;
-    std::cout << std::endl;
 };
 
 void ScavTrap::guardGate() {

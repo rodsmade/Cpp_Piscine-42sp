@@ -1,17 +1,17 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap() {
-    this->set_hitPoints(100);
-    this->set_energyPoints(100);
-    this->set_attackDamage(30);
+FragTrap::FragTrap() : ClapTrap() {
+    this->set_hitPoints(FragTrap::DEFAULT_HIT_POINTS);
+    this->set_energyPoints(FragTrap::DEFAULT_ENERGY_POINTS);
+    this->set_attackDamage(FragTrap::DEFAULT_ATTACK_DAMAGE);
     std::cout << "FragTrap's default constructor called." << std::endl;
 };
 
-FragTrap::FragTrap(std::string name) {
+FragTrap::FragTrap(std::string name) : ClapTrap(name) {
     this->set_name(name);
-    this->set_hitPoints(100);
-    this->set_energyPoints(100);
-    this->set_attackDamage(30);
+    this->set_hitPoints(FragTrap::DEFAULT_HIT_POINTS);
+    this->set_energyPoints(FragTrap::DEFAULT_ENERGY_POINTS);
+    this->set_attackDamage(FragTrap::DEFAULT_ATTACK_DAMAGE);
     std::cout << "FragTrap's name constructor called." << std::endl;
 };
 
@@ -34,42 +34,6 @@ FragTrap &FragTrap::operator=(const FragTrap &other){
     this->_attackDamage = other._attackDamage;
     std::cout << "FragTrap's assignment operator (operator=) called." << std::endl;
     return (*this);
-};
-
-void FragTrap::attack(const std::string &target) {
-    if (this->_hitPoints <= 0) {
-        std::cout << "FragTrap " << this->get_name() << " has no HP left!" << std::endl;
-        return;
-    }
-    if (this->_energyPoints <= 0) {
-        std::cout << "FragTrap " << this->get_name() << " has no energy left!" << std::endl;
-        return;
-    }
-    this->_energyPoints -= 1;
-    std::cout << "FragTrap " << this->get_name() << " attacks " << target << ", causing " << this->get_attackDamage() << " points of damage!" << std::endl;
-};
-
-void FragTrap::beRepaired(unsigned int amount){
-    if (this->_hitPoints <= 0) {
-        std::cout << "FragTrap " << this->get_name() << " has no HP left!" << std::endl;
-        return;
-    }
-    if (this->_energyPoints <= 0) {
-        std::cout << "FragTrap " << this->get_name() << " has no energy left!" << std::endl;
-        return;
-    }
-    this->_hitPoints += amount;
-    this->_energyPoints -= 1;
-    std::cout << "FragTrap " << this->get_name() << " heals " << amount << " HP !" << std::endl;
-};
-
-void FragTrap::printStatus(void) {
-    std::cout << std::endl;
-    std::cout << "FragTrap " << this->get_name() << " has:" << std::endl;
-    std::cout << "  " << this->get_attackDamage() << " attack damage;" << std::endl;
-    std::cout << "  " << this->get_energyPoints() << " energy points;" << std::endl;
-    std::cout << "  " << this->get_hitPoints() << " hit points;" << std::endl;
-    std::cout << std::endl;
 };
 
 void FragTrap::highFivesGuys(void) {

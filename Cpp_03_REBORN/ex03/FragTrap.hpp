@@ -5,7 +5,6 @@
 #include "ClapTrap.hpp"
 
 class FragTrap : virtual public ClapTrap {
-
    public:
     // construtor
     FragTrap();
@@ -17,10 +16,11 @@ class FragTrap : virtual public ClapTrap {
     // operator=
     FragTrap &operator=(const FragTrap &other);
 
-    void attack(const std::string &target);
-    void beRepaired(unsigned int amount);
-    void printStatus(void);
-
     // FragTrap's exclusive function:
     void highFivesGuys(void);
+
+   private:
+    const static int DEFAULT_HIT_POINTS = 100;
+    const static int DEFAULT_ENERGY_POINTS = 100;
+    const static int DEFAULT_ATTACK_DAMAGE = 30;
 };

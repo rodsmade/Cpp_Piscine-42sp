@@ -1,6 +1,6 @@
 NAME	= badgalriri.out
 CC		= c++
-CFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
+CFLAGS	= -Wall -Wextra -Werror -Wshadow -std=c++98 -g
 
 SOURCES	= ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 OBJECTS	= $(patsubst %.cpp,%.o,$(SOURCES))

@@ -1,17 +1,18 @@
-NAME	= clapclap.out
+NAME	= badgalriri.out
 CC		= c++
-CFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
+CFLAGS	= -Wall -Wextra -Werror -Wshadow -std=c++98 -g
 
-SOURCES = ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
-OBJECTS = $(SOURCES:.cpp=.o)
+SOURCES	= ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
+OBJECTS	= $(patsubst %.cpp,%.o,$(SOURCES))
+
 
 all:	$(NAME)
 
 $(NAME): main.cpp $(OBJECTS)
 	$(CC) $(CFLAGS) main.cpp $(OBJECTS) -o $(NAME)
 
-%.o:	%.cpp %.hpp
-	$(CC) $(CFLAGS) $< -c -o $@
+%.o : %.cpp %.hpp
+	$(CC) -c $(CFLAGS) $< -c -o $@
 
 clean:
 	rm -f $(OBJECTS)

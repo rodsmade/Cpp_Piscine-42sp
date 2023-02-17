@@ -1,26 +1,29 @@
 #pragma once
 
+#include <iostream>
+
 #include "ClapTrap.hpp"
 
 class ScavTrap : virtual public ClapTrap {
+
    public:
-    using ClapTrap::_energyPoints;
-
-    // Constructors/Destructor
-    ScavTrap(void);
+    // construtor
+    ScavTrap();
     ScavTrap(std::string name);
+    // destrutor
+    ~ScavTrap();
+    // copy constructor
     ScavTrap(const ScavTrap &other);
-    ~ScavTrap(void);
-
-    // Operator Overloads
-    // -- Assignment operator
+    // operator=
     ScavTrap &operator=(const ScavTrap &other);
 
-    // Member functions
-    using ClapTrap::attack;
     void attack(const std::string &target);
-    void takeDamage(unsigned int amount);
-    void beRepaired(unsigned int amount);
+
+    // ScavTrap's exclusive function:
     void guardGate();
-    void printStatus();
+
+   protected:
+    const static int DEFAULT_HIT_POINTS = 100;
+    const static int DEFAULT_ENERGY_POINTS = 50;
+    const static int DEFAULT_ATTACK_DAMAGE = 20;
 };

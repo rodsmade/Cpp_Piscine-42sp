@@ -10,30 +10,29 @@ class ClapTrap {
     int _attackDamage;
 
    public:
-    // Constructors/Destructor
-    ClapTrap(void);
+    // construtor
+    ClapTrap();
     ClapTrap(std::string name);
+    // destrutor
+    ~ClapTrap();
+    // copy constructor
     ClapTrap(const ClapTrap &other);
-    ~ClapTrap(void);
-
-    // Accessors
-    std::string getName(void) const;
-    void setName(std::string const name);
-    int getHitPoints(void) const;
-    void setHitPoints(int const hitPoints);
-    int getEnergyPoints(void) const;
-    void setEnergyPoints(int const energyPoints);
-    int getAttackDamage(void) const;
-    void setAttackDamage(int const attackDamage);
-
-    // Operator Overloads
-    // -- Assignment operator
+    // operator=
     ClapTrap &operator=(const ClapTrap &other);
 
-    // Member functions
-    void attack(const std::string &target);
+    // Getters e Setters
+    std::string get_name(void) const;
+    int get_hit_points(void) const;
+    int get_energy_points(void) const;
+    int get_attack_damage(void) const;
+    void set_name(std::string name);
+    void set_hit_points(int hitPoints);
+    void set_energy_points(int energyPoints);
+    void set_attack_damage(int attackDamage);
+
+    virtual void attack(const std::string &target);
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
 
-    void printStatus(void);
+    void print_status( void );
 };

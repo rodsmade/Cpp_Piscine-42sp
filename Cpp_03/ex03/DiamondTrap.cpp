@@ -1,68 +1,52 @@
 #include "DiamondTrap.hpp"
 
-// CONSTRUCTORS / DESTRUCTOR ===================================================
-DiamondTrap::DiamondTrap(void) : ScavTrap(), FragTrap() {
-    std::cout << "Default constructor called for DiamondTrap " << this->getName() << std::endl;
+DiamondTrap::DiamondTrap() : ScavTrap(), FragTrap() {
+    this->_name = "unnamed diamond trap";
+    this->set_hit_points(FragTrap::DEFAULT_HIT_POINTS);
+    this->set_energy_points(ScavTrap::DEFAULT_ENERGY_POINTS);
+    this->set_attack_damage(FragTrap::DEFAULT_ATTACK_DAMAGE);
+    std::cout << "DiamondTrap's default constructor called." << std::endl;
 };
 
-DiamondTrap::DiamondTrap(std::string name) : ScavTrap(name), FragTrap(name) {
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name), ScavTrap(name), FragTrap(name) {
     this->_name = name;
-    this->_attackDamage = FragTrap::getAttackDamage();
-    this->_hitPoints = FragTrap::getHitPoints();
-    this->_energyPoints = ScavTrap::getEnergyPoints();
-    std::cout << "Name constructor called for DiamondTrap " << this->getName() << std::endl;
+    ClapTrap::set_name(name + "_clap_name");
+    this->set_hit_points(FragTrap::DEFAULT_HIT_POINTS);
+    this->set_energy_points(ScavTrap::DEFAULT_ENERGY_POINTS);
+    this->set_attack_damage(FragTrap::DEFAULT_ATTACK_DAMAGE);
+    std::cout << "DiamondTrap's name constructor called." << std::endl;
 };
 
-DiamondTrap::DiamondTrap(const DiamondTrap &other) : ClapTrap(other), ScavTrap(other), FragTrap(other) {
-    *this = other;
-    std::cout << "Copy constructor called for DiamondTrap " << this->getName() << std::endl;
+DiamondTrap::~DiamondTrap() {
+    std::cout << "DiamondTrap's default destructor called." << std::endl;
 };
 
-DiamondTrap::~DiamondTrap(void) {
-    std::cout << "Destructor called for DiamondTrap " << this->getName() << std::endl;
+DiamondTrap::DiamondTrap(const DiamondTrap &other) {
+    this->set_name(other.get_name());
+    this->set_hit_points(other.get_hit_points());
+    this->set_energy_points(other.get_energy_points());
+    this->set_attack_damage(other.get_attack_damage());
+    std::cout << "DiamondTrap's copy constructor called." << std::endl;
 };
 
-// OPERATOR OVERLOADS ==========================================================
-// ASSIGNMENT OPERATOR -------------------------------------------------
-DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other) {
-    if (this != &other) {
-        this->_name = other.getName();
-        this->_attackDamage = other.getAttackDamage();
-        this->_hitPoints = other.getHitPoints();
-        this->_energyPoints = other.getEnergyPoints();
-    }
+DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other){
+    this->_name = other._name;
+    this->_hitPoints = other._hitPoints;
+    this->_energyPoints = other._energyPoints;
+    this->_attackDamage = other._attackDamage;
+    std::cout << "DiamondTrap's assignment operator (operator=) called." << std::endl;
     return (*this);
 };
 
-// MEMBER FUNCTIONS ============================================================
-void DiamondTrap::takeDamage(unsigned int amount) {
-    if (this->getHitPoints() > 0) {
-        std::cout << "DiamondTrap " << this->_name << " takes " << amount << " points of damage!" << std::endl;
-        this->setHitPoints(this->getHitPoints() - amount);
-    } else {
-        std::cout << "DiamondTrap " << this->getName() << " has no HP left!" << std::endl;
-    }
+void DiamondTrap::whoAmI() {
+    std::cout << "My name is " << this->_name << " and my daddy's name is " << this->ClapTrap::_name << std::endl;
 };
 
-void DiamondTrap::beRepaired(unsigned int amount) {
-    if (this->getEnergyPoints() > 0 && this->getHitPoints() > 0) {
-        std::cout << "DiamondTrap " << this->_name << " heals " << amount << " hit points." << std::endl;
-        this->setHitPoints(this->getHitPoints() + amount);
-        this->setEnergyPoints(this->getEnergyPoints() - 1);
-    } else {
-        if (this->getHitPoints() <= 0) {
-            std::cout << "DiamondTrap " << this->getName() << " has no HP left!" << std::endl;
-        } else {
-            std::cout << "DiamondTrap " << this->getName() << " has no Energy Points left to perform this action!" << std::endl;
-        }
-    }
-};
-
-void DiamondTrap::whoAmI(void) {
-    std::cout << "ClapTrap's name: " << ClapTrap::_name << std::endl;
-    std::cout << "DiamondTrap's name: " << this->_name << std::endl;
-};
-
-void DiamondTrap::printStatus(void) {
-    std::cout << "DiamondTrap " << this->getName() << " has " << this->getHitPoints() << " HP and " << this->getEnergyPoints() << " energy and " << this->getAttackDamage() << " attack damage" << std::endl;
+void DiamondTrap::print_status(void) {
+    std::cout << "================================" << std::endl;
+    std::cout << "Name:\t" << this->_name << std::endl;
+    std::cout << "HP:\t" << this->get_hit_points() << std::endl;
+    std::cout << "EP:\t" << this->get_energy_points() << std::endl;
+    std::cout << "DMG:\t" << this->get_attack_damage() << std::endl;
+    std::cout << "================================" << std::endl;
 };

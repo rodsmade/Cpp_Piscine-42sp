@@ -1,17 +1,17 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap() : ClapTrap() {
-    this->set_hitPoints(this->DEFAULT_HIT_POINTS);
-    this->set_energyPoints(this->DEFAULT_ENERGY_POINTS);
-    this->set_attackDamage(this->DEFAULT_ATTACK_DAMAGE);
+    this->set_hit_points(this->DEFAULT_HIT_POINTS);
+    this->set_energy_points(this->DEFAULT_ENERGY_POINTS);
+    this->set_attack_damage(this->DEFAULT_ATTACK_DAMAGE);
     std::cout << "ScavTrap's default constructor called." << std::endl;
 };
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
     this->set_name(name);
-    this->set_hitPoints(this->DEFAULT_HIT_POINTS);
-    this->set_energyPoints(this->DEFAULT_ENERGY_POINTS);
-    this->set_attackDamage(this->DEFAULT_ATTACK_DAMAGE);
+    this->set_hit_points(this->DEFAULT_HIT_POINTS);
+    this->set_energy_points(this->DEFAULT_ENERGY_POINTS);
+    this->set_attack_damage(this->DEFAULT_ATTACK_DAMAGE);
     std::cout << "ScavTrap's name constructor called." << std::endl;
 };
 
@@ -21,9 +21,9 @@ ScavTrap::~ScavTrap() {
 
 ScavTrap::ScavTrap(const ScavTrap &other) {
     this->set_name(other.get_name());
-    this->set_hitPoints(other.get_hitPoints());
-    this->set_energyPoints(other.get_energyPoints());
-    this->set_attackDamage(other.get_attackDamage());
+    this->set_hit_points(other.get_hit_points());
+    this->set_energy_points(other.get_energy_points());
+    this->set_attack_damage(other.get_attack_damage());
     std::cout << "ScavTrap's copy constructor called." << std::endl;
 };
 

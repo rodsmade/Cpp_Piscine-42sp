@@ -22,15 +22,17 @@ class ClapTrap {
 
     // Getters e Setters
     std::string get_name(void) const;
-    int get_hitPoints(void) const;
-    int get_energyPoints(void) const;
-    int get_attackDamage(void) const;
+    int get_hit_points(void) const;
+    int get_energy_points(void) const;
+    int get_attack_damage(void) const;
     void set_name(std::string name);
-    void set_hitPoints(int hitPoints);
-    void set_energyPoints(int energyPoints);
-    void set_attackDamage(int attackDamage);
+    void set_hit_points(int hitPoints);
+    void set_energy_points(int energyPoints);
+    void set_attack_damage(int attackDamage);
 
     virtual void attack(const std::string &target);
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
+
+    void print_status( void );
 };

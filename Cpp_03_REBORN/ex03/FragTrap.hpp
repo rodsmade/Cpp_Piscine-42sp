@@ -19,7 +19,7 @@ class FragTrap : virtual public ClapTrap {
     // FragTrap's exclusive function:
     void highFivesGuys(void);
 
-   private:
+   protected:
     const static int DEFAULT_HIT_POINTS = 100;
     const static int DEFAULT_ENERGY_POINTS = 100;
     const static int DEFAULT_ATTACK_DAMAGE = 30;

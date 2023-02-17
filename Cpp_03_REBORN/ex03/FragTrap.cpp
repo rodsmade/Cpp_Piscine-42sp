@@ -1,17 +1,17 @@
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap() : ClapTrap() {
-    this->set_hitPoints(FragTrap::DEFAULT_HIT_POINTS);
-    this->set_energyPoints(FragTrap::DEFAULT_ENERGY_POINTS);
-    this->set_attackDamage(FragTrap::DEFAULT_ATTACK_DAMAGE);
+    this->set_hit_points(this->DEFAULT_HIT_POINTS);
+    this->set_energy_points(this->DEFAULT_ENERGY_POINTS);
+    this->set_attack_damage(this->DEFAULT_ATTACK_DAMAGE);
     std::cout << "FragTrap's default constructor called." << std::endl;
 };
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name) {
     this->set_name(name);
-    this->set_hitPoints(FragTrap::DEFAULT_HIT_POINTS);
-    this->set_energyPoints(FragTrap::DEFAULT_ENERGY_POINTS);
-    this->set_attackDamage(FragTrap::DEFAULT_ATTACK_DAMAGE);
+    this->set_hit_points(this->DEFAULT_HIT_POINTS);
+    this->set_energy_points(this->DEFAULT_ENERGY_POINTS);
+    this->set_attack_damage(this->DEFAULT_ATTACK_DAMAGE);
     std::cout << "FragTrap's name constructor called." << std::endl;
 };
 
@@ -21,9 +21,9 @@ FragTrap::~FragTrap() {
 
 FragTrap::FragTrap(const FragTrap &other) {
     this->set_name(other.get_name());
-    this->set_hitPoints(other.get_hitPoints());
-    this->set_energyPoints(other.get_energyPoints());
-    this->set_attackDamage(other.get_attackDamage());
+    this->set_hit_points(other.get_hit_points());
+    this->set_energy_points(other.get_energy_points());
+    this->set_attack_damage(other.get_attack_damage());
     std::cout << "FragTrap's copy constructor called." << std::endl;
 };
 

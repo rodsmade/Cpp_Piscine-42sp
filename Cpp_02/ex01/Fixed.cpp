@@ -9,13 +9,13 @@ Fixed::Fixed(const Fixed& other) {
 
 Fixed::Fixed(int const integer) {
     std::cout << "Integer constructor called" << std::endl;
-    this->_rawBits = integer << this->_binaryPointPosition;
+    this->_rawBits = integer << this->_precisionBits;
 };
 
 Fixed::Fixed(float const bobber) {
     std::cout << "Float constructor called" << std::endl;
     int roundNumber = (int) bobber;
-    this->_rawBits = roundNumber << this->_binaryPointPosition;
+    this->_rawBits = roundNumber << this->_precisionBits;
 
     float sum = 0.0;
     int fractPartToBin = 0;
@@ -55,7 +55,7 @@ float Fixed::toFloat( void ) const {
     int rawBitsTemp = this->getRawBits();
     float fractionalPart = 0.0;
 
-    for (int i = this->_binaryPointPosition; i > 0; i--) {
+    for (int i = this->_precisionBits; i > 0; i--) {
         fractionalPart += 1 / pow(2, i) * (rawBitsTemp & 0x0001);
         rawBitsTemp = rawBitsTemp >> 1;
     }

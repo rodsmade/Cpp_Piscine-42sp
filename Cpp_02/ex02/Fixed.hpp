@@ -41,7 +41,7 @@ class Fixed {
 
    private:
     int _rawBits;
-    static const int _binaryPointPosition = 8;
+    static const int _precisionBits = 8;
 };
 
 std::ostream &operator<<(std::ostream &o, Fixed const &rightHandSide);

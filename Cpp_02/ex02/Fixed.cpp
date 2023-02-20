@@ -7,25 +7,30 @@ Fixed::Fixed(const Fixed &other) {
 };
 
 Fixed::Fixed(int const integer) {
-    this->_rawBits = integer << this->_binaryPointPosition;
+    this->_rawBits = integer << this->_precisionBits;
 };
 
 Fixed::Fixed(float const bobber) {
     int roundNumber = (int)bobber;
-    this->_rawBits = roundNumber << this->_binaryPointPosition;
+    this->_rawBits = roundNumber << this->_precisionBits;
 
     float sum = 0.0;
     int fractPartToBin = 0;
 
     double fractPart, intPart;
     fractPart = std::modf(bobber, &intPart);
+    if (fractPart < 0)
+        fractPart *= (-1);
 
     while (sum < fractPart) {
         sum += 0.00390625;
         fractPartToBin++;
     }
 
-    this->_rawBits += fractPartToBin;
+    if (bobber < 0)
+        this->_rawBits -= fractPartToBin;
+    else
+        this->_rawBits += fractPartToBin;
 };
 
 Fixed &Fixed::operator=(const Fixed &other) {
@@ -50,7 +55,7 @@ float Fixed::toFloat(void) const {
     int rawBitsTemp = this->getRawBits();
     float fractionalPart = 0.0;
 
-    for (int i = this->_binaryPointPosition; i > 0; i--) {
+    for (int i = this->_precisionBits; i > 0; i--) {
         fractionalPart += 1 / pow(2, i) * (rawBitsTemp & 0x0001);
         rawBitsTemp = rawBitsTemp >> 1;
     }
@@ -116,7 +121,7 @@ Fixed Fixed::operator*(const Fixed &other) {
 Fixed Fixed::operator/(const Fixed &other) {
     Fixed result;
 
-    long int a = this->getRawBits() << this->_binaryPointPosition;
+    long int a = this->getRawBits() << this->_precisionBits;
     int b = other.getRawBits();
 
     result.setRawBits((int)a / b);
@@ -124,14 +129,14 @@ Fixed Fixed::operator/(const Fixed &other) {
     return (result);
 };
 
-Fixed &Fixed::operator++() {
+Fixed &Fixed::operator++() {  // Prefix increment
     this->setRawBits(this->getRawBits() + 0x0001);
     return *(this);
 };
 
-Fixed Fixed::operator++(int) {
+Fixed Fixed::operator++(int) {  // Postfix increment
     Fixed temp(*this);
-    temp.setRawBits(temp.getRawBits() + 0x0001);
+    this->setRawBits(this->getRawBits() + 0x0001);
     return (temp);
 };
 
@@ -142,7 +147,7 @@ Fixed &Fixed::operator--() {
 
 Fixed Fixed::operator--(int) {
     Fixed temp(*this);
-    temp.setRawBits(temp.getRawBits() - 0x0001);
+    this->setRawBits(this->getRawBits() - 0x0001);
     return (temp);
 };
 

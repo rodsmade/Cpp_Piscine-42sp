@@ -8,12 +8,17 @@ class DiamondTrap : public ScavTrap, public FragTrap {
     std::string _name;
 
    public:
-    DiamondTrap();
+    // Constructors/Destructor
+    DiamondTrap(void);
     DiamondTrap(std::string const name);
-    ~DiamondTrap();
     DiamondTrap(const DiamondTrap &other);
+    ~DiamondTrap(void);
+
+    // Operator Overloads
+    // -- Assignment operator
     DiamondTrap &operator=(const DiamondTrap &other);
 
+    // Member functions
     void whoAmI();
     void print_status(void);
 };

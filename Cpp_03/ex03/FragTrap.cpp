@@ -1,30 +1,30 @@
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap() : ClapTrap() {
-    this->set_hit_points(this->DEFAULT_HIT_POINTS);
-    this->set_energy_points(this->DEFAULT_ENERGY_POINTS);
-    this->set_attack_damage(this->DEFAULT_ATTACK_DAMAGE);
-    std::cout << "FragTrap's default constructor called." << std::endl;
+    this->_hitPoints = FragTrap::DEFAULT_HIT_POINTS;
+    this->_energyPoints = FragTrap::DEFAULT_ENERGY_POINTS;
+    this->_attackDamage = FragTrap::DEFAULT_ATTACK_DAMAGE;
+    std::cout << LIGHT_MAGENTA "FragTrap" RESET "'s default constructor called." << std::endl;
 };
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name) {
-    this->set_name(name);
-    this->set_hit_points(this->DEFAULT_HIT_POINTS);
-    this->set_energy_points(this->DEFAULT_ENERGY_POINTS);
-    this->set_attack_damage(this->DEFAULT_ATTACK_DAMAGE);
-    std::cout << "FragTrap's name constructor called." << std::endl;
+    this->_name = name;
+    this->_hitPoints = FragTrap::DEFAULT_HIT_POINTS;
+    this->_energyPoints = FragTrap::DEFAULT_ENERGY_POINTS;
+    this->_attackDamage = FragTrap::DEFAULT_ATTACK_DAMAGE;
+    std::cout << LIGHT_MAGENTA "FragTrap" RESET "'s name constructor called." << std::endl;
 };
 
 FragTrap::~FragTrap() {
-    std::cout << "FragTrap's default destructor called." << std::endl;
+    std::cout << LIGHT_MAGENTA "FragTrap" RESET "'s default destructor called." << std::endl; 
 };
 
-FragTrap::FragTrap(const FragTrap &other) {
-    this->set_name(other.get_name());
-    this->set_hit_points(other.get_hit_points());
-    this->set_energy_points(other.get_energy_points());
-    this->set_attack_damage(other.get_attack_damage());
-    std::cout << "FragTrap's copy constructor called." << std::endl;
+FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other) {
+    this->_name = other._name;
+    this->_hitPoints = other._hitPoints;
+    this->_energyPoints = other._energyPoints;
+    this->_attackDamage = other._attackDamage;
+    std::cout << LIGHT_MAGENTA "FragTrap" RESET "'s copy constructor called." << std::endl;
 };
 
 FragTrap &FragTrap::operator=(const FragTrap &other){
@@ -32,10 +32,10 @@ FragTrap &FragTrap::operator=(const FragTrap &other){
     this->_hitPoints = other._hitPoints;
     this->_energyPoints = other._energyPoints;
     this->_attackDamage = other._attackDamage;
-    std::cout << "FragTrap's assignment operator (operator=) called." << std::endl;
+    std::cout << LIGHT_MAGENTA "FragTrap" RESET "'s assignment operator (operator=) called." << std::endl;
     return (*this);
 };
 
 void FragTrap::highFivesGuys(void) {
-    std::cout << "High five my G's!" << std::endl;
+    std::cout << LIGHT_MAGENTA "FragTrap " RESET << this->_name << " says: High five, my G's!" << std::endl;
 };

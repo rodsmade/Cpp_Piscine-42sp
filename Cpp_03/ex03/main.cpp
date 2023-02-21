@@ -6,9 +6,9 @@
 
 int main() {
     {
-        std::cout << std::endl << "========================================= ClapTrap Tests ==========" << std::endl << std::endl;
+        std::cout << std::endl << BOLD BG_LIGHT_YELLOW "========================================= CLAPTRAP TESTS ==========" RESET << std::endl << std::endl;
         ClapTrap clepiClepi = ClapTrap("Crépe-crépe");
-        clepiClepi.print_status();
+        clepiClepi.printStatus();
         clepiClepi.attack("Rihanna");
         clepiClepi.attack("Rihanna");
         clepiClepi.attack("Rihanna");
@@ -20,59 +20,60 @@ int main() {
         clepiClepi.beRepaired(1);
         clepiClepi.beRepaired(1);
         clepiClepi.attack("Rihanna");
-        clepiClepi.print_status();
+        clepiClepi.printStatus();
 
         ClapTrap clepiB = clepiClepi;  // same as ClapTrap clepiB = ClapTrap(clepiClepi);
-        clepiB.set_name("Clepi B");
-        clepiB.set_energy_points(3);
-        clepiB.print_status();
-        clepiClepi.print_status();
+        clepiB.setName("Clepi B");
+        clepiClepi.printStatus();
+        clepiB.setEnergyPoints(3);
+        clepiB.printStatus();
+        clepiClepi.printStatus();
 
         ClapTrap clepiC;  // same as ClapTrap clepiC = ClapTrap();
         clepiC = clepiB;
-        clepiC.set_name("Clépi C");
-        clepiC.set_attack_damage(9999);
-        clepiC.print_status();
-        clepiB.print_status();
-        clepiClepi.print_status();
+        clepiC.setName("Clépi C");
+        clepiC.setAttackDamage(9999);
+        clepiC.printStatus();
+        clepiB.printStatus();
+        clepiClepi.printStatus();
     }
     {
-        std::cout << std::endl << "========================================= ScavTrap Tests ==========" << std::endl << std::endl;
+        std::cout << std::endl << BOLD BG_LIGHT_YELLOW "========================================= SCAVTRAP TESTS ==========" RESET << std::endl << std::endl;
         ClapTrap *base_ptr;
 
         ClapTrap clepiClepi = ClapTrap("Crépe-crépe");
         base_ptr = &clepiClepi;
-        clepiClepi.print_status();
+        clepiClepi.printStatus();
         base_ptr = &clepiClepi;
-        base_ptr->print_status();
+        base_ptr->printStatus();
 
         ScavTrap escave = ScavTrap("Escave");
-        escave.print_status();
+        escave.printStatus();
         base_ptr = &escave;
-        base_ptr->print_status();
+        base_ptr->printStatus();
         escave.guardGate();
     }
     {
-        std::cout << std::endl << "========================================= FragTrap Tests ==========" << std::endl << std::endl;
+        std::cout << std::endl << BOLD BG_LIGHT_YELLOW "========================================= FRAGTRAP TESTS ==========" RESET << std::endl << std::endl;
         ClapTrap *base_ptr;
 
         ClapTrap clepiClepi = ClapTrap("Crépe-crépe");
         base_ptr = &clepiClepi;
-        // clepiClepi.print_status();
+        clepiClepi.printStatus();
         base_ptr = &clepiClepi;
-        // base_ptr->print_status();
+        base_ptr->printStatus();
 
         FragTrap speedy = FragTrap("Speedy Fragger");
-        // speedy.print_status();
+        speedy.printStatus();
         base_ptr = &speedy;
-        // base_ptr->print_status();
+        base_ptr->printStatus();
         speedy.highFivesGuys();
 
         speedy.attack("Crépe-crépe");
-        clepiClepi.takeDamage(speedy.get_attack_damage());
+        clepiClepi.takeDamage(speedy.getAttackDamage());
         clepiClepi.beRepaired(10);
-        // speedy.print_status();
-        // clepiClepi.print_status();
+        speedy.printStatus();
+        clepiClepi.printStatus();
     }
     {
         DiamondTrap rihanna("Badgal Riri");
@@ -80,14 +81,15 @@ int main() {
         ScavTrap escave("ScavTrap");
 
         std::cout << std::endl
-                  << "====================================== DiamondTrap Tests ==========" << std::endl
+                  << BOLD BG_LIGHT_YELLOW "====================================== DIAMONDTRAP TESTS ==========" RESET << std::endl
                   << std::endl;
 
-        assert(rihanna.get_hit_points() == speedy.get_hit_points());
-        assert(rihanna.get_energy_points() == escave.get_energy_points());
-        assert(rihanna.get_attack_damage() == speedy.get_attack_damage());
+        assert(rihanna.getHitPoints() == speedy.getHitPoints());
+        assert(rihanna.getEnergyPoints() == escave.getEnergyPoints());
+        assert(rihanna.getAttackDamage() == speedy.getAttackDamage());
 
-        rihanna.print_status();
+        rihanna.printStatus();
+        rihanna.ClapTrap::printStatus();
         rihanna.whoAmI();
         rihanna.attack("Victoria Secrets");
         rihanna.highFivesGuys();

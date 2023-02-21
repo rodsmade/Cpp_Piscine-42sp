@@ -1,5 +1,6 @@
 #include "DiamondTrap.hpp"
 
+// CONSTRUCTORS / DESTRUCTOR ===================================================
 DiamondTrap::DiamondTrap() : ScavTrap(), FragTrap() {
     this->_name = "unnamed diamond trap";
     this->_hitPoints = FragTrap::DEFAULT_HIT_POINTS;
@@ -17,10 +18,6 @@ DiamondTrap::DiamondTrap(std::string name) : ScavTrap(name), FragTrap(name) {
     std::cout << LIGHT_RED "DiamondTrap" RESET "'s name constructor called." << std::endl;
 };
 
-DiamondTrap::~DiamondTrap() {
-    std::cout << LIGHT_RED "DiamondTrap" RESET "'s default destructor called." << std::endl;
-};
-
 DiamondTrap::DiamondTrap(const DiamondTrap &other) : ScavTrap(other), FragTrap(other) {
     this->_name = other._name;
     this->_hitPoints = other._hitPoints;
@@ -29,6 +26,12 @@ DiamondTrap::DiamondTrap(const DiamondTrap &other) : ScavTrap(other), FragTrap(o
     std::cout << LIGHT_RED "DiamondTrap" RESET "'s copy constructor called." << std::endl;
 };
 
+DiamondTrap::~DiamondTrap() {
+    std::cout << LIGHT_RED "DiamondTrap" RESET "'s default destructor called." << std::endl;
+};
+
+// OPERATOR OVERLOADS ==========================================================
+// ASSIGNMENT OPERATOR -------------------------------------------------
 DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other) {
     this->_name = other._name;
     this->_hitPoints = other._hitPoints;
@@ -38,6 +41,7 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other) {
     return (*this);
 };
 
+// MEMBER FUNCTIONS ============================================================
 void DiamondTrap::whoAmI() {
     std::cout << "My name is " BOLD ORANGE << this->_name << RESET " and my daddy's name is " BOLD VIOLET << this->ClapTrap::_name << RESET << std::endl;
 };

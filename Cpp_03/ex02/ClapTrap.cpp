@@ -2,19 +2,19 @@
 
 // CONSTRUCTORS / DESTRUCTOR ===================================================
 ClapTrap::ClapTrap(void) : _name("unnamed clap trap"), _hitPoints(ClapTrap::DEFAULT_HIT_POINTS), _energyPoints(ClapTrap::DEFAULT_ENERGY_POINTS), _attackDamage(ClapTrap::DEFAULT_ATTACK_DAMAGE) {
-    std::cout << LIGHT_BLUE "ClapTrap" RESET "'s default constructor called." << std::endl;
+    std::cout << LIGHT_BLUE "ClapTrap " RESET << this->_name << "'s default constructor called." << std::endl;
 };
 
 ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoints(ClapTrap::DEFAULT_HIT_POINTS), _energyPoints(ClapTrap::DEFAULT_ENERGY_POINTS), _attackDamage(ClapTrap::DEFAULT_ATTACK_DAMAGE) {
-    std::cout << LIGHT_BLUE "ClapTrap" RESET "'s name constructor called." << std::endl;
+    std::cout << LIGHT_BLUE "ClapTrap " RESET << this->_name << "'s name constructor called." << std::endl;
 };
 
 ClapTrap::ClapTrap(const ClapTrap &other) : _name(other._name), _hitPoints(other._hitPoints), _energyPoints(other._energyPoints), _attackDamage(other._attackDamage) {
-    std::cout << LIGHT_BLUE "ClapTrap" RESET "'s copy constructor called." << std::endl;
+    std::cout << LIGHT_BLUE "ClapTrap " RESET << this->_name << "'s copy constructor called." << std::endl;
 };
 
 ClapTrap::~ClapTrap() {
-    std::cout << LIGHT_BLUE "ClapTrap" RESET "'s default destructor called." << std::endl;
+    std::cout << LIGHT_BLUE "ClapTrap " RESET << this->_name << "'s default destructor called." << std::endl;
 };
 
 // ACCESSORS ===================================================================

@@ -1,5 +1,6 @@
 #include "FragTrap.hpp"
 
+// CONSTRUCTORS / DESTRUCTOR ===================================================
 FragTrap::FragTrap() : ClapTrap() {
     this->_hitPoints = FragTrap::DEFAULT_HIT_POINTS;
     this->_energyPoints = FragTrap::DEFAULT_ENERGY_POINTS;
@@ -15,10 +16,6 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name) {
     std::cout << LIGHT_MAGENTA "FragTrap" RESET "'s name constructor called." << std::endl;
 };
 
-FragTrap::~FragTrap() {
-    std::cout << LIGHT_MAGENTA "FragTrap" RESET "'s default destructor called." << std::endl;
-};
-
 FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other) {
     this->_name = other._name;
     this->_hitPoints = other._hitPoints;
@@ -27,6 +24,12 @@ FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other) {
     std::cout << LIGHT_MAGENTA "FragTrap" RESET "'s copy constructor called." << std::endl;
 };
 
+FragTrap::~FragTrap() {
+    std::cout << LIGHT_MAGENTA "FragTrap" RESET "'s default destructor called." << std::endl;
+};
+
+// OPERATOR OVERLOADS ==========================================================
+// ASSIGNMENT OPERATOR -------------------------------------------------
 FragTrap &FragTrap::operator=(const FragTrap &other) {
     this->_name = other._name;
     this->_hitPoints = other._hitPoints;
@@ -36,6 +39,7 @@ FragTrap &FragTrap::operator=(const FragTrap &other) {
     return (*this);
 };
 
+// MEMBER FUNCTIONS ============================================================
 void FragTrap::highFivesGuys(void) {
     std::cout << LIGHT_MAGENTA "FragTrap " RESET << this->_name << " says: High five, my G's!" << std::endl;
 };

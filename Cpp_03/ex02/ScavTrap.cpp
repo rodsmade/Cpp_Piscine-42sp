@@ -27,7 +27,7 @@ ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other) {
     std::cout << LIGHT_CYAN "ScavTrap" RESET "'s copy constructor called." << std::endl;
 };
 
-ScavTrap &ScavTrap::operator=(const ScavTrap &other){
+ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
     this->_name = other._name;
     this->_hitPoints = other._hitPoints;
     this->_energyPoints = other._energyPoints;

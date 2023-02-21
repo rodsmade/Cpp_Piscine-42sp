@@ -16,7 +16,7 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name) {
 };
 
 FragTrap::~FragTrap() {
-    std::cout << LIGHT_MAGENTA "FragTrap" RESET "'s default destructor called." << std::endl; 
+    std::cout << LIGHT_MAGENTA "FragTrap" RESET "'s default destructor called." << std::endl;
 };
 
 FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other) {
@@ -27,7 +27,7 @@ FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other) {
     std::cout << LIGHT_MAGENTA "FragTrap" RESET "'s copy constructor called." << std::endl;
 };
 
-FragTrap &FragTrap::operator=(const FragTrap &other){
+FragTrap &FragTrap::operator=(const FragTrap &other) {
     this->_name = other._name;
     this->_hitPoints = other._hitPoints;
     this->_energyPoints = other._energyPoints;

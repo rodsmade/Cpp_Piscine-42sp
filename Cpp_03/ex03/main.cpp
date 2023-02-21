@@ -1,12 +1,15 @@
+#include <cassert>
+
 #include "ClapTrap.hpp"
 #include "DiamondTrap.hpp"
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
-#include <cassert>
 
 int main() {
     {
-        std::cout << std::endl << BOLD BG_LIGHT_YELLOW "=========================================" RESET LIGHT_YELLOW " CLAPTRAP TESTS " RESET BG_LIGHT_YELLOW "==========" RESET << std::endl << std::endl;
+        std::cout << std::endl
+                  << BOLD BG_LIGHT_YELLOW "=========================================" RESET LIGHT_YELLOW " CLAPTRAP TESTS " RESET BG_LIGHT_YELLOW "==========" RESET << std::endl
+                  << std::endl;
         ClapTrap clepiClepi = ClapTrap("Crépe-crépe");
         clepiClepi.printStatus();
         clepiClepi.attack("Rihanna");
@@ -37,7 +40,9 @@ int main() {
         clepiClepi.printStatus();
     }
     {
-        std::cout << std::endl << BOLD BG_LIGHT_YELLOW "=========================================" RESET LIGHT_YELLOW " SCAVTRAP TESTS " RESET BG_LIGHT_YELLOW "==========" RESET << std::endl << std::endl;
+        std::cout << std::endl
+                  << BOLD BG_LIGHT_YELLOW "=========================================" RESET LIGHT_YELLOW " SCAVTRAP TESTS " RESET BG_LIGHT_YELLOW "==========" RESET << std::endl
+                  << std::endl;
         ClapTrap *base_ptr;
 
         ClapTrap clepiClepi = ClapTrap("Crépe-crépe");
@@ -50,14 +55,16 @@ int main() {
         escave.printStatus();
         escave.guardGate();
         escave.attack("Crépe-crépe");
-		clepiClepi.takeDamage(escave.getAttackDamage());
+        clepiClepi.takeDamage(escave.getAttackDamage());
         base_ptr = &escave;
         base_ptr->printStatus();
         base_ptr = &clepiClepi;
-		clepiClepi.printStatus();
+        clepiClepi.printStatus();
     }
     {
-        std::cout << std::endl << BOLD BG_LIGHT_YELLOW "=========================================" RESET LIGHT_YELLOW " FRAGTRAP TESTS " RESET BG_LIGHT_YELLOW "==========" RESET << std::endl << std::endl;
+        std::cout << std::endl
+                  << BOLD BG_LIGHT_YELLOW "=========================================" RESET LIGHT_YELLOW " FRAGTRAP TESTS " RESET BG_LIGHT_YELLOW "==========" RESET << std::endl
+                  << std::endl;
         ClapTrap *base_ptr;
 
         ClapTrap clepiClepi = ClapTrap("Crépe-crépe");

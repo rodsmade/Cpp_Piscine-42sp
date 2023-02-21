@@ -21,7 +21,7 @@ DiamondTrap::~DiamondTrap() {
     std::cout << LIGHT_RED "DiamondTrap" RESET "'s default destructor called." << std::endl;
 };
 
-DiamondTrap::DiamondTrap(const DiamondTrap &other)  : ScavTrap(other), FragTrap(other) {
+DiamondTrap::DiamondTrap(const DiamondTrap &other) : ScavTrap(other), FragTrap(other) {
     this->_name = other._name;
     this->_hitPoints = other._hitPoints;
     this->_energyPoints = other._energyPoints;
@@ -29,7 +29,7 @@ DiamondTrap::DiamondTrap(const DiamondTrap &other)  : ScavTrap(other), FragTrap(
     std::cout << LIGHT_RED "DiamondTrap" RESET "'s copy constructor called." << std::endl;
 };
 
-DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other){
+DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other) {
     this->_name = other._name;
     this->_hitPoints = other._hitPoints;
     this->_energyPoints = other._energyPoints;

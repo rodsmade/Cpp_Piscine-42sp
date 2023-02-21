@@ -12,7 +12,7 @@ int main() {
 
     balrog.guardGate();
     gandalf.attack("Balrog");
-	balrog.takeDamage(gandalf.getAttackDamage());
+    balrog.takeDamage(gandalf.getAttackDamage());
     std::cout << std::endl;
 
     gandalf.printStatus();
@@ -26,8 +26,8 @@ int main() {
 
     anotherBalrog.guardGate();
     anotherBalrog.printStatus();
-	anotherBalrog.attack("Balrog");
-	balrog.takeDamage(anotherBalrog.getAttackDamage());
+    anotherBalrog.attack("Balrog");
+    balrog.takeDamage(anotherBalrog.getAttackDamage());
     std::cout << std::endl;
 
     balrog.printStatus();

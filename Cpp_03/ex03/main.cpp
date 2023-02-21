@@ -6,7 +6,7 @@
 
 int main() {
     {
-        std::cout << std::endl << BOLD BG_LIGHT_YELLOW "========================================= CLAPTRAP TESTS ==========" RESET << std::endl << std::endl;
+        std::cout << std::endl << BOLD BG_LIGHT_YELLOW "=========================================" RESET LIGHT_YELLOW " CLAPTRAP TESTS " RESET BG_LIGHT_YELLOW "==========" RESET << std::endl << std::endl;
         ClapTrap clepiClepi = ClapTrap("Crépe-crépe");
         clepiClepi.printStatus();
         clepiClepi.attack("Rihanna");
@@ -24,7 +24,6 @@ int main() {
 
         ClapTrap clepiB = clepiClepi;  // same as ClapTrap clepiB = ClapTrap(clepiClepi);
         clepiB.setName("Clepi B");
-        clepiClepi.printStatus();
         clepiB.setEnergyPoints(3);
         clepiB.printStatus();
         clepiClepi.printStatus();
@@ -38,7 +37,7 @@ int main() {
         clepiClepi.printStatus();
     }
     {
-        std::cout << std::endl << BOLD BG_LIGHT_YELLOW "========================================= SCAVTRAP TESTS ==========" RESET << std::endl << std::endl;
+        std::cout << std::endl << BOLD BG_LIGHT_YELLOW "=========================================" RESET LIGHT_YELLOW " SCAVTRAP TESTS " RESET BG_LIGHT_YELLOW "==========" RESET << std::endl << std::endl;
         ClapTrap *base_ptr;
 
         ClapTrap clepiClepi = ClapTrap("Crépe-crépe");
@@ -49,16 +48,19 @@ int main() {
 
         ScavTrap escave = ScavTrap("Escave");
         escave.printStatus();
+        escave.guardGate();
+        escave.attack("Crépe-crépe");
+		clepiClepi.takeDamage(escave.getAttackDamage());
         base_ptr = &escave;
         base_ptr->printStatus();
-        escave.guardGate();
+        base_ptr = &clepiClepi;
+		clepiClepi.printStatus();
     }
     {
-        std::cout << std::endl << BOLD BG_LIGHT_YELLOW "========================================= FRAGTRAP TESTS ==========" RESET << std::endl << std::endl;
+        std::cout << std::endl << BOLD BG_LIGHT_YELLOW "=========================================" RESET LIGHT_YELLOW " FRAGTRAP TESTS " RESET BG_LIGHT_YELLOW "==========" RESET << std::endl << std::endl;
         ClapTrap *base_ptr;
 
         ClapTrap clepiClepi = ClapTrap("Crépe-crépe");
-        base_ptr = &clepiClepi;
         clepiClepi.printStatus();
         base_ptr = &clepiClepi;
         base_ptr->printStatus();
@@ -76,13 +78,12 @@ int main() {
         clepiClepi.printStatus();
     }
     {
+        std::cout << std::endl
+                  << BOLD BG_LIGHT_YELLOW "======================================" RESET LIGHT_YELLOW " DIAMONDTRAP TESTS " RESET BG_LIGHT_YELLOW "==========" RESET << std::endl
+                  << std::endl;
         DiamondTrap rihanna("Badgal Riri");
         FragTrap speedy("Speedy Fragger");
         ScavTrap escave("ScavTrap");
-
-        std::cout << std::endl
-                  << BOLD BG_LIGHT_YELLOW "====================================== DIAMONDTRAP TESTS ==========" RESET << std::endl
-                  << std::endl;
 
         assert(rihanna.getHitPoints() == speedy.getHitPoints());
         assert(rihanna.getEnergyPoints() == escave.getEnergyPoints());

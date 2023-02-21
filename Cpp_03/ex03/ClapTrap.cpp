@@ -70,7 +70,7 @@ void ClapTrap::attack(const std::string &target) {
         std::cout << LIGHT_BLUE "ClapTrap " RESET << this->_name << " has no energy left!" << std::endl;
         return;
     }
-    this->_energyPoints -= -1;
+    this->_energyPoints -= 1;
     std::cout << LIGHT_BLUE "ClapTrap " RESET << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
 };
 
@@ -91,7 +91,7 @@ void ClapTrap::beRepaired(unsigned int amount) {
         return;
     }
     this->_hitPoints += amount;
-    this->_energyPoints -= -1;
+    this->_energyPoints -= 1;
     std::cout << LIGHT_BLUE "ClapTrap " RESET << this->_name << " heals " << amount << " HP !" << std::endl;
 };
 

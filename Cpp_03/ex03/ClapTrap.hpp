@@ -7,6 +7,7 @@
 #define VIOLET "\033[38;2;75;0;130m"
 #define DARK_GRAY "\033[90m"
 #define BG_LIGHT_YELLOW "\033[103m"
+#define LIGHT_YELLOW "\033[93m"
 #define LIGHT_BLUE "\033[94m"
 #define LIGHT_CYAN "\033[96m"
 #define LIGHT_MAGENTA "\033[95m"

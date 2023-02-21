@@ -42,7 +42,7 @@ void DiamondTrap::whoAmI() {
     std::cout << "My name is " BOLD ORANGE << this->_name << RESET " and my daddy's name is " BOLD VIOLET << this->ClapTrap::_name << RESET << std::endl;
 };
 
-void DiamondTrap::print_status(void) {
+void DiamondTrap::printStatus(void) {
     std::cout << DARK_GRAY "  =====================================" RESET << std::endl;
     std::cout << "    Name:\t" BOLD ORANGE << this->_name << RESET << std::endl;
     std::cout << "    HP:\t\t" << this->_hitPoints << std::endl;

@@ -16,15 +16,13 @@
 
 class ClapTrap {
    private:
-    const static int DEFAULT_HIT_POINTS = 10;
-    const static int DEFAULT_ENERGY_POINTS = 10;
-    const static int DEFAULT_ATTACK_DAMAGE = 0;
-
-   protected:
     std::string _name;
     int _hitPoints;
     int _energyPoints;
     int _attackDamage;
+    const static int DEFAULT_HIT_POINTS = 10;
+    const static int DEFAULT_ENERGY_POINTS = 10;
+    const static int DEFAULT_ATTACK_DAMAGE = 0;
 
    public:
     // Constructors/Destructor

@@ -1,14 +1,21 @@
 #pragma once
 
+#include <iostream>
+
 #include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap {
+class ScavTrap : virtual public ClapTrap {
+   protected:
+    const static int DEFAULT_HIT_POINTS = 100;
+    const static int DEFAULT_ENERGY_POINTS = 50;
+    const static int DEFAULT_ATTACK_DAMAGE = 20;
+
    public:
     // Constructors/Destructor
-    ScavTrap(void);
+    ScavTrap();
     ScavTrap(std::string name);
     ScavTrap(const ScavTrap &other);
-    ~ScavTrap(void);
+    ~ScavTrap();
 
     // Operator Overloads
     // -- Assignment operator
@@ -16,8 +23,5 @@ class ScavTrap : public ClapTrap {
 
     // Member functions
     void attack(const std::string &target);
-    void takeDamage(unsigned int amount);
-    void beRepaired(unsigned int amount);
     void guardGate();
-    void printStatus();
 };

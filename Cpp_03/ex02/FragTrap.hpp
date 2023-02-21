@@ -1,23 +1,26 @@
 #pragma once
 
+#include <iostream>
+
 #include "ClapTrap.hpp"
 
-class FragTrap : public ClapTrap {
+class FragTrap : virtual public ClapTrap {
+   protected:
+    const static int DEFAULT_HIT_POINTS = 100;
+    const static int DEFAULT_ENERGY_POINTS = 100;
+    const static int DEFAULT_ATTACK_DAMAGE = 30;
+
    public:
     // Constructors/Destructor
-    FragTrap(void);
+    FragTrap();
     FragTrap(std::string name);
     FragTrap(const FragTrap &other);
-    ~FragTrap(void);
+    ~FragTrap();
 
     // Operator Overloads
     // -- Assignment operator
     FragTrap &operator=(const FragTrap &other);
 
     // Member functions
-    void attack(const std::string &target);
-    void takeDamage(unsigned int amount);
-    void beRepaired(unsigned int amount);
     void highFivesGuys(void);
-    void printStatus();
 };

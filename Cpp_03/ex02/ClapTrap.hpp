@@ -2,7 +2,24 @@
 
 #include <iostream>
 
+#define BOLD "\033[1m"
+#define ORANGE "\033[38;2;255;165;0m"
+#define VIOLET "\033[38;2;75;0;130m"
+#define DARK_GRAY "\033[90m"
+#define BG_LIGHT_YELLOW "\033[103m"
+#define LIGHT_YELLOW "\033[93m"
+#define LIGHT_BLUE "\033[94m"
+#define LIGHT_CYAN "\033[96m"
+#define LIGHT_MAGENTA "\033[95m"
+#define LIGHT_RED "\033[91m"
+#define RESET "\033[0m"
+
 class ClapTrap {
+   private:
+    const static int DEFAULT_HIT_POINTS = 10;
+    const static int DEFAULT_ENERGY_POINTS = 10;
+    const static int DEFAULT_ATTACK_DAMAGE = 0;
+
    protected:
     std::string _name;
     int _hitPoints;
@@ -18,13 +35,12 @@ class ClapTrap {
 
     // Accessors
     std::string getName(void) const;
-    void setName(std::string const name);
     int getHitPoints(void) const;
-    void setHitPoints(int const hitPoints);
     int getEnergyPoints(void) const;
-    void setEnergyPoints(int const energyPoints);
     int getAttackDamage(void) const;
-    void setAttackDamage(int const attackDamage);
+    void setName(std::string name);
+    void setEnergyPoints(int eps);
+    void setAttackDamage(int damage);
 
     // Operator Overloads
     // -- Assignment operator

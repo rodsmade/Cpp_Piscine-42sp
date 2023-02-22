@@ -1,11 +1,12 @@
+#include <time.h>
+
 #include <iostream>
 #include <string>
-#include <time.h>
 
 #include "Point.hpp"
 
-const int NUM_LINES = 30;
-const int NUM_COLUMNS = 30;
+const int NUM_LINES = 20;
+const int NUM_COLUMNS = 20;
 const int NUMBER_OF_PATTERNS = 5;
 const float FRAME_RATE = 0.5f;
 
@@ -35,64 +36,81 @@ void resetCursorPosition(void) {
 };
 
 void printPattern0(void) {
-    // Print the new text
+    Point a = Point(9.0f, 17.0f);
+    Point b = Point(2.0f, 2.0f);
+    Point c = Point(18.0f, 2.0f);
+
+    // Print matrix
     for (int i = 0; i < NUM_LINES; i++) {
         for (int j = 0; j < NUM_COLUMNS; j++) {
-            if (i == j + 3) {
-                std::cout << "x ";
-            } else {
+            Point point(j * 1.0f, (NUM_LINES - i) * 1.0f);
+            if (bsp(a, b, c, point))
+                std::cout << "O ";
+            else
                 std::cout << "- ";
-            }
         }
-        std::cout << "\n";
+        std::cout << std::endl;
     }
 };
 
 void printPattern1(void) {
+    Point a = Point(2.0f, 12.0f);
+    Point b = Point(9.0f, 17.0f);
+    Point c = Point(18.0f, 2.0f);
+
+    // Print matrix
     for (int i = 0; i < NUM_LINES; i++) {
         for (int j = 0; j < NUM_COLUMNS; j++) {
-            if (j == 5) {
-                std::cout << "x ";
-            } else {
+            Point point(j * 1.0f, (NUM_LINES - i) * 1.0f);
+            if (bsp(a, b, c, point))
+                std::cout << "O ";
+            else
                 std::cout << "- ";
-            }
         }
-        std::cout << "\n";
+        std::cout << std::endl;
     }
 };
 
 void printPattern2(void) {
-    // Print the new text
+    Point a = Point(2.0f, 2.0f);
+    Point b = Point(2.0f, 17.0f);
+    Point c = Point(18.0f, 2.0f);
+
+    // Print matrix
     for (int i = 0; i < NUM_LINES; i++) {
         for (int j = 0; j < NUM_COLUMNS; j++) {
-            if (i == 17) {
-                std::cout << "x ";
-            } else {
+            Point point(j * 1.0f, (NUM_LINES - i) * 1.0f);
+            if (bsp(a, b, c, point))
+                std::cout << "O ";
+            else
                 std::cout << "- ";
-            }
         }
-        std::cout << "\n";
+        std::cout << std::endl;
     }
 };
 
 void printPattern3(void) {
-    // Print the new text
+    Point a = Point(2.0f, 2.0f);
+    Point b = Point(2.0f, 17.0f);
+    Point c = Point(13.0f, 9.0f);
+
+    // Print matrix
     for (int i = 0; i < NUM_LINES; i++) {
         for (int j = 0; j < NUM_COLUMNS; j++) {
-            if (i + j == NUM_LINES + 6) {
-                std::cout << "x ";
-            } else {
+            Point point(j * 1.0f, (NUM_LINES - i) * 1.0f);
+            if (bsp(a, b, c, point))
+                std::cout << "O ";
+            else
                 std::cout << "- ";
-            }
         }
-        std::cout << "\n";
+        std::cout << std::endl;
     }
 };
 
 void printPattern4(void) {
-    Point a = Point(2.0f, 2.0f);
-    Point b = Point(9.0f, 17.0f);
-    Point c = Point(18.0f, 2.0f);
+    Point a = Point(18.0f, 2.0f);
+    Point b = Point(13.0f, 2.0f);
+    Point c = Point(9.0f, 17.0f);
 
     // Print matrix
     for (int i = 0; i < NUM_LINES; i++) {

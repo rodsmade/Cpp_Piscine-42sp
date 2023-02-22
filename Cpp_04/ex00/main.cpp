@@ -2,14 +2,15 @@
 #include "Cat.hpp"
 
 int main() {
-    const Animal* meta = new Animal();
-    const Animal* j = new Dog();
-    const Animal* i = new Cat();
-    std::cout << j->getType() << " " << std::endl;
-    std::cout << i->getType() << " " << std::endl;
-    i->makeSound();  // will output the cat sound!
-    j->makeSound();
-    meta->makeSound();
+    // Pdf tests:
+    const Animal* ptrToAnimal = new Animal();
+    const Animal* ptrToDog = new Dog();
+    const Animal* ptrToCat = new Cat();
+    std::cout << ptrToDog->getType() << " " << std::endl;
+    std::cout << ptrToCat->getType() << " " << std::endl;
+    ptrToCat->makeSound();  // will output the cat sound!
+    ptrToDog->makeSound();
+    ptrToAnimal->makeSound();
 
     return 0;
 }

@@ -2,7 +2,16 @@
 #include <string>
 #include <time.h>
 
-void print_canvas(int NUM_LINES, int NUM_COLUMNS) {
+#include "Point.hpp"
+
+const int NUM_LINES = 30;
+const int NUM_COLUMNS = 30;
+const int NUMBER_OF_PATTERNS = 5;
+const float FRAME_RATE = 0.5f;
+
+bool bsp(Point const a, Point const b, Point const c, Point const point);
+
+void printCanvas(void) {
     // Print 20 lines of "-" characters
     for (int i = 0; i < NUM_LINES; i++) {
         for (int j = 0; j < NUM_COLUMNS; j++) {
@@ -10,29 +19,26 @@ void print_canvas(int NUM_LINES, int NUM_COLUMNS) {
         }
         std::cout << std::endl;
     }
-
 };
 
-int main() {
-    const int NUM_LINES = 20;
-    const int NUM_COLUMNS = 20;
-    const float FRAME_RATE = 0.5f;
-    clock_t start_time;
-
-    print_canvas(NUM_LINES, NUM_COLUMNS);
-
-    // Move cursor to the start of the first line and overwrite it with the new text
-    std::cout << "\033[" << NUM_LINES << "A"; // Move cursor up NUM_LINES lines
-    std::cout << "\033[0G"; // Move cursor to the start of the line
-
+void waitFrameRateTick(void) {
     //  Wait 2 seconts
-    start_time = clock();
-    while (static_cast<double>(clock() - start_time) / CLOCKS_PER_SEC < FRAME_RATE);
-    
+    clock_t start_time = clock();
+    while (static_cast<double>(clock() - start_time) / CLOCKS_PER_SEC < FRAME_RATE)
+        ;
+}
+
+void resetCursorPosition(void) {
+    // Move cursor to the start of the first line and overwrite it with the new text
+    std::cout << "\033[" << NUM_LINES << "A";  // Move cursor up NUM_LINES lines
+    std::cout << "\033[0G";                    // Move cursor to the start of the line
+};
+
+void printPattern0(void) {
     // Print the new text
     for (int i = 0; i < NUM_LINES; i++) {
         for (int j = 0; j < NUM_COLUMNS; j++) {
-            if (i == j) {
+            if (i == j + 3) {
                 std::cout << "x ";
             } else {
                 std::cout << "- ";
@@ -40,16 +46,9 @@ int main() {
         }
         std::cout << "\n";
     }
+};
 
-    // Move cursor to the start of the first line and overwrite it with the new text
-    std::cout << "\033[" << NUM_LINES << "A"; // Move cursor up NUM_LINES lines
-    std::cout << "\033[0G"; // Move cursor to the start of the line
-
-    //  Wait 2 seconts
-    start_time = clock();
-    while (static_cast<double>(clock() - start_time) / CLOCKS_PER_SEC < FRAME_RATE);
-    
-    // Print the new text
+void printPattern1(void) {
     for (int i = 0; i < NUM_LINES; i++) {
         for (int j = 0; j < NUM_COLUMNS; j++) {
             if (j == 5) {
@@ -60,15 +59,9 @@ int main() {
         }
         std::cout << "\n";
     }
+};
 
-    // Move cursor to the start of the first line and overwrite it with the new text
-    std::cout << "\033[" << NUM_LINES << "A"; // Move cursor up NUM_LINES lines
-    std::cout << "\033[0G"; // Move cursor to the start of the line
-
-    //  Wait 2 seconts
-    start_time = clock();
-    while (static_cast<double>(clock() - start_time) / CLOCKS_PER_SEC < FRAME_RATE);
-    
+void printPattern2(void) {
     // Print the new text
     for (int i = 0; i < NUM_LINES; i++) {
         for (int j = 0; j < NUM_COLUMNS; j++) {
@@ -79,6 +72,50 @@ int main() {
             }
         }
         std::cout << "\n";
+    }
+};
+
+void printPattern3(void) {
+    // Print the new text
+    for (int i = 0; i < NUM_LINES; i++) {
+        for (int j = 0; j < NUM_COLUMNS; j++) {
+            if (i + j == NUM_LINES + 6) {
+                std::cout << "x ";
+            } else {
+                std::cout << "- ";
+            }
+        }
+        std::cout << "\n";
+    }
+};
+
+void printPattern4(void) {
+    Point a = Point(2.0f, 2.0f);
+    Point b = Point(9.0f, 17.0f);
+    Point c = Point(18.0f, 2.0f);
+
+    // Print matrix
+    for (int i = 0; i < NUM_LINES; i++) {
+        for (int j = 0; j < NUM_COLUMNS; j++) {
+            Point point(j * 1.0f, (NUM_LINES - i) * 1.0f);
+            if (bsp(a, b, c, point))
+                std::cout << "O ";
+            else
+                std::cout << "- ";
+        }
+        std::cout << std::endl;
+    }
+};
+
+void (*printPatterns[NUMBER_OF_PATTERNS])() = {&printPattern0, &printPattern1, &printPattern2, &printPattern3, &printPattern4};
+
+int main() {
+    printCanvas();
+
+    for (int i = 0; i < 40; i++) {
+        waitFrameRateTick();
+        resetCursorPosition();
+        printPatterns[i % NUMBER_OF_PATTERNS]();
     }
 
     return 0;

@@ -1,22 +1,24 @@
 #include "Animal.hpp"
 
 Animal::Animal() {
-    this->_type = "undefined";
+    this->_type = "Animal";
 };
 
-Animal::Animal(const std::string type) : _type(type) {};
-
 Animal::Animal(const Animal &other){
-    *this = other;
+    this->_type = other._type;
 };
 
 Animal::~Animal() {};
 
-void Animal::makeSound() {
-    std::cout << "* makes weird noises *" << std::endl;
-};
-
 Animal &Animal::operator=(const Animal &other) {
     this->_type = other._type;
     return (*this);
+};
+
+std::string Animal::getType(void) const {
+    return this->_type;
+};
+
+void Animal::makeSound() const {
+    std::cout << "* makes weird noises *" << std::endl;
 };

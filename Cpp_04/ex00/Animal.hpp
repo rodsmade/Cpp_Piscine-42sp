@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 
 class Animal {
@@ -6,12 +8,13 @@ class Animal {
 
     public:
     Animal() ;
-    Animal(const std::string type);
     Animal(const Animal &other);
     ~Animal();
 
+    std::string getType(void) const;
+
     Animal &operator=(const Animal &other);
 
-    void makeSound();
+    virtual void makeSound() const;
 
 };

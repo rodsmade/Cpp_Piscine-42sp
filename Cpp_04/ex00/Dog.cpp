@@ -1,10 +1,10 @@
 #include "Dog.hpp"
 
-Dog::Dog() {
+Dog::Dog() : Animal() {
     this->_type = "Dog";
 };
 
-Dog::Dog(const Dog &other){
+Dog::Dog(const Dog &other) : Animal(other) {
     this->_type = other._type;
 };
 

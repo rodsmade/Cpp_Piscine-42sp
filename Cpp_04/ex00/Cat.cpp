@@ -1,6 +1,6 @@
 #include "Cat.hpp"
 
-Cat::Cat() {
+Cat::Cat() : Animal() {
     this->_type = "Cat";
 };
 

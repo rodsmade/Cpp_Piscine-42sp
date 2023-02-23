@@ -1,16 +1,16 @@
 #include "Animal.hpp"
 
 Animal::Animal() : _type("Animal") {
-    std::cout << this->_type << " constructor called" << std::endl;
+    std::cout << "Animal constructor called" << std::endl;
 };
 
 Animal::Animal(const Animal &other){
     this->_type = other._type;
-    std::cout << this->_type << " copy constructor called" << std::endl;
+    std::cout << "Animal copy constructor called" << std::endl;
 };
 
 Animal::~Animal() {
-    std::cout << this->_type << " destructor called" << std::endl;
+    std::cout << "Animal destructor called" << std::endl;
 };
 
 Animal &Animal::operator=(const Animal &other) {

@@ -1,16 +1,11 @@
 #include "Dog.hpp"
 
-Dog::Dog() : Animal() {
-    this->_type = "Dog";
+Dog::Dog() : Animal(), _brain(new Brain) {
     std::cout << "Dog constructor called" << std::endl;
-    this->_brain = new Brain();
 };
 
-// TODO: make sure the copies are deep, not shallow!
-// A copy of a Dog or a Cat mustn’t be shallow. Thus, you have to test that your copies are deep copies!
-Dog::Dog(const Dog &other) : Animal(other) {
+Dog::Dog(const Dog &other) : Animal(other), _brain(new Brain(*other._brain)) {
     std::cout << "Dog copy constructor called" << std::endl;
-    this->_type = other._type;
 };
 
 Dog::~Dog() {
@@ -18,9 +13,13 @@ Dog::~Dog() {
     delete this->_brain;
 };
 
-Dog &Dog::operator=(const Dog &other) {
-    this->_type = other._type;
-    return (*this);
+Dog &Dog::operator=(const Dog &other){
+    if (this != &other) { // check for self-assignment
+        _type = other._type;
+        delete _brain;
+        _brain = new Brain(*other._brain); // deep copy
+    }
+    return *this;
 };
 
 void Dog::setType(std::string &type) {

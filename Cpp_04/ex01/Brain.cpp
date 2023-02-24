@@ -4,8 +4,7 @@ Brain::Brain() : _type("Brain") {
     std::cout << "Brain constructor called" << std::endl;
 };
 
-Brain::Brain(const Brain &other){
-    this->_type = other._type;
+Brain::Brain(const Brain &other) : _type(other._type) {
     std::cout << "Brain copy constructor called" << std::endl;
 };
 

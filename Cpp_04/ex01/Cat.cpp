@@ -1,15 +1,14 @@
 #include "Cat.hpp"
 #include "Brain.hpp"
 
-Cat::Cat() : Animal() {
-    this->_type = "Cat";
+Cat::Cat() : Animal(), _brain(new Brain) {
     std::cout << "Cat constructor called" << std::endl;
-    this->_brain = new Brain();
 };
 
-Cat::Cat(const Cat &other) : Animal(other) {
+// TODO: make sure the copies are deep, not shallow!
+// A copy of a Dog or a Cat mustn’t be shallow. Thus, you have to test that your copies are deep copies!
+Cat::Cat(const Cat &other) : _brain(new Brain(*other._brain)) {
     std::cout << "Cat copy constructor called" << std::endl;
-    *this = other;
 };
 
 Cat::~Cat() {
@@ -22,11 +21,14 @@ Cat &Cat::operator=(const Cat &other){
     return (*this);
 };
 
+void Cat::setType(std::string &type) {
+    this->_type = type;
+}
+
 void Cat::setIdea(int index, const std::string& idea) {
     _brain->setIdea(index, idea);
 }
 
-// get an idea from the cat's brain at a specific index
 std::string Cat::getIdea(int index) const {
     return _brain->getIdea(index);
 }

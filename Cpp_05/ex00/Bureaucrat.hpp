@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include <sstream>
+#include <string>
 #include <stdexcept>
 
 class Bureaucrat {
@@ -27,7 +29,14 @@ class Bureaucrat {
     Bureaucrat(const Bureaucrat &other);
     ~Bureaucrat();
     Bureaucrat &operator=(const Bureaucrat &other);
+    Bureaucrat &operator++();    // Prefix increment operator.
+    Bureaucrat operator++(int);  // Postfix increment operator.
+    Bureaucrat &operator--();    // Prefix decrement operator.
+    Bureaucrat operator--(int);  // Postfix decrement operator.
 
     std::string getName() const;
     int getGrade() const;
 };
+
+std::ostream &operator<<(std::ostream &o, Bureaucrat const &rightHandSide);
+

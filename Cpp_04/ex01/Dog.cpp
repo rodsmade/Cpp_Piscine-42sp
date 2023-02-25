@@ -22,7 +22,7 @@ Dog &Dog::operator=(const Dog &other){
     return *this;
 };
 
-void Dog::setType(std::string &type) {
+void Dog::setType(const std::string &type) {
     this->_type = type;
 }
 

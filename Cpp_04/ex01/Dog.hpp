@@ -14,7 +14,7 @@ class Dog : public Animal {
 
     Dog &operator=(const Dog &other);
 
-    void setType(std::string &type);
+    void setType(const std::string &type);
     void setIdea(int index, const std::string& idea);
     std::string getIdea(int index) const;
 

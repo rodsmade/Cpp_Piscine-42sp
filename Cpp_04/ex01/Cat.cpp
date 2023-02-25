@@ -22,7 +22,7 @@ Cat &Cat::operator=(const Cat &other){
     return *this;
 };
 
-void Cat::setType(std::string &type) {
+void Cat::setType(const std::string &type) {
     this->_type = type;
 }
 

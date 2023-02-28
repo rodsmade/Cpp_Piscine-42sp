@@ -1,7 +1,11 @@
+#pragma once
+
 #include <exception>
 #include <iostream>
 
 #include "Bureaucrat.hpp"
+// forward declaration of Bureaucrat class
+class Bureaucrat;
 
 class Form {
    private:

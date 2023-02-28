@@ -5,6 +5,10 @@
 #include <stdexcept>
 #include <string>
 
+#include "Form.hpp"
+// forward declaration of Form class
+class Form;
+
 class Bureaucrat {
    private:
     std::string _name;
@@ -36,6 +40,7 @@ class Bureaucrat {
 
     std::string getName() const;
     int getGrade() const;
+    void signForm(Form form);
 };
 
 std::ostream &operator<<(std::ostream &o, Bureaucrat const &rightHandSide);

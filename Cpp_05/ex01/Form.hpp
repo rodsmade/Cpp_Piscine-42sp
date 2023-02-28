@@ -1,6 +1,8 @@
 #include <exception>
 #include <iostream>
 
+#include "Bureaucrat.hpp"
+
 class Form {
    private:
     std::string _name;
@@ -18,6 +20,8 @@ class Form {
     bool getIsSigned(void) const;
     int getGradeRequiredToSign(void) const;
     int getGradeRequiredToExecute(void) const;
+
+    void beSigned(Bureaucrat bureaucrat);
 
     class GradeTooHighException : public std::exception {
        public:

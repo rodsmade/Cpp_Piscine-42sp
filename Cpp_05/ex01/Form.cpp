@@ -13,6 +13,8 @@ Form::Form(std::string name, int gradeToSign, int gradeToExecute) : _name(name),
 
 Form::Form(const Form &other) : _name(other._name), _gradeRequiredToSign(other._gradeRequiredToSign), _gradeRequiredToExecute(other._gradeRequiredToExecute){};
 
+// OPERATOR OVERLOADS
+// ASSIGNMENT OPERATOR
 Form &Form::operator=(const Form &other) {
     if (this != &other) {  // check for self-assignment
         _name = other._name;
@@ -22,4 +24,22 @@ Form &Form::operator=(const Form &other) {
     return *this;
 };
 
+// INSERTION OPERATOR
+std::ostream & operator<<(std::ostream &o, Form const &form) {
+    o << "Form " << form.getName() << " is ";
+    if (!form.getIsSigned())
+        o << "not";
+    o << " signed and needs grade " << form.getGradeRequiredToSign() << " to be signed and grade " << form.getGradeRequiredToExecute() << " to be executed.";
+    return (o);
+};
+
 Form::~Form(){};
+
+// GETTERS 
+std::string Form::getName(void) const { return this->_name; };
+
+bool Form::getIsSigned(void) const { return this->_isSigned; };
+
+int Form::getGradeRequiredToSign(void) const { return this->_gradeRequiredToSign; };
+
+int Form::getGradeRequiredToExecute(void) const { return this->_gradeRequiredToExecute; };

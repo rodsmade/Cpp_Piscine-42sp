@@ -14,6 +14,11 @@ class Form {
     Form &operator=(const Form &other);
     ~Form();
 
+    std::string getName(void) const;
+    bool getIsSigned(void) const;
+    int getGradeRequiredToSign(void) const;
+    int getGradeRequiredToExecute(void) const;
+
     class GradeTooHighException : public std::exception {
        public:
         GradeTooHighException(void) {}
@@ -30,3 +35,5 @@ class Form {
         }
     };
 };
+
+std::ostream &operator<<(std::ostream &o, Form const &form);

@@ -2,7 +2,7 @@ NAME	= bureaucracy.out
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 
-SOURCES = Bureaucrat.cpp
+SOURCES = Bureaucrat.cpp Form.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 
 all:	$(NAME)

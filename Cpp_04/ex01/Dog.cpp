@@ -13,11 +13,11 @@ Dog::~Dog() {
     delete this->_brain;
 };
 
-Dog &Dog::operator=(const Dog &other){
-    if (this != &other) { // check for self-assignment
+Dog &Dog::operator=(const Dog &other) {
+    if (this != &other) {  // check for self-assignment
         _type = other._type;
         delete _brain;
-        _brain = new Brain(*other._brain); // deep copy
+        _brain = new Brain(*other._brain);  // deep copy
     }
     return *this;
 };
@@ -26,7 +26,7 @@ void Dog::setType(const std::string &type) {
     this->_type = type;
 }
 
-void Dog::setIdea(int index, const std::string& idea) {
+void Dog::setIdea(int index, const std::string &idea) {
     _brain->setIdea(index, idea);
 }
 

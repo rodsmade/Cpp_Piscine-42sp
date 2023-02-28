@@ -1,19 +1,18 @@
-#include "Dog.hpp"
-#include "Cat.hpp"
-
 #include <iostream>
 #include <sstream>
 #include <string>
 
-int main()
-{
+#include "Cat.hpp"
+#include "Dog.hpp"
+
+int main() {
     {
         // Mandatory tests
         std::cout << "Mandatory tests:" << std::endl;
         const Animal* dogPtr = new Dog();
         const Animal* catPtr = new Cat();
 
-        delete dogPtr;//should not create a leak
+        delete dogPtr;  // should not create a leak
         delete catPtr;
         std::cout << std::endl;
     }
@@ -34,7 +33,7 @@ int main()
             else
                 catPtr->setIdea(i, "Catch " + str + " mice");
         }
-        for (int i = 0; i < 110; i++) {
+        for (int i = 0; i < 105; i++) {
             std::ostringstream oss;
             oss << i;
             std::string str = oss.str();
@@ -43,5 +42,5 @@ int main()
 
         delete catPtr;
     }
-return 0;
+    return 0;
 }

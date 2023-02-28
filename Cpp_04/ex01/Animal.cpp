@@ -4,7 +4,7 @@ Animal::Animal() : _type("Animal") {
     std::cout << "Animal constructor called" << std::endl;
 };
 
-Animal::Animal(const Animal &other){
+Animal::Animal(const Animal &other) {
     this->_type = other._type;
     std::cout << "Animal copy constructor called" << std::endl;
 };

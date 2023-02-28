@@ -13,11 +13,11 @@ Cat::~Cat() {
     delete this->_brain;
 };
 
-Cat &Cat::operator=(const Cat &other){
-    if (this != &other) { // check for self-assignment
+Cat &Cat::operator=(const Cat &other) {
+    if (this != &other) {  // check for self-assignment
         _type = other._type;
         delete _brain;
-        _brain = new Brain(*other._brain); // deep copy
+        _brain = new Brain(*other._brain);  // deep copy
     }
     return *this;
 };
@@ -26,7 +26,7 @@ void Cat::setType(const std::string &type) {
     this->_type = type;
 }
 
-void Cat::setIdea(int index, const std::string& idea) {
+void Cat::setIdea(int index, const std::string &idea) {
     _brain->setIdea(index, idea);
 }
 
@@ -34,6 +34,6 @@ std::string Cat::getIdea(int index) const {
     return _brain->getIdea(index);
 }
 
-void    Cat::makeSound() const {
+void Cat::makeSound() const {
     std::cout << "Meow!" << std::endl;
 };

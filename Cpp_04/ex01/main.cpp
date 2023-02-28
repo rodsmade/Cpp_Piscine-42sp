@@ -1,12 +1,11 @@
-#include "Dog.hpp"
-#include "Cat.hpp"
-
 #include <iostream>
 #include <sstream>
 #include <string>
 
-int main()
-{
+#include "Cat.hpp"
+#include "Dog.hpp"
+
+int main() {
     {
         // Mandatory tests
         std::cout << "===================================================== Mandatory tests:" << std::endl;
@@ -15,14 +14,14 @@ int main()
             const Animal* dogPtr = new Dog();
             const Animal* catPtr = new Cat();
 
-            delete dogPtr;//should not create a leak
+            delete dogPtr;  // should not create a leak
             delete catPtr;
         }
         {
             std::cout << std::endl;
             std::cout << "--- Array test ---" << std::endl;
             std::cout << "... creating array ..." << std::endl;
-            Animal *animals[10];
+            Animal* animals[10];
             for (int i = 0; i < 10; i++) {
                 if (i % 2) {
                     animals[i] = new Dog();
@@ -77,7 +76,7 @@ int main()
         std::cout << "--- Copying a Cat object: ---" << std::endl;
         std::string newType = "Persian";
         Cat cat1;
-        Cat cat2 = cat1; // Deep copy
+        Cat cat2 = cat1;  // Deep copy
         std::cout << cat1.getType() << " is the type of cat1" << std::endl;
         std::cout << cat2.getType() << " is the type of cat2" << std::endl;
         cat2.setType(newType);

@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <sstream>
-#include <string>
 #include <stdexcept>
+#include <string>
 
 class Bureaucrat {
    private:
@@ -12,20 +12,20 @@ class Bureaucrat {
 
    public:
     class GradeTooHighException : public std::exception {
-    public:
-        virtual const char* what() const throw() {
+       public:
+        virtual const char *what() const throw() {
             return "Grade is too high.";
         }
     };
 
     class GradeTooLowException : public std::exception {
-    public:
-        virtual const char* what() const throw() {
+       public:
+        virtual const char *what() const throw() {
             return "Grade is too low.";
         }
     };
 
-    Bureaucrat(const std::string& name, int grade);
+    Bureaucrat(const std::string &name, int grade);
     Bureaucrat(const Bureaucrat &other);
     ~Bureaucrat();
     Bureaucrat &operator=(const Bureaucrat &other);
@@ -39,4 +39,3 @@ class Bureaucrat {
 };
 
 std::ostream &operator<<(std::ostream &o, Bureaucrat const &rightHandSide);
-

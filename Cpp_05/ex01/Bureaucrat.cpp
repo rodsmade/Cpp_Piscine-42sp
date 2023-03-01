@@ -67,10 +67,7 @@ Bureaucrat Bureaucrat::operator--(int) {
 
 // INSERTION OPERATOR
 std::ostream &operator<<(std::ostream &o, Bureaucrat const &rightHandSide) {
-    std::ostringstream oss;
-    oss << rightHandSide.getGrade();
-    std::string grade = oss.str();
-    o << rightHandSide.getName() << ", bureaucrat grade " << grade << ".";
+    o << rightHandSide.getName() << ", bureaucrat grade " << rightHandSide.getGrade() << ".";
     return (o);
 };
 

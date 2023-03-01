@@ -50,16 +50,26 @@ bool test02_assignProperFormShouldNotRaiseException(void) {
 };
 
 bool test03_printProperFormShouldMatchSpecificString(void) {
+    // Arrange
     std::string formName = "Admission";
     int formGradeToSign = 100;
     int formGradeToExecute = 50;
     std::string formGradeToSignStr = "100";
     std::string formGradeToExecuteStr = "50";
     Form admissionForm = Form(formName, formGradeToSign, formGradeToExecute);
+    std::string expectedOutput = formName +
+                                 " form is not signed and needs grade " +
+                                 formGradeToSignStr +
+                                 " to be signed and grade " +
+                                 formGradeToExecuteStr +
+                                 " to be executed.";
 
-    std::string expectedOutput = formName + " form is not signed and needs grade " + formGradeToSignStr + " to be signed and grade " + formGradeToExecuteStr + " to be executed.";
-    std::string obtainedOutput = admissionForm;
+    // Act
+    std::stringstream ss;
+    ss << admissionForm;
+    std::string obtainedOutput = ss.str();
 
+    // Assert
     if (obtainedOutput == expectedOutput) {
         return (true);
     } else {

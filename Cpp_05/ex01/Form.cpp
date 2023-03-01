@@ -36,29 +36,6 @@ std::ostream &operator<<(std::ostream &o, Form const &form) {
     return (o);
 };
 
-// STD::STRING OPERATOR
-Form::operator std::string() const {
-    std::ostringstream oss;
-    oss << this->_gradeRequiredToSign;
-    std::string gradeRequiredToSignStr = oss.str();
-
-    std::ostringstream oss2;
-    oss2 << this->_gradeRequiredToExecute;
-    std::string gradeRequiredToExecuteStr = oss2.str();
-
-    std::string result = "";
-    result += _name;
-    result += " form is";
-    if (!this->_isSigned)
-        result += " not";
-    result += " signed and needs grade ";
-    result += gradeRequiredToSignStr;
-    result += " to be signed and grade ";
-    result += gradeRequiredToExecuteStr;
-    result += " to be executed.";
-    return result;
-}
-
 // GETTERS
 std::string Form::getName(void) const { return this->_name; };
 

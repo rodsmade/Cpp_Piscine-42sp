@@ -15,15 +15,10 @@
 
 #include <sstream>
 
-#define toString(x) static_cast<std::ostringstream&>(            \
-                        (std::ostringstream() << std::dec << x)) \
-                        .str()
-
 bool test00_createProperFormShouldNotRaiseException(void) {
     try {
         // criar form certo
-        Form permitirAdmissao = Form("Formulário de Admissão", 100, 50);
-        std::cout << permitirAdmissao << std::endl;
+        Form admissionForm = Form("Admission", 100, 50);
         return (true);
     } catch (const std::exception& e) {
         return (false);
@@ -31,11 +26,11 @@ bool test00_createProperFormShouldNotRaiseException(void) {
 };
 
 bool test01_copyProperFormShouldNotRaiseException(void) {
-    Form permitirAdmissao = Form("Formulário de Admissão", 100, 50);
+    Form admissionForm = Form("Admission", 100, 50);
 
     try {
         // copiar form certo
-        Form copia1(permitirAdmissao);
+        Form copia1(admissionForm);
         return (true);
     } catch (const std::exception& e) {
         return (false);
@@ -43,11 +38,11 @@ bool test01_copyProperFormShouldNotRaiseException(void) {
 };
 
 bool test02_assignProperFormShouldNotRaiseException(void) {
-    Form permitirAdmissao = Form("Formulário de Admissão", 100, 50);
+    Form admissionForm = Form("Admission", 100, 50);
 
     try {
         // designar form certo
-        Form copia2 = permitirAdmissao;
+        Form copia2 = admissionForm;
         return (true);
     } catch (const std::exception& e) {
         return (false);
@@ -60,10 +55,10 @@ bool test03_printProperFormShouldMatchSpecificString(void) {
     int formGradeToExecute = 50;
     std::string formGradeToSignStr = "100";
     std::string formGradeToExecuteStr = "50";
-    Form permitirAdmissao = Form(formName, formGradeToSign, formGradeToExecute);
+    Form admissionForm = Form(formName, formGradeToSign, formGradeToExecute);
 
     std::string expectedOutput = formName + " form is not signed and needs grade " + formGradeToSignStr + " to be signed and grade " + formGradeToExecuteStr + " to be executed.";
-    std::string obtainedOutput = permitirAdmissao;
+    std::string obtainedOutput = admissionForm;
 
     if (obtainedOutput == expectedOutput) {
         return (true);
@@ -108,54 +103,87 @@ bool test07_createWrongFormWithLowExecutionGradeShouldRaiseGradeTooLowException(
     return (false);
 };
 
+bool test08_beSignedByBureaucratWithExactGradeNeededShouldNotRaiseException(void) {
+    Bureaucrat soninha("Soninha", 10);
+    std::string formName = "Admission";
+    int formGradeToSign = 10;
+    int formGradeToExecute = 50;
+    Form admissionForm = Form(formName, formGradeToSign, formGradeToExecute);
+    try {
+        admissionForm.beSigned(soninha);
+        return (true);
+    } catch (const std::exception& e) {
+        return (false);
+    }
+};
+
+bool test09_beSignedByBureaucratWithHigherGradeThanNeededShouldNotRaiseException(void) {
+    Bureaucrat soninha("Soninha", 2);
+    std::string formName = "Admission";
+    int formGradeToSign = 10;
+    int formGradeToExecute = 50;
+    Form admissionForm = Form(formName, formGradeToSign, formGradeToExecute);
+    try {
+        admissionForm.beSigned(soninha);
+        return (true);
+    } catch (const std::exception& e) {
+        return (false);
+    }
+};
+
+bool test10_beSignedByBureaucratWithLowerGradeThanNeededShouldRaiseGradeTooLowException(void) {
+    Bureaucrat soninha("Soninha", 20);
+    std::string formName = "Admission";
+    int formGradeToSign = 10;
+    int formGradeToExecute = 50;
+    Form admissionForm = Form(formName, formGradeToSign, formGradeToExecute);
+    try {
+        admissionForm.beSigned(soninha);
+        return (false);
+    } catch (const Form::GradeTooLowException& e) {
+        return (true);
+    } catch (const std::exception& e) {
+        return (false);
+    }
+};
+
+    // be signed por um burocrata como nivel mais baixo
+
 int main() {
-    int totalTests = 8;
+    int totalTests = 11;
     bool (*testFunctions[totalTests])();
+    std::string testFunctionsNames[totalTests];
 
     testFunctions[0] = test00_createProperFormShouldNotRaiseException;
+    testFunctionsNames[0] = "test00_createProperFormShouldNotRaiseException";
     testFunctions[1] = test01_copyProperFormShouldNotRaiseException;
+    testFunctionsNames[1] = "test01_copyProperFormShouldNotRaiseException";
     testFunctions[2] = test02_assignProperFormShouldNotRaiseException;
+    testFunctionsNames[2] = "test02_assignProperFormShouldNotRaiseException";
     testFunctions[3] = test03_printProperFormShouldMatchSpecificString;
+    testFunctionsNames[3] = "test03_printProperFormShouldMatchSpecificString";
     testFunctions[4] = test04_createWrongFormWithHighSignatureGradeShouldRaiseGradeTooHighException;
+    testFunctionsNames[4] = "test04_createWrongFormWithHighSignatureGradeShouldRaiseGradeTooHighException";
     testFunctions[5] = test05_createWrongFormWithLowSignatureGradeShouldRaiseGradeTooLowException;
+    testFunctionsNames[5] = "test05_createWrongFormWithLowSignatureGradeShouldRaiseGradeTooLowException";
     testFunctions[6] = test06_createWrongFormWithHighExecutionGradeShouldRaiseGradeTooLowException;
+    testFunctionsNames[6] = "test06_createWrongFormWithHighExecutionGradeShouldRaiseGradeTooLowException";
     testFunctions[7] = test07_createWrongFormWithLowExecutionGradeShouldRaiseGradeTooLowException;
+    testFunctionsNames[7] = "test07_createWrongFormWithLowExecutionGradeShouldRaiseGradeTooLowException";
+    testFunctions[8] = test08_beSignedByBureaucratWithExactGradeNeededShouldNotRaiseException;
+    testFunctionsNames[8] = "test08_beSignedByBureaucratWithExactGradeNeededShouldNotRaiseException";
+    testFunctions[9] = test09_beSignedByBureaucratWithHigherGradeThanNeededShouldNotRaiseException;
+    testFunctionsNames[9] = "test09_beSignedByBureaucratWithHigherGradeThanNeededShouldNotRaiseException";
+    testFunctions[10] = test10_beSignedByBureaucratWithLowerGradeThanNeededShouldRaiseGradeTooLowException;
+    testFunctionsNames[10] = "test10_beSignedByBureaucratWithLowerGradeThanNeededShouldRaiseGradeTooLowException";
 
     for (int i = 0; i < totalTests; ++i) {
-        std::string iToString = toString(i);
-        if (i < 10) {
-            iToString = "0" + iToString;
-        };
-
         if (!testFunctions[i]()) {
-            std::cout << LIGHT_RED "Test" << iToString << ": " BOLD "[NOK]" RESET RESET << std::endl;
+            std::cout << LIGHT_RED BOLD "[NOK]  " RESET LIGHT_RED << testFunctionsNames[i] << RESET << std::endl;
         } else {
-            std::cout << LIGHT_GREEN "Test" << iToString << ": " BOLD "[OK]" RESET RESET << std::endl;
+            std::cout << LIGHT_GREEN BOLD "[OK]  " RESET LIGHT_GREEN << testFunctionsNames[i] << RESET << std::endl;
         }
     }
-
-
-    // // criar form com execute grade mais alta
-    // try {
-    //     Form formErrado1("Formulário de Admissão", 100, -50);
-    // } catch (const Form::GradeTooHighException& e) {
-    //     std::cout << "Exception caught: " << e.what() << std::endl;
-    // };
-
-    // // criar form com execute grade mais baixa
-    // try {
-    //     Form formErrado1("Formulário de Admissão", 100, 500);
-    // } catch (const Form::GradeTooHighException& e) {
-    //     std::cout << "Exception caught: " << e.what() << std::endl;
-    // };
-
-    // // criar um burocrata
-    // Bureaucrat bureaucrat("Soninha", 10);
-    // // be signed por um burocrata com exatamente o nivel
-    // // be signed por um burocrata como nivel mais alto
-
-    // // try catch
-    // // be signed por um burocrata como nivel mais baixo
 
     return 0;
 }

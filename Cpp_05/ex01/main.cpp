@@ -72,14 +72,54 @@ bool test03_printProperFormShouldMatchSpecificString(void) {
     }
 };
 
+bool test04_createWrongFormWithHighSignatureGradeShouldRaiseGradeTooHighException(void) {
+    try {
+        Form wrongForm("Admission", -42, 50);
+    } catch (const Form::GradeTooHighException& e) {
+        return (true);
+    };
+    return (false);
+};
+
+bool test05_createWrongFormWithLowSignatureGradeShouldRaiseGradeTooLowException(void) {
+    try {
+        Form wrongForm("Admission", 420, 50);
+    } catch (const Form::GradeTooLowException& e) {
+        return (true);
+    };
+    return (false);
+};
+
+bool test06_createWrongFormWithHighExecutionGradeShouldRaiseGradeTooLowException(void) {
+    try {
+        Form wrongForm("Admission", 42, -50);
+    } catch (const Form::GradeTooHighException& e) {
+        return (true);
+    };
+    return (false);
+};
+
+bool test07_createWrongFormWithLowExecutionGradeShouldRaiseGradeTooLowException(void) {
+    try {
+        Form wrongForm("Admission", 42, 420);
+    } catch (const Form::GradeTooLowException& e) {
+        return (true);
+    };
+    return (false);
+};
+
 int main() {
-    int totalTests = 4;
+    int totalTests = 8;
     bool (*testFunctions[totalTests])();
 
     testFunctions[0] = test00_createProperFormShouldNotRaiseException;
     testFunctions[1] = test01_copyProperFormShouldNotRaiseException;
     testFunctions[2] = test02_assignProperFormShouldNotRaiseException;
     testFunctions[3] = test03_printProperFormShouldMatchSpecificString;
+    testFunctions[4] = test04_createWrongFormWithHighSignatureGradeShouldRaiseGradeTooHighException;
+    testFunctions[5] = test05_createWrongFormWithLowSignatureGradeShouldRaiseGradeTooLowException;
+    testFunctions[6] = test06_createWrongFormWithHighExecutionGradeShouldRaiseGradeTooLowException;
+    testFunctions[7] = test07_createWrongFormWithLowExecutionGradeShouldRaiseGradeTooLowException;
 
     for (int i = 0; i < totalTests; ++i) {
         std::string iToString = toString(i);
@@ -94,23 +134,6 @@ int main() {
         }
     }
 
-    // // printar form certo
-    // std::cout << "Formulario criado: " << permitirAdmissao << std::endl;
-
-    // // try catches
-    // // criar form com sign grade mais alta
-    // try {
-    //     Form formErrado1("Formulário de Admissão", -42, 50);
-    // } catch (const Form::GradeTooHighException& e) {
-    //     std::cout << "Exception caught: " << e.what() << std::endl;
-    // };
-
-    // // criar form com sign grade mais baixa
-    // try {
-    //     Form formErrado1("Formulário de Admissão", 1000, 50);
-    // } catch (const Form::GradeTooHighException& e) {
-    //     std::cout << "Exception caught: " << e.what() << std::endl;
-    // };
 
     // // criar form com execute grade mais alta
     // try {

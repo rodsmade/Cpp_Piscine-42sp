@@ -147,8 +147,6 @@ bool test10_beSignedByBureaucratWithLowerGradeThanNeededShouldRaiseGradeTooLowEx
     }
 };
 
-    // be signed por um burocrata como nivel mais baixo
-
 int main() {
     int totalTests = 11;
     bool (*testFunctions[totalTests])();

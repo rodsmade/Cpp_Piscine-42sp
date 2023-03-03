@@ -50,6 +50,14 @@ class AForm {
             return "Grade is too high. Provide value greater than or equal to 1";
         }
     };
+
+    class UnsignedFormException : public std::exception {
+       public:
+        UnsignedFormException(void) {}
+        std::string what() {
+            return "Form has not yet been signed!";
+        }
+    };
 };
 
 std::ostream &operator<<(std::ostream &o, AForm const &form);

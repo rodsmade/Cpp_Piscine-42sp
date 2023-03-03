@@ -9,21 +9,47 @@ class Bureaucrat;
 
 class AForm {
    private:
-    int _gradeRequiredToSign;
+    const int _gradeRequiredToExecute;
+    const int _gradeRequiredToSign;
     bool _isSigned;
     std::string _name;
 
    public:
+    // Constructors/Destructor
+    AForm(std::string name, int gradeToSign, int gradeToExecute);
+    AForm(const AForm &other);
+    ~AForm();
+
+    // Accessors
+    int getGradeRequiredToExecute(void) const;
+    int getGradeRequiredToSign(void) const;
+    bool getIsSigned(void) const;
     std::string getName(void) const;
 
+    // Operator Overloads
+    // -- Assignment operator
+    AForm &operator=(const AForm &other);
+
+    // Member functions
     void beSigned(Bureaucrat &bureaucrat);
     virtual void beExecuted(Bureaucrat &bureaucrat) = 0;
 
+    // Exceptions
     class GradeTooLowException : public std::exception {
        public:
         GradeTooLowException(void) {}
         std::string what() {
-            return "Grade is too high. Provide value lesser than or equal to 1";
+            return "Grade is too low. Provide value less than or equal to 150";
+        }
+    };
+
+    class GradeTooHighException : public std::exception {
+       public:
+        GradeTooHighException(void) {}
+        std::string what() {
+            return "Grade is too high. Provide value greater than or equal to 1";
         }
     };
 };
+
+std::ostream &operator<<(std::ostream &o, AForm const &form);

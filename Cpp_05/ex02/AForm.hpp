@@ -8,7 +8,7 @@
 class Bureaucrat;
 
 class AForm {
-   private:
+   protected:
     const int _gradeRequiredToExecute;
     const int _gradeRequiredToSign;
     bool _isSigned;
@@ -56,6 +56,14 @@ class AForm {
         UnsignedFormException(void) {}
         std::string what() {
             return "Form has not yet been signed!";
+        }
+    };
+
+    class UnauthorisedException : public std::exception {
+       public:
+        UnauthorisedException(void) {}
+        std::string what() {
+            return "Grade not authorised to perform this action!";
         }
     };
 

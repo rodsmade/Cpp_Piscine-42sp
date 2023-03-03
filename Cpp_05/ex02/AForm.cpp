@@ -47,6 +47,6 @@ int AForm::getGradeRequiredToExecute(void) const { return this->_gradeRequiredTo
 // MEMBER FUNCTIONS
 void AForm::beSigned(Bureaucrat &bureaucrat) {
     if (bureaucrat.getGrade() > this->_gradeRequiredToSign)
-        throw AForm::GradeTooLowException();
+        throw AForm::UnauthorisedException();
     this->_isSigned = true;
 };

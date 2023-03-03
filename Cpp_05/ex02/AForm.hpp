@@ -38,7 +38,7 @@ class AForm {
     class GradeTooLowException : public std::exception {
        public:
         GradeTooLowException(void) {}
-        std::string what() {
+        virtual const char* what() const throw() {
             return "Grade is too low. Provide value less than or equal to 150";
         }
     };
@@ -46,7 +46,7 @@ class AForm {
     class GradeTooHighException : public std::exception {
        public:
         GradeTooHighException(void) {}
-        std::string what() {
+        virtual const char* what() const throw() {
             return "Grade is too high. Provide value greater than or equal to 1";
         }
     };
@@ -54,7 +54,7 @@ class AForm {
     class UnsignedFormException : public std::exception {
        public:
         UnsignedFormException(void) {}
-        std::string what() {
+        virtual const char* what() const throw() {
             return "Form has not yet been signed!";
         }
     };
@@ -62,7 +62,7 @@ class AForm {
     class UnauthorisedException : public std::exception {
        public:
         UnauthorisedException(void) {}
-        std::string what() {
+        virtual const char* what() const throw() {
             return "Grade not authorised to perform this action!";
         }
     };
@@ -70,7 +70,7 @@ class AForm {
     class FailedToOpenFileException : public std::exception {
        public:
         FailedToOpenFileException(void) {}
-        std::string what() {
+        virtual const char* what() const throw() {
             return "Error: failed to open file";
         }
     };

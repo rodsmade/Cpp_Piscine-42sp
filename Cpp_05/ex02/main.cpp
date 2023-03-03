@@ -16,6 +16,10 @@ int main() {
     soninha.executeForm(pardon);
     soninha.signForm(pardon);
     soninha.executeForm(pardon);
+    soninha.signForm(robForm);
+    soninha.executeForm(robForm);
+    soninha.signForm(shrubs);
+    soninha.executeForm(shrubs);
 
     return 0;
 }

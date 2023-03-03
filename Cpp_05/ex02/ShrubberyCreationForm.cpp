@@ -13,7 +13,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm co
     return (*this);
 };
 
-void ShrubberyCreationForm::execute(Bureaucrat &bureaucrat) {
+void ShrubberyCreationForm::execute(Bureaucrat &bureaucrat) const {
     if (!this->getIsSigned()) {
         throw AForm::UnsignedFormException();
     }

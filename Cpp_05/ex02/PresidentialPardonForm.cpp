@@ -13,7 +13,7 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(PresidentialPardonForm
     return (*this);
 };
     
-void PresidentialPardonForm::execute(Bureaucrat &bureaucrat) {
+void PresidentialPardonForm::execute(Bureaucrat &bureaucrat) const {
     if (!this->getIsSigned()) {
         throw AForm::UnsignedFormException();
     }

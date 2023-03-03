@@ -33,6 +33,7 @@ class Bureaucrat {
     Bureaucrat operator--(int);  // Postfix decrement operator.
 
     // Member functions
+    void executeForm(AForm const & form);
     void signForm(AForm &form);
 
     // Exceptions

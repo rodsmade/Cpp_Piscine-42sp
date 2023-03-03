@@ -32,7 +32,7 @@ class AForm {
 
     // Member functions
     void beSigned(Bureaucrat &bureaucrat);
-    virtual void execute(Bureaucrat &bureaucrat) = 0;
+    virtual void execute(Bureaucrat &bureaucrat) const = 0;
 
     // Exceptions
     class GradeTooLowException : public std::exception {

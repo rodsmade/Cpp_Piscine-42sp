@@ -14,5 +14,5 @@ class RobotomyRequestForm : AForm {
     RobotomyRequestForm(RobotomyRequestForm const &other);
     RobotomyRequestForm &operator=(RobotomyRequestForm const &other);
 
-    void execute(Bureaucrat &bureaucrat);
+    void execute(Bureaucrat &bureaucrat) const;
 };

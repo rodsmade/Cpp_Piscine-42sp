@@ -13,12 +13,12 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &o
     return (*this);
 };
 
-void RobotomyRequestForm::execute(Bureaucrat &bureaucrat) {
+void RobotomyRequestForm::execute(Bureaucrat &bureaucrat) const {
     if (!this->getIsSigned()) {
         throw AForm::UnsignedFormException();
     }
     if (bureaucrat.getGrade() > this->getGradeRequiredToExecute()) {
-        throw AForm::GradeTooLowException();
+        throw AForm::UnauthorisedException();
     }
     std::cout << "* some drilling noises *" << std::endl;
     if (std::rand() < RAND_MAX / 2) {

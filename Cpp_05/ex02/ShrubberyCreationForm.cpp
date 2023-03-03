@@ -18,7 +18,7 @@ void ShrubberyCreationForm::execute(Bureaucrat &bureaucrat) const {
         throw AForm::UnsignedFormException();
     }
     if (bureaucrat.getGrade() > this->getGradeRequiredToExecute()) {
-        throw AForm::GradeTooLowException();
+        throw AForm::UnauthorisedException();
     }
     std::string fileName = this->_target + "_shrubbery";
     std::ofstream outfile(fileName.c_str());

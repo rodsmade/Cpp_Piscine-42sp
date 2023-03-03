@@ -90,9 +90,9 @@ void Bureaucrat::executeForm(AForm const & form) {
     try {
         form.execute(*this);
         std::cout << this->_name << " executed " << form.getName() << std::endl;
+    } catch (AForm::UnsignedFormException &ex) {
+        std::cout << this->_name << " couldn't sign " << form.getName() << " because " << ex.what() << std::endl;
     } catch (AForm::UnauthorisedException &ex) {
         std::cout << this->_name << " couldn't sign " << form.getName() << " because " << ex.what() << std::endl;
-    } catch (AForm::UnsignedFormException &ex) {
-
     }
 };

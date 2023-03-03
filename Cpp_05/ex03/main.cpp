@@ -1,5 +1,6 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include "Intern.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
@@ -20,6 +21,12 @@ int main() {
     soninha.executeForm(robForm);
     soninha.signForm(shrubs);
     soninha.executeForm(shrubs);
+
+    Intern jmilson;
+    jmilson.makeForm("Presidential Pardon", "Rods");
+    jmilson.makeForm("Robotomy Request", "Moulinette");
+    jmilson.makeForm("Shrubbery Creation", "groovy_grove");
+    jmilson.makeForm("Eject from Spaceship", "The Impostor");
 
     return 0;
 }

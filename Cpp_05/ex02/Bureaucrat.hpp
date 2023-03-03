@@ -52,3 +52,4 @@ class Bureaucrat {
 };
 
 // Output stream operator overload
+std::ostream &operator<<(std::ostream &o, Bureaucrat const &rightHandSide);

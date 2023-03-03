@@ -13,12 +13,12 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(PresidentialPardonForm
     return (*this);
 };
     
-void PresidentialPardonForm::beExecuted(Bureaucrat &bureaucrat) {
+void PresidentialPardonForm::execute(Bureaucrat &bureaucrat) {
     if (!this->getIsSigned()) {
         throw AForm::UnsignedFormException();
     }
     if (bureaucrat.getGrade() > this->getGradeRequiredToExecute()) {
         throw AForm::GradeTooLowException();
     }
-    std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::cout;
+    std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 };

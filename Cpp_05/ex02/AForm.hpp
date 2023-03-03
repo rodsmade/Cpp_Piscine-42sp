@@ -58,6 +58,14 @@ class AForm {
             return "Form has not yet been signed!";
         }
     };
+
+    class FailedToOpenFileException : public std::exception {
+       public:
+        FailedToOpenFileException(void) {}
+        std::string what() {
+            return "Error: failed to open file";
+        }
+    };
 };
 
 std::ostream &operator<<(std::ostream &o, AForm const &form);

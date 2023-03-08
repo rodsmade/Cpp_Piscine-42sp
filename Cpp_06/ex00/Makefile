@@ -12,3 +12,7 @@ run: all
 
 fclean:
 	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all run fclean re

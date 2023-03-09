@@ -27,12 +27,48 @@ bool isEmptyString(char *arg) {
     return (false);
 }
 
+bool isValidDecimal(std::string argument) {
+    int i = -1;
+    int countDots = 0;
+    int countFs = 0;
+
+    // Checa se o formato tá minimamente dentro do esperado (apenas 1 '.', podendo terminar em f)
+    // pra evitar "modo C" de fazer isso precisa de uma função em <algorithms> q é proibida então . . .
+    while (argument[++i]) {
+        if (argument[i] == '.') {
+            countDots++;
+        };
+        if (argument[i] == 'f') {
+            countFs++;
+        };
+    }
+    if (countDots != 1 || countFs > 1)
+        return (false);
+
+    // Checa se tem somente dígitos ou '.' dentro
+    i = -1;
+    while (argument[++i]) {
+        if (!std::isdigit(argument[i]) && argument[i] != '.' && argument[i] != 'f')
+            return (false);
+    }
+
+    // Checa se tem ao menos uma casa decimal depois do ponto
+    if (!std::isdigit(argument[argument.find('.') + 1]))
+        return (false);
+
+    return (true);
+}
+
+bool endsInF(std::string argument) {
+    return (argument[argument.size() - 1] == 'f');
+}
+
 std::string decideOriginalType(std::string argument) {
     if (argument.size() == 1) {
         // aqui sei que é printable (testei na main)
         return ("char");
-    } else if (argument.size() > 1 && ((argument.find('.') != std::string::npos && std::isdigit(argument[argument.find('.') + 1])) || argument.compare("nan") == 0 || argument.compare("nanf") == 0)) {
-        if (argument[argument.size() - 1] == 'f')
+    } else if (argument.size() > 1 && (isValidDecimal(argument) || argument.compare("nan") == 0 || argument.compare("nanf") == 0)) {
+        if (endsInF(argument))
             return ("float");
         else
             return ("double");
@@ -54,12 +90,13 @@ int main(int argc, char *argv[]) {
         return (-42);
     }
 
-    // std::string string1 = "nanf";
-    // std::string string2 = "nan";
-    // std::cout << (string1.compare(string2)) << std::endl; // returns 0 if equivalent
-
     std::string argument = argv[1];
     std::string originalType = decideOriginalType(argument);
+
+    if (originalType.compare("undefined") == 0) {
+        std::cout << "Provide either one char, a double or a float - don't forget the decimal point and at least one decimal place for decimals, e.g. 42.0" << std::endl;
+        return (-42);
+    }
 
     std::cout << "Argument type is: " << originalType << std::endl;
 

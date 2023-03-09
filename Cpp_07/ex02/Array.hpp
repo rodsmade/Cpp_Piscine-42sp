@@ -20,7 +20,12 @@ class Array {
    public:
     Array();
     Array(unsigned int size);
-    void do_something();
+    Array(const Array &other);
+    unsigned int size() const;
+
+    // operators
+    Array<T> &operator=(const Array<T> &other);
+    T &operator[](unsigned int index);
 
    private:
     T *_elements;

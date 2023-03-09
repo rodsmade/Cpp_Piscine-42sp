@@ -8,6 +8,8 @@ Data::Data() {
 
 Data::Data(const Data &other) : _importantTidbit(other._importantTidbit), _relevantTidbit(other._relevantTidbit), _interestingTidbit(other._interestingTidbit){};
 
+Data::Data(std::string importantTidbit, std::string relevantTidbit, std::string interestingTidbit) : _importantTidbit(importantTidbit), _relevantTidbit(relevantTidbit), _interestingTidbit(interestingTidbit){};
+
 Data &Data::operator=(const Data &other) {
     if (this != &other) {
         this->_importantTidbit = other._importantTidbit;

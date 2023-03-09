@@ -51,8 +51,8 @@ bool isValidDecimal(std::string argument) {
     int countDots = 0;
     int countFs = 0;
 
-    // Checa se o formato tá minimamente dentro do esperado (apenas 1 '.', podendo terminar em f)
-    // pra evitar "modo C" de fazer isso precisa de uma função em <algorithms> q é proibida então . . .
+    // Checks if format abides to expected (only one '.', may begin in '-' and end in 'f')
+    // To avoid "the C way of doing things" I'd need a function in <algorithms>, which is forbidden, so...
     (argument[0] == '-') ? i = 0 : i = -1;
     while (argument[++i]) {
         if (argument[i] == '.') {
@@ -85,7 +85,6 @@ bool endsInF(std::string argument) {
 
 std::string decideOriginalType(std::string argument) {
     if (argument.size() == 1 && !std::isdigit(argument[0])) {
-        // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
         return ("char");
     } else if (isNumericString(argument) && isValidIntValue(argument)) {
         return ("int");
@@ -116,10 +115,6 @@ std::string validateInput(int argc, char *argv1) {
     return (std::string(argv1));
 }
 
-/*
-    TODO:
-    + tratar casos de max e min float/double
-*/
 int main(int argc, char *argv[]) {
     std::string argument = validateInput(argc, argv[1]);
     std::string originalType = decideOriginalType(argument);

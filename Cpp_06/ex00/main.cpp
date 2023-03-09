@@ -1,9 +1,10 @@
-#include <ctype.h>
-
 #include <cstdlib>
+#include <ctype.h>
 #include <iomanip>
 #include <iostream>
 #include <string>
+
+#include "ConvertedNumber.hpp"
 
 bool doesNotHaveExactlyOneArgument(int argc) {
     return (argc != 2);
@@ -65,7 +66,6 @@ bool endsInF(std::string argument) {
 
 std::string decideOriginalType(std::string argument) {
     if (argument.size() == 1) {
-        // aqui sei que é printable (testei na main)
         return ("char");
     } else if (argument.size() > 1 && (isValidDecimal(argument) || argument.compare("nan") == 0 || argument.compare("nanf") == 0)) {
         if (endsInF(argument))
@@ -73,30 +73,30 @@ std::string decideOriginalType(std::string argument) {
         else
             return ("double");
     }
-    return ("undefined");
+    std::cout << "Provide either one char, a double or a float - don't forget the decimal point and at least one decimal place for decimals, e.g. 42.0" << std::endl;
+    exit(-42);
+}
+
+std::string validateInput(int argc, char *argv1) {
+    if (doesNotHaveExactlyOneArgument(argc)) {
+        std::cout << "Provide exactly one argument, e.g.: ./convert 42.0f" << std::endl;
+        exit(-42);
+    }
+    if (hasUnprintableCharacters(argv1)) {
+        std::cout << "Argument has unprintable character in it, come on!" << std::endl;
+        exit(-42);
+    }
+    if (isEmptyString(argv1)) {
+        std::cout << "Argument is empty. I'm watching you 👀" << std::endl;
+        exit(-42);
+    }
+
+    return (std::string(argv1));
 }
 
 int main(int argc, char *argv[]) {
-    if (doesNotHaveExactlyOneArgument(argc)) {
-        std::cout << "Provide exactly one argument, e.g.: ./convert 42.0f" << std::endl;
-        return (-42);
-    }
-    if (hasUnprintableCharacters(argv[1])) {
-        std::cout << "Argument has unprintable character in it, come on!" << std::endl;
-        return (-42);
-    }
-    if (isEmptyString(argv[1])) {
-        std::cout << "Argument is empty. I'm watching you 👀" << std::endl;
-        return (-42);
-    }
-
-    std::string argument = argv[1];
+    std::string argument = validateInput(argc, argv[1]);
     std::string originalType = decideOriginalType(argument);
-
-    if (originalType.compare("undefined") == 0) {
-        std::cout << "Provide either one char, a double or a float - don't forget the decimal point and at least one decimal place for decimals, e.g. 42.0" << std::endl;
-        return (-42);
-    }
 
     std::cout << "Argument type is: " << originalType << std::endl;
 

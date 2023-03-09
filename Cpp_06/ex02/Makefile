@@ -2,7 +2,7 @@ NAME = typefinder.out
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 
-SOURCES = Base.cpp A.cpp B.cpp C.cpp
+SOURCES = Base.cpp A.cpp B.cpp C.cpp functions.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 
 all: $(NAME)

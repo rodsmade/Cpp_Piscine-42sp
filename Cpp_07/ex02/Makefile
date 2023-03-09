@@ -2,16 +2,16 @@ NAME = array.out
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 
-# SOURCES = Base.cpp A.cpp B.cpp C.cpp functions.cpp
-# OBJECTS = $(SOURCES:.cpp=.o)
+SOURCES = main.cpp
+OBJECTS = $(SOURCES:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): main.cpp Array.hpp
-	$(CC) $(CFLAGS) main.cpp -o $(NAME)
+$(NAME): $(SOURCES) Array.hpp Array.tpp
+	$(CC) $(CFLAGS) $(SOURCES) -o $(NAME)
 
-# %.o:	%.cpp %.hpp
-# 	$(CC) $(CFLAGS) $< -c -o $@
+%.o:	%.cpp
+	$(CC) $(CFLAGS) $< -c -o $@
 
 run: all
 	./$(NAME)

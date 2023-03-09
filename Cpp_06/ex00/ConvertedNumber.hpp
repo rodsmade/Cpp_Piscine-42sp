@@ -1,4 +1,6 @@
+#include <cstdlib>
 #include <iostream>
+#include <string>
 
 class ConvertedNumber {
    private:
@@ -9,13 +11,15 @@ class ConvertedNumber {
 
    public:
     ConvertedNumber(std::string originalType, std::string arg);
-    ConvertedNumber(const ConvertedNumber &other);
+    // ConvertedNumber(const ConvertedNumber &other);
     ~ConvertedNumber();
-    ConvertedNumber &operator=(const ConvertedNumber &other);
+    // ConvertedNumber &operator=(const ConvertedNumber &other);
 
-    void convertToFloat();
-    void convertToDouble();
-    void convertToChar();
+    static float convertToFloat();
+    static double convertToDouble();
+    static char convertToChar();
     std::string floatToString();
     std::string doubleToString();
+
+	void printNumberInAllFormats(void);
 };

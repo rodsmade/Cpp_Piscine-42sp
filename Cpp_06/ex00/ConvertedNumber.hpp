@@ -16,15 +16,9 @@ class ConvertedNumber {
 
    public:
     ConvertedNumber(std::string originalType, std::string arg);
-    // ConvertedNumber(const ConvertedNumber &other);
+    ConvertedNumber(const ConvertedNumber &other);
     ~ConvertedNumber();
-    // ConvertedNumber &operator=(const ConvertedNumber &other);
-
-    // static float convertToFloat();
-    // static double convertToDouble();
-    // static char convertToChar();
-    // std::string floatToString();
-    // std::string doubleToString();
+    ConvertedNumber &operator=(const ConvertedNumber &other);
 
     bool charAndIntConversionIsImpossible(void);
     void printNumberInAllFormats(void);

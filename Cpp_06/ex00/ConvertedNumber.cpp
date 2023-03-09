@@ -32,19 +32,22 @@ ConvertedNumber::ConvertedNumber(std::string originalType, std::string arg) : _o
     }
 };
 
-// ConvertedNumber::ConvertedNumber(const ConvertedNumber &other){};
+ConvertedNumber::ConvertedNumber(const ConvertedNumber &other) : _char(other._char), _int(other._int), _float(other._float), _double(other._double){};
 
 ConvertedNumber::~ConvertedNumber(){};
 
-// ConvertedNumber &ConvertedNumber::operator=(const ConvertedNumber &other){};
-
-void convertToFloat();
-void convertToDouble();
-void convertToChar();
+ConvertedNumber &ConvertedNumber::operator=(const ConvertedNumber &other){
+    if (this != &other) {
+        this->_char = other._char;
+        this->_int = other._int;
+        this->_float = other._float;
+        this->_double = other._double;
+    }
+    return (*this);
+};
 
 bool ConvertedNumber::charAndIntConversionIsImpossible() {
-    return (isnan(this->_double) || isinf(this->_double) || this->_double > INT_MAX || this->_double < INT_MIN
-    || isnanf(this->_float) || isinff(this->_float || this->_float > INT_MAX || this->_float < INT_MIN));
+    return (isnan(this->_double) || isinf(this->_double) || this->_double > INT_MAX || this->_double < INT_MIN || isnanf(this->_float) || isinff(this->_float || this->_float > INT_MAX || this->_float < INT_MIN));
 };
 
 void ConvertedNumber::printNumberInAllFormats(void) {
@@ -77,7 +80,9 @@ void ConvertedNumber::printNumberInAllFormats(void) {
         decimalPlaces++;
     }
     // Set the precision of the number that will be printed accordingly
-    if (decimalPlaces == 0) { decimalPlaces++; }
+    if (decimalPlaces == 0) {
+        decimalPlaces++;
+    }
     std::cout << std::fixed << std::setprecision(decimalPlaces);
     // Print the float with a decimal point and trailing zeros
     std::cout << "float: " << this->_float << "f" << std::endl;
@@ -88,7 +93,9 @@ void ConvertedNumber::printNumberInAllFormats(void) {
         temp *= 10.0;
         decimalPlaces++;
     }
-    if (decimalPlaces == 0) { decimalPlaces++; }
+    if (decimalPlaces == 0) {
+        decimalPlaces++;
+    }
     std::cout << std::fixed << std::setprecision(decimalPlaces);
     std::cout << "double: " << this->_double << std::endl;
 };

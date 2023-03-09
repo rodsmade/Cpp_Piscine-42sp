@@ -40,6 +40,14 @@ bool isNumericString(std::string argument) {
     return (true);
 }
 
+bool isValidIntValue(std::string argument) {
+    long temp = std::atol(argument.c_str());
+    if (temp > INT_MAX || temp < INT_MIN) {
+        return (false);
+    }
+    return (true);
+}
+
 bool isSpecialNumericValue(std::string argument) {
     return (argument == "nan" || argument == "nanf" || argument == "inf" ||
             argument == "-inf" || argument == "inff" || argument == "-inff");
@@ -86,7 +94,7 @@ std::string decideOriginalType(std::string argument) {
     if (argument.size() == 1 && !std::isdigit(argument[0])) {
         // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
         return ("char");
-    } else if (isNumericString(argument)) {
+    } else if (isNumericString(argument) && isValidIntValue(argument)) {
         return ("int");
     } else if (argument.size() > 1 && (isSpecialNumericValue(argument) || isValidDecimal(argument))) {
         if (endsInF(argument) && argument != "inf" && argument != "-inf")
@@ -94,7 +102,7 @@ std::string decideOriginalType(std::string argument) {
         else
             return ("double");
     }
-    std::cout << "Provide either one char, a double or a float - don't forget the decimal point and at least one decimal place for decimals, e.g. 42.0" << std::endl;
+    std::cout << "Provide either one char, an int, a double or a float - don't forget the decimal point and at least one decimal place for decimals, e.g. 42.0, also make sure int is within the interval [INT_MIN, INT_MAX]" << std::endl;
     exit(-42);
 }
 
@@ -117,7 +125,7 @@ std::string validateInput(int argc, char *argv1) {
 
 /*
     TODO:
-    + tratar casos de max e min int/float/double
+    + tratar casos de max e min float/double
 */
 int main(int argc, char *argv[]) {
     std::string argument = validateInput(argc, argv[1]);
@@ -125,9 +133,9 @@ int main(int argc, char *argv[]) {
 
     std::cout << "Argument type is: " << originalType << std::endl;
 
-    // ConvertedNumber convertedNumber = ConvertedNumber(originalType, argument);
+    ConvertedNumber convertedNumber = ConvertedNumber(originalType, argument);
 
-    // convertedNumber.printNumberInAllFormats();
+    convertedNumber.printNumberInAllFormats();
 
     return 0;
 }

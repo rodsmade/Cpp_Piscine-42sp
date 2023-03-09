@@ -2,10 +2,16 @@ NAME = convert.out
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 
+SOURCES = ConvertedNumber.cpp
+OBJECTS = $(SOURCES:.cpp=.o)
+
 all: $(NAME)
 
-$(NAME): main.cpp
-	$(CC) $(CFLAGS) main.cpp -o $(NAME)
+$(NAME): main.cpp $(OBJECTS)
+	$(CC) $(CFLAGS) main.cpp $(OBJECTS) -o $(NAME)
+
+%.o:	%.cpp %.hpp
+	$(CC) $(CFLAGS) $< -c -o $@
 
 run: all
 	./$(NAME) nan

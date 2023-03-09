@@ -1,10 +1,3 @@
-#include <ctype.h>
-
-#include <cstdlib>
-#include <iomanip>
-#include <iostream>
-#include <string>
-
 #include "ConvertedNumber.hpp"
 
 bool doesNotHaveExactlyOneArgument(int argc) {
@@ -130,8 +123,6 @@ std::string validateInput(int argc, char *argv1) {
 int main(int argc, char *argv[]) {
     std::string argument = validateInput(argc, argv[1]);
     std::string originalType = decideOriginalType(argument);
-
-    std::cout << "Argument type is: " << originalType << std::endl;
 
     ConvertedNumber convertedNumber = ConvertedNumber(originalType, argument);
 

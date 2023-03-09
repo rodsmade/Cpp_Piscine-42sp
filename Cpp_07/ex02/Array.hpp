@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstddef>
+
 /* Example:
 template <typename T>
 class Stack {
@@ -16,11 +18,13 @@ private:
 template <typename T>
 class Array {
    public:
-    Array(T arg);
+    Array();
+    Array(unsigned int size);
     void do_something();
 
    private:
-    T m_data;
+    T *_elements;
+    unsigned int _size;
 };
 
 #include "Array.tpp"

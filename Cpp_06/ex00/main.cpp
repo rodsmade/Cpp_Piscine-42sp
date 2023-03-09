@@ -94,17 +94,20 @@ std::string validateInput(int argc, char *argv1) {
     return (std::string(argv1));
 }
 
+/* TODO: 
+    + ADICIONAT O INT VEI
+    + CONSIDERAR NUMEROS NEGATIVOS
+    + -inff, +inff, -inf, +inf
+*/
 int main(int argc, char *argv[]) {
     std::string argument = validateInput(argc, argv[1]);
     std::string originalType = decideOriginalType(argument);
 
     std::cout << "Argument type is: " << originalType << std::endl;
 
-    // float f = std::atof(argv[1]);
-    // // Set the number of decimal places to 1 and enable fixed-point notation
-    // std::cout << std::fixed << std::setprecision(1);
-    // // Print the float with a decimal point and trailing zeros
-    // std::cout << "The float value is: " << f << "f" << std::endl;
+    // ConvertedNumber convertedNumber = ConvertedNumber(originalType, argument);
 
+    // convertedNumber.printNumberInAllFormats();
+ 
     return 0;
 }

@@ -16,7 +16,10 @@ $(NAME): main.cpp $(OBJECTS)
 run: all
 	./$(NAME) nan
 
-fclean:
+clean:
+	rm -f $(OBJECTS)
+
+fclean: clean
 	rm -f $(NAME)
 
 re: fclean all

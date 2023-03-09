@@ -12,3 +12,8 @@ void iter(T *arrayAddress, unsigned int arrayLength, T f(T element)) {
     while ((unsigned int) ++i < arrayLength)
         arrayAddress[i] = f(arrayAddress[i]);
 }
+
+template <typename T>
+T sumItself(T element) {
+    return (element + element);
+}

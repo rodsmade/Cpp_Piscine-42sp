@@ -1,5 +1,6 @@
-#include <cstdlib>
 #include <ctype.h>
+
+#include <cstdlib>
 #include <iomanip>
 #include <iostream>
 #include <string>
@@ -28,13 +29,19 @@ bool isEmptyString(char *arg) {
     return (false);
 }
 
+bool isSpecialNumericValue(std::string argument) {
+    return (argument == "nan" || argument == "nanf" || argument == "inf" ||
+            argument == "-inf" || argument == "inff" || argument == "-inff");
+}
+
 bool isValidDecimal(std::string argument) {
-    int i = -1;
+    int i;
     int countDots = 0;
     int countFs = 0;
 
     // Checa se o formato tá minimamente dentro do esperado (apenas 1 '.', podendo terminar em f)
     // pra evitar "modo C" de fazer isso precisa de uma função em <algorithms> q é proibida então . . .
+    (argument[0] == '-') ? i = 0 : i = -1;
     while (argument[++i]) {
         if (argument[i] == '.') {
             countDots++;
@@ -47,7 +54,7 @@ bool isValidDecimal(std::string argument) {
         return (false);
 
     // Checa se tem somente dígitos ou '.' dentro
-    i = -1;
+    (argument[0] == '-') ? i = 0 : i = -1;
     while (argument[++i]) {
         if (!std::isdigit(argument[i]) && argument[i] != '.' && argument[i] != 'f')
             return (false);
@@ -67,8 +74,8 @@ bool endsInF(std::string argument) {
 std::string decideOriginalType(std::string argument) {
     if (argument.size() == 1) {
         return ("char");
-    } else if (argument.size() > 1 && (isValidDecimal(argument) || argument.compare("nan") == 0 || argument.compare("nanf") == 0)) {
-        if (endsInF(argument))
+    } else if (argument.size() > 1 && (isSpecialNumericValue(argument) || isValidDecimal(argument))) {
+        if (endsInF(argument) && argument != "inf" && argument != "-inf")
             return ("float");
         else
             return ("double");
@@ -94,7 +101,7 @@ std::string validateInput(int argc, char *argv1) {
     return (std::string(argv1));
 }
 
-/* TODO: 
+/* TODO:
     + ADICIONAT O INT VEI
     + CONSIDERAR NUMEROS NEGATIVOS
     + -inff, +inff, -inf, +inf
@@ -108,6 +115,6 @@ int main(int argc, char *argv[]) {
     // ConvertedNumber convertedNumber = ConvertedNumber(originalType, argument);
 
     // convertedNumber.printNumberInAllFormats();
- 
+
     return 0;
 }

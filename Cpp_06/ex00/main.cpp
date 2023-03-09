@@ -29,6 +29,149 @@ bool isEmptyString(char *arg) {
     return (false);
 }
 
+bool isNumericString(std::string argument) {
+    int i;
+
+    (argument[0] == '-') ? i = 0 : i = -1;
+    while (argument[++i]) {
+        if (!std::isdigit(argument[i]))
+            return (false);
+    }
+    return (true);
+}
+
+bool isNumericString(std::string argument) {
+    int i;
+
+    (argument[0] == '-') ? i = 0 : i = -1;
+    while (argument[++i]) {
+        if (!std::isdigit(argument[i]))
+            return (false);
+    }
+    return (true);
+}
+
+bool isNumericString(std::string argument) {
+    int i;
+
+    (argument[0] == '-') ? i = 0 : i = -1;
+    while (argument[++i]) {
+        if (!std::isdigit(argument[i]))
+            return (false);
+    }
+    return (true);
+}
+
+bool isNumericString(std::string argument) {
+    int i;
+
+    (argument[0] == '-') ? i = 0 : i = -1;
+    while (argument[++i]) {
+        if (!std::isdigit(argument[i]))
+            return (false);
+    }
+    return (true);
+}
+
+bool isNumericString(std::string argument) {
+    int i;
+
+    (argument[0] == '-') ? i = 0 : i = -1;
+    while (argument[++i]) {
+        if (!std::isdigit(argument[i]))
+            return (false);
+    }
+    return (true);
+}
+
+bool isNumericString(std::string argument) {
+    int i;
+
+    (argument[0] == '-') ? i = 0 : i = -1;
+    while (argument[++i]) {
+        if (!std::isdigit(argument[i]))
+            return (false);
+    }
+    return (true);
+}
+
+bool isNumericString(std::string argument) {
+    int i;
+
+    (argument[0] == '-') ? i = 0 : i = -1;
+    while (argument[++i]) {
+        if (!std::isdigit(argument[i]))
+            return (false);
+    }
+    return (true);
+}
+
+bool isNumericString(std::string argument) {
+    int i;
+
+    (argument[0] == '-') ? i = 0 : i = -1;
+    while (argument[++i]) {
+        if (!std::isdigit(argument[i]))
+            return (false);
+    }
+    return (true);
+}
+
+bool isNumericString(std::string argument) {
+    int i;
+
+    (argument[0] == '-') ? i = 0 : i = -1;
+    while (argument[++i]) {
+        if (!std::isdigit(argument[i]))
+            return (false);
+    }
+    return (true);
+}
+
+bool isNumericString(std::string argument) {
+    int i;
+
+    (argument[0] == '-') ? i = 0 : i = -1;
+    while (argument[++i]) {
+        if (!std::isdigit(argument[i]))
+            return (false);
+    }
+    return (true);
+}
+
+bool isNumericString(std::string argument) {
+    int i;
+
+    (argument[0] == '-') ? i = 0 : i = -1;
+    while (argument[++i]) {
+        if (!std::isdigit(argument[i]))
+            return (false);
+    }
+    return (true);
+}
+
+bool isNumericString(std::string argument) {
+    int i;
+
+    (argument[0] == '-') ? i = 0 : i = -1;
+    while (argument[++i]) {
+        if (!std::isdigit(argument[i]))
+            return (false);
+    }
+    return (true);
+}
+
+bool isNumericString(std::string argument) {
+    int i;
+
+    (argument[0] == '-') ? i = 0 : i = -1;
+    while (argument[++i]) {
+        if (!std::isdigit(argument[i]))
+            return (false);
+    }
+    return (true);
+}
+
 bool isSpecialNumericValue(std::string argument) {
     return (argument == "nan" || argument == "nanf" || argument == "inf" ||
             argument == "-inf" || argument == "inff" || argument == "-inff");
@@ -72,8 +215,71 @@ bool endsInF(std::string argument) {
 }
 
 std::string decideOriginalType(std::string argument) {
+    if (argument.size() == 1 && !std::isdigit(argument[0])) {
+        // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
     if (argument.size() == 1) {
+    if (argument.size() == 1 && !std::isdigit(argument[0])) {
+        // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
+    if (argument.size() == 1) {
+    if (argument.size() == 1 && !std::isdigit(argument[0])) {
+        // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
+    if (argument.size() == 1) {
+    if (argument.size() == 1 && !std::isdigit(argument[0])) {
+        // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
+    if (argument.size() == 1) {
+    if (argument.size() == 1 && !std::isdigit(argument[0])) {
+        // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
+    if (argument.size() == 1) {
+    if (argument.size() == 1 && !std::isdigit(argument[0])) {
+        // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
+    if (argument.size() == 1) {
+    if (argument.size() == 1 && !std::isdigit(argument[0])) {
+        // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
+    if (argument.size() == 1) {
+    if (argument.size() == 1 && !std::isdigit(argument[0])) {
+        // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
+    if (argument.size() == 1) {
+    if (argument.size() == 1 && !std::isdigit(argument[0])) {
+        // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
+    if (argument.size() == 1) {
+    if (argument.size() == 1 && !std::isdigit(argument[0])) {
+        // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
+    if (argument.size() == 1) {
+    if (argument.size() == 1 && !std::isdigit(argument[0])) {
+        // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
+    if (argument.size() == 1) {
+    if (argument.size() == 1 && !std::isdigit(argument[0])) {
+        // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
+    if (argument.size() == 1) {
+    if (argument.size() == 1 && !std::isdigit(argument[0])) {
+        // aqui já sei de antemão que não é "" e que é printável; não sendo dígito, logo é char
         return ("char");
+    } else if (isNumericString(argument)) {
+        return ("int");
+    } else if (isNumericString(argument)) {
+        return ("int");
+    } else if (isNumericString(argument)) {
+        return ("int");
+    } else if (isNumericString(argument)) {
+        return ("int");
+    } else if (isNumericString(argument)) {
+        return ("int");
+    } else if (isNumericString(argument)) {
+        return ("int");
+    } else if (isNumericString(argument)) {
+        return ("int");
+    } else if (isNumericString(argument)) {
+        return ("int");
+    } else if (isNumericString(argument)) {
+        return ("int");
+    } else if (isNumericString(argument)) {
+        return ("int");
+    } else if (isNumericString(argument)) {
+        return ("int");
+    } else if (isNumericString(argument)) {
+        return ("int");
+    } else if (isNumericString(argument)) {
+        return ("int");
     } else if (argument.size() > 1 && (isSpecialNumericValue(argument) || isValidDecimal(argument))) {
         if (endsInF(argument) && argument != "inf" && argument != "-inf")
             return ("float");
@@ -102,9 +308,7 @@ std::string validateInput(int argc, char *argv1) {
 }
 
 /* TODO:
-    + ADICIONAT O INT VEI
-    + CONSIDERAR NUMEROS NEGATIVOS
-    + -inff, +inff, -inf, +inf
+    + tratar limites max e min float/int/double.
 */
 int main(int argc, char *argv[]) {
     std::string argument = validateInput(argc, argv[1]);

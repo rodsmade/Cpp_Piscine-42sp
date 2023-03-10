@@ -14,6 +14,11 @@ Array<T>::Array(const Array &other) {
 };
 
 template <typename T>
+Array<T>::~Array() {
+    delete[] this->_elements;
+}
+
+template <typename T>
 Array<T> &Array<T>::operator=(const Array<T> &other) {
     if (this != other) {
         this->_size = other._size;
@@ -27,7 +32,7 @@ Array<T> &Array<T>::operator=(const Array<T> &other) {
 
 template <typename T>
 T &Array<T>::operator[](unsigned int index) {
-    if (index < 0 || index >= this->_size) {
+    if (index >= this->_size) {
         throw std::exception();
     }
 

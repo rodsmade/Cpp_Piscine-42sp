@@ -21,6 +21,7 @@ class Array {
     Array();
     Array(unsigned int size);
     Array(const Array &other);
+    ~Array();
     unsigned int size() const;
 
     // operators

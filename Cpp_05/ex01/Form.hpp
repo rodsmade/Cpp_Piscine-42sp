@@ -9,10 +9,10 @@ class Bureaucrat;
 
 class Form {
    private:
-    std::string _name;
+    const std::string _name;
     bool _isSigned;
-    int _gradeRequiredToSign;
-    int _gradeRequiredToExecute;
+    const int _gradeRequiredToSign;
+    const int _gradeRequiredToExecute;
 
    public:
     Form(std::string name, int gradeToSign, int gradeToExecute);
@@ -30,7 +30,7 @@ class Form {
     class GradeTooHighException : public std::exception {
        public:
         GradeTooHighException(void) {}
-        std::string what() {
+        virtual const char* what() const throw() {
             return "Grade is too low. Provide value greater than or equal to 150";
         }
     };
@@ -38,7 +38,7 @@ class Form {
     class GradeTooLowException : public std::exception {
        public:
         GradeTooLowException(void) {}
-        std::string what() {
+        virtual const char* what() const throw() {
             return "Grade is too high. Provide value lesser than or equal to 1";
         }
     };

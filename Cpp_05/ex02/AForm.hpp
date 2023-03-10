@@ -12,7 +12,7 @@ class AForm {
     const int _gradeRequiredToExecute;
     const int _gradeRequiredToSign;
     bool _isSigned;
-    std::string _name;
+    const std::string _name;
 
    public:
     // Constructors/Destructor

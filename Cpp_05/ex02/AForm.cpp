@@ -1,8 +1,7 @@
 #include "AForm.hpp"
 
 // CONSTRUCTORS AND DESTRUCTOR
-AForm::AForm(std::string name, int gradeToSign, int gradeToExecute) : _gradeRequiredToExecute(gradeToExecute), _gradeRequiredToSign(gradeToSign) {
-    this->_name = name;
+AForm::AForm(std::string name, int gradeToSign, int gradeToExecute) : _gradeRequiredToExecute(gradeToExecute), _gradeRequiredToSign(gradeToSign), _name(name) {
     this->_isSigned = false;
     if (gradeToSign > 150 || gradeToExecute > 150) {
         throw AForm::GradeTooLowException();
@@ -20,7 +19,6 @@ AForm::~AForm(){};
 // ASSIGNMENT OPERATOR
 AForm &AForm::operator=(const AForm &other) {
     if (this != &other) {  // check for self-assignment
-        _name = other._name;
         _isSigned = other._isSigned;
     }
     return *this;

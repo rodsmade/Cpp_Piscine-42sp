@@ -2,7 +2,10 @@ template <typename T>
 Array<T>::Array() : _elements(NULL), _size(0) {}
 
 template <typename T>
-Array<T>::Array(unsigned int size) : _elements(new T[size]), _size(size) {}
+Array<T>::Array(unsigned int size) : _elements(new T[size]), _size(size) {
+    for (unsigned int i = 0; i < size; i++)
+        this->_elements[i] = 0;
+}
 
 template <typename T>
 Array<T>::Array(const Array &other) {

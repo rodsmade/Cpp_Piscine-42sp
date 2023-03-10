@@ -57,7 +57,7 @@ void ConvertedNumber::printNumberInAllFormats(void) {
     } else if (!std::isprint(_char)) {
         std::cout << "Non displayable";
     } else {
-        std::cout << _char;
+        std::cout << "'" << _char << "'";
     }
     std::cout << std::endl;
 

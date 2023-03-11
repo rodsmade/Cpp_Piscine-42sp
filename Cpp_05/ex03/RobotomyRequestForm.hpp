@@ -1,6 +1,7 @@
 #pragma once
 
-#include <cstdlib>
+#include <cstdlib> // rand, srand
+#include <ctime> // time
 
 #include "AForm.hpp"
 

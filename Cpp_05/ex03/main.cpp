@@ -11,7 +11,7 @@ int main() {
 
     PresidentialPardonForm pardon("Rods");
     RobotomyRequestForm robForm("Moulinette");
-    ShrubberyCreationForm shrubs("Terraço");
+    ShrubberyCreationForm shrubs("groovy_grove");
 
     flaviano.signForm(pardon);
     soninha.executeForm(pardon);
@@ -28,9 +28,6 @@ int main() {
     AForm *form2 = jmilson.makeForm("Robotomy Request", "Moulinette");
     AForm *form3 = jmilson.makeForm("Shrubbery Creation", "groovy_grove");
 
-    // (void) form1;
-    // (void) form2;
-    // (void) form3;
     delete form1;
     delete form2;
     delete form3;

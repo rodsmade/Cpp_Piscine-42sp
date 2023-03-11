@@ -23,9 +23,18 @@ int main() {
     soninha.executeForm(shrubs);
 
     Intern jmilson;
-    jmilson.makeForm("Presidential Pardon", "Rods");
-    jmilson.makeForm("Robotomy Request", "Moulinette");
-    jmilson.makeForm("Shrubbery Creation", "groovy_grove");
+
+    AForm *form1 = jmilson.makeForm("Presidential Pardon", "Rods");
+    AForm *form2 = jmilson.makeForm("Robotomy Request", "Moulinette");
+    AForm *form3 = jmilson.makeForm("Shrubbery Creation", "groovy_grove");
+
+    // (void) form1;
+    // (void) form2;
+    // (void) form3;
+    delete form1;
+    delete form2;
+    delete form3;
+
     jmilson.makeForm("Eject from Spaceship", "The Impostor");
 
     return 0;

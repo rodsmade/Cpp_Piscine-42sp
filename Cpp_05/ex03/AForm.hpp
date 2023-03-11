@@ -18,7 +18,7 @@ class AForm {
     // Constructors/Destructor
     AForm(std::string name, int gradeToSign, int gradeToExecute);
     AForm(const AForm &other);
-    ~AForm();
+    virtual ~AForm();
 
     // Accessors
     int getGradeRequiredToExecute(void) const;

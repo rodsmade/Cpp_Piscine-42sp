@@ -46,7 +46,7 @@ ConvertedNumber &ConvertedNumber::operator=(const ConvertedNumber &other) {
 };
 
 bool ConvertedNumber::charAndIntConversionIsImpossible() {
-    return (isnan(_double) || isinf(_double) || _double > INT_MAX || _double < INT_MIN || isnanf(_float) || isinff(_float || _float > INT_MAX || _float < INT_MIN));
+    return (isnan(_double) || isinf(_double) || _double > double(INT_MAX) || _double < double(INT_MIN) || isnanf(_float) || isinff(_float) || _float > float(INT_MAX) || _float < float(INT_MIN));
 };
 
 void ConvertedNumber::printNumberInAllFormats(void) {

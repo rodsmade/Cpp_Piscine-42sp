@@ -17,6 +17,7 @@ class Array {
 
     // member functions
     unsigned int size() const;
+    void printAllElements() const;
 
    private:
     T *_elements;

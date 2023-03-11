@@ -46,3 +46,14 @@ template <typename T>
 unsigned int Array<T>::size() const {
     return (this->_size);
 };
+
+template <typename T>
+void Array<T>::printAllElements() const {
+    std::cout << " -> All elements: ";
+    for (unsigned int i = 0; i < _size; i++) {
+        std::cout << _elements[i];
+        if (i != _size - 1)
+            std::cout << ", ";
+    }
+    std::cout << "." << std::endl;
+};

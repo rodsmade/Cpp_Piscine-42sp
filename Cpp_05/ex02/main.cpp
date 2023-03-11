@@ -10,7 +10,7 @@ int main() {
 
     PresidentialPardonForm pardon("Rods");
     RobotomyRequestForm robForm("Moulinette");
-    ShrubberyCreationForm shrubs("Terraço");
+    ShrubberyCreationForm shrubs("groovy_grove");
 
     flaviano.signForm(pardon);
     soninha.executeForm(pardon);

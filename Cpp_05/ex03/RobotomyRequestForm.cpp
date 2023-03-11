@@ -21,7 +21,11 @@ void RobotomyRequestForm::execute(Bureaucrat &bureaucrat) const {
         throw AForm::UnauthorisedException();
     }
     std::cout << "* some drilling noises *" << std::endl;
-    if (std::rand() < RAND_MAX / 2) {
+
+    std::srand(std::time(0));
+    int randNb = std::rand();
+
+    if (randNb % 2) {
         std::cout << this->_target << " has been robotomized successfully! 🤖" << std::endl;
     } else {
         std::cout << "Oh dear! The robotomy failed. 🫠" << std::endl;

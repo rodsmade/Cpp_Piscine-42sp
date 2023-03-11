@@ -5,5 +5,4 @@
 class B : public Base {
    public:
     virtual ~B();
-    virtual int getType(void);
 };

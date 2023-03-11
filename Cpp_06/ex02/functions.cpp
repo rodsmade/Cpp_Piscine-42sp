@@ -1,6 +1,6 @@
 #include "functions.hpp"
 
-Base * generate(void) {
+Base* generate(void) {
     std::srand(std::time(0));
     int randNb = std::rand() % 3;
 
@@ -14,7 +14,6 @@ Base * generate(void) {
 };
 
 void identify(Base* p) {
-    std::cout << "Type of object: ";
     if (dynamic_cast<A*>(p)) {
         std::cout << "A";
     }
@@ -28,18 +27,24 @@ void identify(Base* p) {
 };
 
 void identify(Base& p) {
-    std::cout << "Type of object: ";
-    if (p.getType() == Type_Base) {
-        std::cout << "Base";
+    try {
+        dynamic_cast<A&>(p);
+        std::cout << "A" << std::endl;
+        return;
+    } catch (const std::exception& e) {
+        try {
+            dynamic_cast<B&>(p);
+            std::cout << "B" << std::endl;
+            return;
+        } catch (const std::exception& e) {
+            try {
+                dynamic_cast<C&>(p);
+                std::cout << "C" << std::endl;
+                return;
+            } catch (const std::exception& e) {
+                std::cout << "ERROR OGKJDFGKASKDOASK" << std::endl;
+                return;
+            }
+        }
     }
-    if (p.getType() == Type_A) {
-        std::cout << "A";
-    }
-    if (p.getType() == Type_B) {
-        std::cout << "B";
-    }
-    if (p.getType() == Type_C) {
-        std::cout << "C";
-    }
-    std::cout << std::endl;
 };

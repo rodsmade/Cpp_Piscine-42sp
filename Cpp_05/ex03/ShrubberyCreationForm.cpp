@@ -39,7 +39,7 @@ void ShrubberyCreationForm::execute(Bureaucrat &bureaucrat) const {
     outfile << "\\________________/       ///\\\\\\    \\________________/       ///\\\\\\    " << std::endl;
     outfile << "       ||||             ////\\\\\\\\          ||||             ////\\\\\\\\   " << std::endl;
     outfile << "       ||||      @         ||             ||||        @       ||      " << std::endl;
-    outfile << "       ||||      |         ||          ;  ||||        |       ||      " << std::endl;
+    outfile << "  ,,   ||||      | ,       ||         ,;  ||||      ; | ;,    ||   ,, " << std::endl;
 
     // close the file
     outfile.close();

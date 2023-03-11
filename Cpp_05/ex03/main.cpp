@@ -28,9 +28,6 @@ int main() {
     AForm *form2 = jmilson.makeForm("Robotomy Request", "Moulinette");
     AForm *form3 = jmilson.makeForm("Shrubbery Creation", "groovy_grove");
 
-    // (void) form1;
-    // (void) form2;
-    // (void) form3;
     delete form1;
     delete form2;
     delete form3;

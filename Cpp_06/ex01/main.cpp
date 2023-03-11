@@ -10,9 +10,8 @@ int main(void) {
         std::cout << "Relevant Tidbit: " << myDataPtr->_relevantTidbit << std::endl;
         std::cout << "Interesting Tidbit: " << myDataPtr->_interestingTidbit << std::endl;
 
-        uintptr_t intPtr = serialize(myDataPtr);
+        Data *myDataPtrPostDeserialization = deserialize(serialize(myDataPtr));
 
-        Data *myDataPtrPostDeserialization = deserialize(intPtr);
         std::cout << "\nDeserialized data:" << std::endl;
         std::cout << "Important Tidbit: " << myDataPtrPostDeserialization->_importantTidbit << std::endl;
         std::cout << "Relevant Tidbit: " << myDataPtrPostDeserialization->_relevantTidbit << std::endl;
@@ -33,9 +32,8 @@ int main(void) {
         std::cout << "Relevant Tidbit: " << myCustomDataPtr->_relevantTidbit << std::endl;
         std::cout << "Interesting Tidbit: " << myCustomDataPtr->_interestingTidbit << std::endl;
 
-        uintptr_t intPtr = serialize(myCustomDataPtr);
+        Data *myCustomDataPtrPostDeserialization = deserialize(serialize(myCustomDataPtr));
 
-        Data *myCustomDataPtrPostDeserialization = deserialize(intPtr);
         std::cout << "\nDeserialized data:" << std::endl;
         std::cout << "Important Tidbit: " << myCustomDataPtrPostDeserialization->_importantTidbit << std::endl;
         std::cout << "Relevant Tidbit: " << myCustomDataPtrPostDeserialization->_relevantTidbit << std::endl;

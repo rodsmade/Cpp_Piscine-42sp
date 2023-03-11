@@ -7,41 +7,72 @@ char toUpper(char element) {
     return (std::toupper(element));
 }
 
-int powerOfTwo(int element) {
-    return(element * element);
+int timesItself(int element) {
+    return (element * element);
 }
 
 int main() {
-    // TEST 1 = STRING
-    char *ptr;
-    unsigned int size = 11;
+    {  // TEST 1 = STRING
+        std::cout << "====== TEST 1 - STRING ======" << std::endl;
+        char *ptr;
+        unsigned int size = 11;
 
-    std::string henlo = "hello world";
-    ptr = (char *)henlo.c_str();
+        std::string henlo = "Hello world!";
+        ptr = (char *)henlo.c_str();
 
-    iter(ptr, size, toUpper);
+        std::cout << "Original string:\t" << ptr << std::endl;
 
-    std::cout << "Result 1 (string): " << ptr << std::endl;
+        iter(ptr, size, toUpper);
 
-    // TEST 2 = INT
-    size = 10;
-    int* arrayOfInts = new int[size];
-    for (int i = 0; (unsigned int) i < size; i++)
-        arrayOfInts[i] = i + 1;
+        std::cout << "String after iter:\t" << ptr << std::endl;
+        std::cout << std::endl;
+    }
+    {  // TEST 2 = INT
+        std::cout << "====== TEST 2 - INT ======" << std::endl;
+        unsigned int size = 10;
+        int *arrayOfInts = new int[size];
 
-    iter(arrayOfInts, size, powerOfTwo);
+        for (int i = 0; (unsigned int)i < size; i++)
+            arrayOfInts[i] = i + 1;
 
-    std::cout << "Result 2 (int): ";
-    for (unsigned int i = 0; i < size; i++)
-        std::cout << arrayOfInts[i] << " ";
-    std::cout << std::endl;
+        std::cout << "Original int array:\t";
+        for (unsigned int i = 0; i < size; i++)
+            std::cout << arrayOfInts[i] << " ";
+        std::cout << std::endl;
 
-    // TEST 3 = INSTANTIATED TEMPLATE FUNCTION
-    iter(arrayOfInts, size, sumItself<int>);
+        iter(arrayOfInts, size, timesItself);
 
-    std::cout << "Result 3 (instantiated template function): ";
-    for (unsigned int i = 0; i < size; i++)
-        std::cout << arrayOfInts[i] << " ";
-    std::cout << std::endl;
+        std::cout << "Int array after iter:\t";
+        for (unsigned int i = 0; i < size; i++)
+            std::cout << arrayOfInts[i] << " ";
+        std::cout << std::endl;
+        std::cout << std::endl;
 
+        delete[] arrayOfInts;
+    }
+    {  // TEST 3 = INSTANTIATED TEMPLATE FUNCTION
+        std::cout << "====== TEST 3 - INSTANTIATED TEMPLATE FUNCTION ======" << std::endl;
+        unsigned int size = 10;
+        int *arrayOfInts = new int[size];
+
+        for (int i = 0; (unsigned int)i < size; i++)
+            arrayOfInts[i] = i + 1;
+
+        std::cout << "Original int array:\t";
+        for (unsigned int i = 0; i < size; i++)
+            std::cout << arrayOfInts[i] << " ";
+        std::cout << std::endl;
+
+        iter(arrayOfInts, size, sumItself<int>);
+
+        std::cout << "Int array after iter:\t";
+        for (unsigned int i = 0; i < size; i++)
+            std::cout << arrayOfInts[i] << " ";
+        std::cout << std::endl;
+        std::cout << "(using instantiated template function)" << std::endl;
+
+        delete[] arrayOfInts;
+    }
+
+    return (0);
 }

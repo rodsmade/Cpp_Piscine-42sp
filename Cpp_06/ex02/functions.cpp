@@ -28,18 +28,21 @@ void identify(Base* p) {
 
 void identify(Base& p) {
     try {
-        dynamic_cast<A&>(p);
+        A& aPtr = dynamic_cast<A&>(p);
         std::cout << "A" << std::endl;
+        (void) aPtr;
         return;
     } catch (const std::exception& e) {
         try {
-            dynamic_cast<B&>(p);
+            B& bPtr = dynamic_cast<B&>(p);
             std::cout << "B" << std::endl;
+            (void) bPtr;
             return;
         } catch (const std::exception& e) {
             try {
-                dynamic_cast<C&>(p);
+                C& cPtr = dynamic_cast<C&>(p);
                 std::cout << "C" << std::endl;
+                (void) cPtr;
                 return;
             } catch (const std::exception& e) {
                 std::cout << "ERROR OGKJDFGKASKDOASK" << std::endl;

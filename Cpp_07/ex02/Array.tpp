@@ -1,8 +1,8 @@
 template <typename T>
-Array<T>::Array() : _elements(new T[0]), _size(0) {}
+Array<T>::Array() : _elements(new T()), _size(0) {}
 
 template <typename T>
-Array<T>::Array(unsigned int size) : _elements(new T[size]), _size(size){}
+Array<T>::Array(unsigned int size) : _elements(new T[size]()), _size(size){}
 
 template <typename T>
 Array<T>::Array(const Array &other) {

@@ -43,15 +43,37 @@ int Span::shortestSpan(void) {
 
     std::sort(diffs.begin(), diffs.end());  // sort vector
 
-    return (diffs[0]);
+    int shortestSpan = diffs[0];
+
+    return (shortestSpan);
+};
+
+// custom comparison function that sorts ints in descending order
+bool greater(int a, int b) {
+    return a > b;
 };
 
 int Span::longestSpan(void) {
-    return (0);
+    if (getSize() <= 1) {
+        throw SpanCantBeFoundException();
+    }
+    std::vector<int> temp = _elements;
+
+    std::sort(temp.begin(), temp.end(), greater);  // sort vector
+
+    std::vector<int> diffs(temp.size() - 1);
+
+    for (long unsigned int i = 0; i < diffs.size(); i++) {
+        diffs[i] = temp[i] - temp[i + 1];
+    }
+
+    std::sort(diffs.begin(), diffs.end(), greater);  // sort vector
+
+    return (diffs[0]);
 };
 
 void Span::addNumber(int number) {
-    if (this->getSize() >= _maxStorage) {
+    if (getSize() >= _maxStorage) {
         throw StorageFullException();
     }
     _elements.push_back(number);

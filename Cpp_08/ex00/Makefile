@@ -5,7 +5,7 @@ CFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 all: $(NAME)
 
 $(NAME): main.cpp easyfind.hpp easyfind.tpp
-	$(CC) $(CFLAGS) main.cpp easyfind.hpp -o $(NAME)
+	$(CC) $(CFLAGS) main.cpp -o $(NAME)
 
 run: all
 	./$(NAME)

@@ -10,6 +10,11 @@ const T &MutantStack<T>::top() const {
 };
 
 template <typename T>
+bool MutantStack<T>::empty() const {
+    return _mStack.empty();
+};
+
+template <typename T>
 std::size_t MutantStack<T>::size() const {
     return _mStack.size();
 };

@@ -12,7 +12,7 @@ class MutantStack {
     MutantStack &operator=(const MutantStack &other);
     // TODO:
     const T &top() const;
-    // empty();
+    bool empty() const;
     std::size_t size() const;
     void push(T element);
     void pop();

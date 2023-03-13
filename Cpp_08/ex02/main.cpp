@@ -16,10 +16,16 @@ void reportStackTop(const MutantStack<int>& s)
 int main()
 {
     MutantStack<int> s;
+
+    std::cout << std::boolalpha;
+    std::cout << "Initially, s.empty(): " << s.empty() << '\n';
+
     s.push(2);
     s.push(6);
     s.push(51);
- 
+
+    std::cout << "After adding elements, s.empty(): " << s.empty() << '\n';
+
     reportStackSize(s);
     reportStackTop(s);
  

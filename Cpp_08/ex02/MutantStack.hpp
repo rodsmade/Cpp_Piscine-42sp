@@ -11,11 +11,11 @@ class MutantStack {
     ~MutantStack();
     MutantStack &operator=(const MutantStack &other);
     // TODO:
-    const T &top();
+    const T &top() const;
     // empty();
-    // size();
-    // push();
-    // pop();
+    std::size_t size() const;
+    void push(T element);
+    void pop();
 
    private:
     std::stack<T> _mStack;

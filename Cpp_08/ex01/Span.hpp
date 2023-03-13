@@ -1,8 +1,8 @@
 #ifndef SPAN_HPP
 #define SPAN_HPP
 
-#include <vector>
 #include <stdexcept>
+#include <vector>
 
 class Span {
    public:
@@ -10,6 +10,14 @@ class Span {
     Span(const Span &other);
     ~Span(void);
     const Span &operator=(const Span &other);
+
+    unsigned int getSize(void);
+    void addNumber(int number);
+
+    class StorageFullException : public std::exception {
+       public:
+        virtual const char *what() const throw();
+    };
 
    private:
     unsigned int _maxStorage;

@@ -1,6 +1,8 @@
 #ifndef SPAN_HPP
 #define SPAN_HPP
 
+#include <algorithm>
+#include <iostream>
 #include <stdexcept>
 #include <vector>
 
@@ -11,10 +13,18 @@ class Span {
     ~Span(void);
     const Span &operator=(const Span &other);
 
+    // MEMBER FUNCTIONS
     unsigned int getSize(void);
     void addNumber(int number);
+    int shortestSpan(void);
+    int longestSpan(void);
+
 
     class StorageFullException : public std::exception {
+       public:
+        virtual const char *what() const throw();
+    };
+    class SpanCantBeFoundException : public std::exception {
        public:
         virtual const char *what() const throw();
     };

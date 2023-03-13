@@ -9,15 +9,20 @@
 int main() {
     Span caixinha(5);
 
-    caixinha.addNumber(42);
-    caixinha.addNumber(43);
-    caixinha.addNumber(44);
-    caixinha.addNumber(45);
-    caixinha.addNumber(46);
+    caixinha.addNumber(420);
+    caixinha.addNumber(4300);
+    caixinha.addNumber(440000);
+    caixinha.addNumber(4);
+    caixinha.addNumber(460);
     try {
         caixinha.addNumber(47);
     } catch (const std::exception &e) {
         std::cout << " ❌ " BOLD LIGHT_RED << e.what() << RESET << std::endl;
     }
+
+    // std::cout << "shortest span: " << caixinha.shortestSpan() << std::endl;
+    caixinha.shortestSpan();
+
+
     return 0;
 }

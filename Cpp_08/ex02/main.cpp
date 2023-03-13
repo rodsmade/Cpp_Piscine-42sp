@@ -22,6 +22,7 @@ int main()
 
     s.push(2);
     s.push(6);
+    s.push(42);
     s.push(51);
 
     std::cout << "After adding elements, s.empty(): " << s.empty() << '\n';
@@ -34,4 +35,14 @@ int main()
  
     reportStackSize(s);
     reportStackTop(s);
+
+
+    MutantStack<int>::iterator it = s.begin();
+    MutantStack<int>::iterator ite = s.end();
+
+    for (int index = 0; index < (ite - it); index++){
+        std::cout << "Pos [" << index << "] Value[" << *(it + index) << "]" << std::endl;
+    }
+
+
 }

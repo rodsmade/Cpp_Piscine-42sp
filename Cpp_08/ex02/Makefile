@@ -7,7 +7,7 @@ OBJECTS = $(SOURCES:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(SOURCES) MutantStack.hpp MutantStack.tpp
+$(NAME): $(SOURCES) MutantStack.hpp
 	$(CC) $(CFLAGS) $(SOURCES) -o $(NAME)
 
 %.o:	%.cpp

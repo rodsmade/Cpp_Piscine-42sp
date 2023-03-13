@@ -30,22 +30,15 @@ int Span::shortestSpan(void) {
     if (getSize() <= 1) {
         throw SpanCantBeFoundException();
     }
-
     std::vector<int> temp = _elements;
 
-    std::sort(temp.begin(), temp.end());  // sort vector
-
     std::vector<int> diffs(temp.size() - 1);
+    std::adjacent_difference(temp.begin(), temp.end(), diffs.begin());  // calculate differences between adjacent elements
 
-    for (long unsigned int i = 0; i < diffs.size(); i++) {
-        diffs[i] = temp[i + 1] - temp[i];
-    }
+    std::vector<int>::iterator minIt = std::min_element(diffs.begin(), diffs.end());  // find iterator to minimum element
+    int minSpan = *minIt;  // dereference iterator to get minimum element
 
-    std::sort(diffs.begin(), diffs.end());  // sort vector
-
-    int shortestSpan = diffs[0];
-
-    return (shortestSpan);
+    return (minSpan);
 };
 
 // custom comparison function that sorts ints in descending order
@@ -59,17 +52,13 @@ int Span::longestSpan(void) {
     }
     std::vector<int> temp = _elements;
 
-    std::sort(temp.begin(), temp.end(), greater);  // sort vector
-
     std::vector<int> diffs(temp.size() - 1);
+    std::adjacent_difference(temp.begin(), temp.end(), diffs.begin());  // calculate differences between adjacent elements
 
-    for (long unsigned int i = 0; i < diffs.size(); i++) {
-        diffs[i] = temp[i] - temp[i + 1];
-    }
+    std::vector<int>::iterator maxIt = std::max_element(diffs.begin(), diffs.end());  // find iterator to maximum element
+    int maxSpan = *maxIt;  // dereference iterator to get maximum element
 
-    std::sort(diffs.begin(), diffs.end(), greater);  // sort vector
-
-    return (diffs[0]);
+    return (maxSpan);
 };
 
 void Span::addNumber(int number) {

@@ -26,6 +26,23 @@ unsigned int Span::getSize(void) {
     return _elements.size();
 };
 
+void Span::addNumber(int number) {
+    if (getSize() >= _maxStorage) {
+        throw StorageFullException();
+    }
+    _elements.push_back(number);
+};
+
+void Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end) {
+    while ( begin != end ) {
+        if (getSize() >= _maxStorage) {
+            throw StorageFullException();
+        }
+        _elements.push_back(*begin);
+        begin++;
+    }
+};
+
 int Span::shortestSpan(void) {
     if (getSize() <= 1) {
         throw SpanCantBeFoundException();
@@ -62,11 +79,4 @@ int Span::longestSpan(void) {
     int maxSpan = *maxIt;
 
     return (maxSpan);
-};
-
-void Span::addNumber(int number) {
-    if (getSize() >= _maxStorage) {
-        throw StorageFullException();
-    }
-    _elements.push_back(number);
 };

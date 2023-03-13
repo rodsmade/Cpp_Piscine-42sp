@@ -16,6 +16,7 @@ class Span {
     // MEMBER FUNCTIONS
     unsigned int getSize(void);
     void addNumber(int number);
+    void addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end);
     int shortestSpan(void);
     int longestSpan(void);
 

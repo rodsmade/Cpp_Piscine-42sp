@@ -48,5 +48,24 @@ int main() {
             std::cout << " ❌ " BOLD LIGHT_RED << e.what() << RESET << std::endl;
         }
     }
+    {
+        Span caixinha(10000);
+
+        for (int i = 0; i < 9500; i++) {
+            caixinha.addNumber(i);
+        }
+        std::cout << "Size of caixinha: " << caixinha.getSize() << std::endl;
+
+
+        std::vector<int> caixa2(0);
+
+        for (int i = 0; i < 500; i++) {
+            caixa2.push_back(9500 + i);
+        }
+        std::cout << "Size of caixa2: " << caixa2.size() << std::endl;
+
+        caixinha.addNumber(caixa2.begin(), caixa2.end());
+        std::cout << "Size of caixinha: " << caixinha.getSize() << std::endl;
+    }
     return 0;
 }

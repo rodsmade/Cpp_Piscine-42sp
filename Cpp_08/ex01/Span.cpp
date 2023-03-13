@@ -33,17 +33,16 @@ int Span::shortestSpan(void) {
     std::vector<int> temp = _elements;
 
     std::vector<int> diffs(temp.size() - 1);
-    std::adjacent_difference(temp.begin(), temp.end(), diffs.begin());  // calculate differences between adjacent elements
 
-    std::vector<int>::iterator minIt = std::min_element(diffs.begin(), diffs.end());  // find iterator to minimum element
-    int minSpan = *minIt;  // dereference iterator to get minimum element
+    // calculate differences (absolute value) between adjacent elements
+    for (unsigned long int i = 0; i < diffs.size(); i++)
+        diffs[i] = abs(temp[i + 1] - temp[i]);
+
+    // find iterator to minimum element:
+    std::vector<int>::iterator minIt = std::min_element(diffs.begin(), diffs.end());
+    int minSpan = *minIt;
 
     return (minSpan);
-};
-
-// custom comparison function that sorts ints in descending order
-bool greater(int a, int b) {
-    return a > b;
 };
 
 int Span::longestSpan(void) {
@@ -53,10 +52,14 @@ int Span::longestSpan(void) {
     std::vector<int> temp = _elements;
 
     std::vector<int> diffs(temp.size() - 1);
-    std::adjacent_difference(temp.begin(), temp.end(), diffs.begin());  // calculate differences between adjacent elements
 
-    std::vector<int>::iterator maxIt = std::max_element(diffs.begin(), diffs.end());  // find iterator to maximum element
-    int maxSpan = *maxIt;  // dereference iterator to get maximum element
+    // calculate differences (absolute value) between adjacent elements
+    for (unsigned long int i = 0; i < diffs.size(); i++)
+        diffs[i] = abs(temp[i + 1] - temp[i]);
+
+    // find iterator to maximum element
+    std::vector<int>::iterator maxIt = std::max_element(diffs.begin(), diffs.end());
+    int maxSpan = *maxIt;
 
     return (maxSpan);
 };

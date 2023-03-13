@@ -14,8 +14,8 @@ int main() {
         sp.addNumber(17);
         sp.addNumber(9);
         sp.addNumber(11);
-        std::cout << sp.shortestSpan() << std::endl;
-        std::cout << sp.longestSpan() << std::endl;
+        std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
+        std::cout << "Longest span: " << sp.longestSpan() << std::endl;
     }
     {  // MY TESTS
         Span caixinha(5);
@@ -32,8 +32,8 @@ int main() {
         }
 
         // std::cout << "shortest span: " << caixinha.shortestSpan() << std::endl;
-        std::cout << "shortest: " << caixinha.shortestSpan() << std::endl;
-        std::cout << "longest: " << caixinha.longestSpan() << std::endl;
+        std::cout << "Shortest span: " << caixinha.shortestSpan() << std::endl;
+        std::cout << "Longest span: " << caixinha.longestSpan() << std::endl;
 
         Span caixa2(1);
         caixa2.addNumber(42);
@@ -49,7 +49,7 @@ int main() {
         }
     }
     {
-        std::cout << "\nTESTE 1\n";
+        std::cout << "\nTEST 1 - Adding 500 elements to 10.000-sized Span\n";
         Span caixinha(10000);
 
         for (int i = 0; i < 9500; i++) {
@@ -69,7 +69,7 @@ int main() {
         std::cout << "Size of caixinha: " << caixinha.getSize() << std::endl;
     }
     {
-        std::cout << "\nTESTE 2\n";
+        std::cout << "\nTESTE 2 - Adding 1.000 elements to 10.000-sized Span\n";
         Span caixinha(10000);
 
         for (int i = 0; i < 9500; i++) {
@@ -93,6 +93,58 @@ int main() {
             std::cout << "Size of caixinha: " << caixinha.getSize() << std::endl;
         }
 
+    }
+    {
+        std::cout << "\nTESTE 3 - Finding Shortest/Longest in 0-sized Span\n";
+        Span caixinha(0);
+
+        std::cout << "Size of caixinha: " << caixinha.getSize() << std::endl;
+
+        try {
+            caixinha.addNumber(42);
+            std::cout << "Size of caixinha: " << caixinha.getSize() << std::endl;
+        } catch (const std::exception &e) {
+            std::cout << " ❌ " BOLD LIGHT_RED << e.what() << RESET << std::endl;
+            std::cout << "Size of caixinha: " << caixinha.getSize() << std::endl;
+        }
+        try {
+            std::cout << "Shortest span: " << caixinha.shortestSpan() << std::endl;
+        } catch (const std::exception &e) {
+            std::cout << " ❌ " BOLD LIGHT_RED << e.what() << RESET << std::endl;
+            std::cout << "Size of caixinha: " << caixinha.getSize() << std::endl;
+        }
+        try {
+            std::cout << "Longest span: " << caixinha.longestSpan() << std::endl;
+        } catch (const std::exception &e) {
+            std::cout << " ❌ " BOLD LIGHT_RED << e.what() << RESET << std::endl;
+            std::cout << "Size of caixinha: " << caixinha.getSize() << std::endl;
+        }
+    }
+    {
+        std::cout << "\nTESTE 4 - Finding Shortest/Longest in 1-sized Span\n";
+        Span caixinha(1);
+
+        std::cout << "Size of caixinha: " << caixinha.getSize() << std::endl;
+
+        try {
+            caixinha.addNumber(42);
+            std::cout << "Size of caixinha: " << caixinha.getSize() << std::endl;
+        } catch (const std::exception &e) {
+            std::cout << " ❌ " BOLD LIGHT_RED << e.what() << RESET << std::endl;
+            std::cout << "Size of caixinha: " << caixinha.getSize() << std::endl;
+        }
+        try {
+            std::cout << "Shortest span: " << caixinha.shortestSpan() << std::endl;
+        } catch (const std::exception &e) {
+            std::cout << " ❌ " BOLD LIGHT_RED << e.what() << RESET << std::endl;
+            std::cout << "Size of caixinha: " << caixinha.getSize() << std::endl;
+        }
+        try {
+            std::cout << "Longest span: " << caixinha.longestSpan() << std::endl;
+        } catch (const std::exception &e) {
+            std::cout << " ❌ " BOLD LIGHT_RED << e.what() << RESET << std::endl;
+            std::cout << "Size of caixinha: " << caixinha.getSize() << std::endl;
+        }
     }
     return 0;
 }

@@ -2,8 +2,10 @@
 #define BITCOIN_EXCHANGE_HPP
 
 #include <cstdio>
+#include <fstream>
 #include <iostream>
 #include <map>
+#include <string>
 
 class Date {
    private:
@@ -22,10 +24,11 @@ class Date {
 
 class BitcoinExchange {
    private:
-    std::map<Date, float> database;
+    // std::map<Date, float> _database;
+    std::map<std::string, std::string> _database;
 
    public:
-    BitcoinExchange(std::FILE* data); // loads .csv into map for faster lookup
+    BitcoinExchange(void); // loads .csv into map for faster lookup
     ~BitcoinExchange();
     BitcoinExchange(const BitcoinExchange &other);
     BitcoinExchange &operator=(const BitcoinExchange &other);

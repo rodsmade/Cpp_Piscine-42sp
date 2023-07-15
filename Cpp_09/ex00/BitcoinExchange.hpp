@@ -2,30 +2,44 @@
 #define BITCOIN_EXCHANGE_HPP
 
 #include <cstdio>
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <map>
 #include <string>
+#include <stdexcept>
 
 class Date {
    private:
-    int day;
-    int month;
-    int year;
+    int _day;
+    int _month;
+    int _year;
 
    public:
-    Date(std::string dateStr);
+    class InvalidDateException : public std::exception {
+       public:
+        InvalidDateException(const std::string& message) : _errorMessage(message) {}
+        ~InvalidDateException() throw() {};
+        virtual const char* what() const throw() {
+            return _errorMessage.c_str();
+        }
+
+       private:
+        std::string _errorMessage;
+    };
+
+    Date(std::string dateString);
     ~Date();
-    Date(const Date &other);
+    // Date(const Date &other);
     Date &operator=(const Date &other);
 
-    // implement operators > and ==, probably 
+    // logical operator overload
+    bool operator<(const Date &rhs) const;
 };
 
 class BitcoinExchange {
    private:
-    // std::map<Date, float> _database;
-    std::map<std::string, std::string> _database;
+    std::map<Date, float> _database;
 
    public:
     BitcoinExchange(void); // loads .csv into map for faster lookup

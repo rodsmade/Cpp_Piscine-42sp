@@ -1,16 +1,21 @@
-CC = c++ -Wall -Wextra -Werror -std=c++98
+CC = c++ -Wall -Wextra -Werror -std=c++98 -g
 NAME = btc
 
 all: $(NAME)
+
+run: $(NAME)
 	./$^ $(ARGS)
 
 vava: $(NAME)
 	valgrind --leak-check=full --show-leak-kinds=all --quiet ./$(NAME) $(ARGS)
 
-$(NAME): BitcoinExchange.o main.cpp
+$(NAME): BitcoinExchange.o main.o
 	$(CC) $? -o $@
 
-BitcoinExchange.o: BitcoinExchange.cpp BitcoinExchange.hpp
+BitcoinExchange.o: BitcoinExchange.cpp
+	$(CC) -c $< -o $@
+
+main.o: main.cpp
 	$(CC) -c $< -o $@
 
 clean:
@@ -21,4 +26,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all vava clean fclean re
+.PHONY: all run vava clean fclean re

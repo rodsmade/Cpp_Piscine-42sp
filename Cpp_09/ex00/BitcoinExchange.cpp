@@ -22,9 +22,9 @@ Date::Date(std::string dateString) {
         throw InvalidDateException("You sneaky shmuck! Quit the shenanigans!");
 };
 
-Date::~Date() {};
+Date::~Date(){};
 
-bool Date::operator<(const Date &rhs) const {
+bool Date::operator<(const Date& rhs) const {
     return  (
                 _year < rhs._year ||
                 (_year == rhs._year && _month < rhs._month) ||
@@ -44,13 +44,11 @@ BitcoinExchange::BitcoinExchange(void) {
         std::getline(database_file, line);
         while (std::getline(database_file, line)) {
             std::string key = line.substr(0, 10);
-            // std::cout << "[" << key << "]" << std::endl;
             std::string value = line.substr(10 + 1);
             _database[Date(key)] = std::atof(value.c_str());
         }
         std::cout << "map size: " << _database.size() << std::endl;
-    }
-    catch(const std::exception& e) {
+    } catch (const std::exception& e) {
         database_file.close();
         throw;
     }
@@ -58,4 +56,4 @@ BitcoinExchange::BitcoinExchange(void) {
     database_file.close();
 }
 
-BitcoinExchange::~BitcoinExchange() {};
+BitcoinExchange::~BitcoinExchange(){};

@@ -13,21 +13,32 @@ void    validate_args(int argc, char **argv) {
         std::exit(-1);
     }
 
-    std::fclose(file);
-    std::cout << "File exists and has read permission. Now do sth with it." << std::endl;
+    return;
+}
+
+void parse_input_line_and_print_result(std::string line) {
+    std::cout << "input line: " << line << std::endl;
 }
 
 int main(int argc, char **argv) {
     std::cout << "HELLO HELLO, HE, HELLO, HELLO" << std::endl;
     validate_args(argc, argv);
 
+    std::ifstream input_file(argv[1]);
+
     try {
         BitcoinExchange database;
+        std::string line;
+
+        std::getline(input_file, line);
+        while (std::getline(input_file, line)) {
+            parse_input_line_and_print_result(line);
+        }
     } catch (const std::exception& e) {
         std::cerr << "An exception occurred: " << e.what() << std::endl;
-        // Perform any necessary cleanup or logging here
-        // You may also choose to exit the program gracefully
     }
+
+    input_file.close();
 
     return 0;
 }

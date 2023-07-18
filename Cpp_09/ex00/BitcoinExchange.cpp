@@ -1,8 +1,8 @@
 #include "BitcoinExchange.hpp"
 
-Date::Date() : _day(0), _month(0), _year(0) {};
+BitcoinExchange::Date::Date() : _day(0), _month(0), _year(0) {};
 
-Date::Date(std::string dateString) {
+BitcoinExchange::Date::Date(std::string dateString) {
     if (dateString.length() != 10 || dateString[4] != '-' || dateString[7] != '-')
         throw InvalidDateException("Invalid date format. Expected YYYY-MM-DD.");
 
@@ -21,12 +21,12 @@ Date::Date(std::string dateString) {
             (_year % 4 && _month == 2 && _day > 28) ||
             ((_year % 4 == 0) && _month == 2 && _day > 29)
         )
-        throw InvalidDateException("You sneaky shmuck! Quit the shenanigans!");
+        throw InvalidDateException("You silly goose! Quit the shenanigans!");
 };
 
-Date::~Date(){};
+BitcoinExchange::Date::~Date(){};
 
-Date &Date::operator=(const Date &other) {
+BitcoinExchange::Date &BitcoinExchange::Date::operator=(const Date &other) {
     if (*this != other) {
         _year = other._year;
         _month = other._month;
@@ -35,12 +35,16 @@ Date &Date::operator=(const Date &other) {
     return *this;
 };
 
-bool Date::operator!=(const Date& rhs) const {
+bool BitcoinExchange::Date::operator==(const Date &rhs) const {
+    return !(*this != rhs);
+};
+
+bool BitcoinExchange::Date::operator!=(const Date& rhs) const {
     return (_year != rhs._year || _month != rhs._month || _day != rhs._day);
 };
 
-bool Date::operator<(const Date& rhs) const {
-    return  (
+bool BitcoinExchange::Date::operator<(const Date& rhs) const {
+    return (
                 _year < rhs._year ||
                 (_year == rhs._year && _month < rhs._month) ||
                 (_year == rhs._year && _month == rhs._month && _day < rhs._day)
@@ -49,7 +53,15 @@ bool Date::operator<(const Date& rhs) const {
 
 ////////////////////////////////////////////////////////////
 
-BitcoinExchange::BitcoinExchange(void) {
+BitcoinExchange::BitcoinExchange(void) {};
+
+BitcoinExchange::~BitcoinExchange(){};
+
+float &BitcoinExchange::operator[](Date &key) {
+    return _database[key];
+};
+
+void BitcoinExchange::load_database() {
     std::ifstream database_file("cpp_09/data.csv");
     if (!database_file.is_open())
         throw std::runtime_error("Failed to open the database file");
@@ -68,15 +80,9 @@ BitcoinExchange::BitcoinExchange(void) {
     }
 
     database_file.close();
-}
-
-BitcoinExchange::~BitcoinExchange(){};
-
-float &BitcoinExchange::operator[](Date &key) {
-    return _database[key];
 };
 
-Date BitcoinExchange::floor(const Date &date) {
+BitcoinExchange::Date BitcoinExchange::floor(const Date &date) {
     std::map<Date, float>::iterator res = _database.find(date);
     if (res != _database.end())
         return res->first;
@@ -96,4 +102,5 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other) {
     if (_database != other._database) {
         _database = other._database;
     };
+    return *this;
 };

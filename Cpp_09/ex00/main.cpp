@@ -2,20 +2,6 @@
 
 #include "BitcoinExchange.hpp"
 
-void    validate_args(int argc, char **argv) {
-    if (argc != 2) {
-        std::cout << "Error: could not open file." << std::endl;
-        std::exit(-1);
-    }
-    std::FILE* file = std::fopen(argv[1], "r");
-    if (file == NULL) {
-        std::cout << "Error: could not open file." << std::endl;
-        std::exit(-1);
-    }
-
-    return;
-}
-
 void splitString(const std::string& str, std::string& beforePipe, std::string& afterPipe) {
     size_t pipePos = str.find('|');
 
@@ -31,60 +17,68 @@ void splitString(const std::string& str, std::string& beforePipe, std::string& a
 
 void parse_input_line_and_print_result(std::string line, BitcoinExchange &database) {
 
-    std::string exchange_rate_date_str, principal_amount_str;
-    splitString(line, exchange_rate_date_str, principal_amount_str);
-    while (*(--exchange_rate_date_str.end()) == ' ')
-        exchange_rate_date_str.pop_back();  // removes trailing '' from string
+    std::string exchangeRateDateStr, principalAmountStr;
 
-    if (principal_amount_str == "") {
-        std::cout << "Error: bad input => " << exchange_rate_date_str << std::endl;
+    splitString(line, exchangeRateDateStr, principalAmountStr);
+    // Remove trailing ' ' from string
+    while (*(--exchangeRateDateStr.end()) == ' ')
+        exchangeRateDateStr.pop_back();
+
+    if (principalAmountStr == "") {
+        std::cout << "Error: bad input => " << line << std::endl;
         return ;
     }
 
-    float principal_amount = std::atof(principal_amount_str.c_str());
-    if (principal_amount < 0) {
+    float principalAmount = std::atof(principalAmountStr.c_str());
+    if (principalAmount < 0) {
         std::cout << "Error: not a positive number." << std::endl;
         return ;
     }
 
-    if (principal_amount > 2147483647.0) {
+    if (principalAmount > 1000.0) {
         std::cout << "Error: too large a number." << std::endl;
         return ;
     }
 
-    Date exchange_rate_date;
+    BitcoinExchange::Date exchange_rate_date;
     try {
-        exchange_rate_date = Date(exchange_rate_date_str);
+        exchange_rate_date = BitcoinExchange::Date(exchangeRateDateStr);
     } catch(const std::exception& e) {
-        std::cerr << "Error: bad input => " << exchange_rate_date_str << ". " << e.what() << std::endl;
+        std::cerr << "Error: bad input => " << exchangeRateDateStr << ". " << e.what() << std::endl;
         return ;
     }
 
-    Date correctedDate = database.floor(exchange_rate_date);
-    float converted_amount = database[correctedDate] * principal_amount;
-
-    std::cout << exchange_rate_date_str << " =>" << principal_amount_str << " = " << converted_amount << "\n";
+    BitcoinExchange::Date correctedDate = database.floor(exchange_rate_date);
+    float convertedAmount = database[correctedDate] * principalAmount;
+    std::cout << exchangeRateDateStr << " =>" << principalAmountStr << " = " << convertedAmount << "\n";
 }
 
 int main(int argc, char **argv) {
-    validate_args(argc, argv);
-
+   if (argc != 2) {
+        std::cout << "Error: could not open file." << std::endl;
+        std::exit(EXIT_FAILURE);
+    }
     std::ifstream input_file(argv[1]);
+    if (!input_file.is_open()) {
+        std::cout << "Error: could not open file." << std::endl;
+        std::exit(EXIT_FAILURE);
+    }
 
+    BitcoinExchange bitcoinExchange;
     try {
-        BitcoinExchange database;
-        std::string line;
-
-        std::getline(input_file, line);
-        while (std::getline(input_file, line)) {
-            parse_input_line_and_print_result(line, database);
-        }
+        bitcoinExchange.load_database();
     } catch (const std::exception& e) {
         std::cerr << "An exception occurred: " << e.what() << std::endl;
+        std::exit(EXIT_FAILURE);
+    };
+
+    std::string line;
+    std::getline(input_file, line); // pops first line (header)
+    while (std::getline(input_file, line)) {
+        parse_input_line_and_print_result(line, bitcoinExchange);
     }
 
     input_file.close();
 
-    return 0;
+    return (EXIT_SUCCESS);
 }
-

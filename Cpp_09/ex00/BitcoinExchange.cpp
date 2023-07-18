@@ -88,8 +88,12 @@ Date BitcoinExchange::floor(const Date &date) {
         else
             return (--it)->first;
     }
+};
 
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : _database(other._database) {};
 
-
-
+BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other) {
+    if (_database != other._database) {
+        _database = other._database;
+    };
 };

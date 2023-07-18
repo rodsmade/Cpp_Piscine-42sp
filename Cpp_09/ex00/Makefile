@@ -4,13 +4,13 @@ NAME = btc
 all: $(NAME)
 
 run: $(NAME)
-	./$^ $(ARGS)
+	./$^ input_good.txt
 
 vava: $(NAME)
 	valgrind --leak-check=full --show-leak-kinds=all --quiet ./$(NAME) $(ARGS)
 
 $(NAME): BitcoinExchange.o main.o
-	$(CC) $? -o $@
+	$(CC) $^ -o $@
 
 BitcoinExchange.o: BitcoinExchange.cpp
 	$(CC) -c $< -o $@

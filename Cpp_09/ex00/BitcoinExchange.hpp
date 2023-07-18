@@ -47,6 +47,7 @@ class BitcoinExchange {
     BitcoinExchange(const BitcoinExchange &other);
     BitcoinExchange &operator=(const BitcoinExchange &other);
 
+    float &operator[](Date &key);
     Date floor(const Date &date); // returns the date inside `database` equal to or immediately smaller than `date`
 };
 

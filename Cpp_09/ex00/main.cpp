@@ -16,12 +16,35 @@ void    validate_args(int argc, char **argv) {
     return;
 }
 
-void parse_input_line_and_print_result(std::string line) {
-    std::cout << "input line: " << line << std::endl;
+void splitString(const std::string& str, std::string& beforePipe, std::string& afterPipe) {
+    size_t pipePos = str.find('|');
+
+    if (pipePos != std::string::npos) {
+        beforePipe = str.substr(0, pipePos);
+        afterPipe = str.substr(pipePos + 1);
+    }
+    else {
+        beforePipe = str;
+        afterPipe = "";
+    }
+}
+
+void parse_input_line_and_print_result(std::string line, BitcoinExchange &database) {
+
+    std::string beforePipe, afterPipe;
+    splitString(line, beforePipe, afterPipe);
+    beforePipe.pop_back();
+
+
+    Date date = Date(beforePipe);
+    Date correctedDate = database.floor(date);
+    float converted = std::atof(afterPipe.c_str());
+    float result = database[correctedDate] * converted;
+
+    std::cout << beforePipe << " =>" << afterPipe << " = " << result << "\n";
 }
 
 int main(int argc, char **argv) {
-    std::cout << "HELLO HELLO, HE, HELLO, HELLO" << std::endl;
     validate_args(argc, argv);
 
     std::ifstream input_file(argv[1]);
@@ -32,7 +55,7 @@ int main(int argc, char **argv) {
 
         std::getline(input_file, line);
         while (std::getline(input_file, line)) {
-            parse_input_line_and_print_result(line);
+            parse_input_line_and_print_result(line, database);
         }
     } catch (const std::exception& e) {
         std::cerr << "An exception occurred: " << e.what() << std::endl;

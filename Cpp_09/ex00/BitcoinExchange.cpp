@@ -47,7 +47,6 @@ BitcoinExchange::BitcoinExchange(void) {
             std::string value = line.substr(10 + 1);
             _database[Date(key)] = std::atof(value.c_str());
         }
-        std::cout << "map size: " << _database.size() << std::endl;
     } catch (const std::exception& e) {
         database_file.close();
         throw;
@@ -57,3 +56,25 @@ BitcoinExchange::BitcoinExchange(void) {
 }
 
 BitcoinExchange::~BitcoinExchange(){};
+
+float &BitcoinExchange::operator[](Date &key) {
+    return _database[key];
+};
+
+Date BitcoinExchange::floor(const Date &date) {
+    std::map<Date, float>::iterator res = _database.find(date);
+    if (res != _database.end())
+        return res->first;
+
+    std::map<Date, float>::iterator it = _database.begin();
+    while (true) {
+        if (it->first < date)
+            it++;
+        else
+            return (--it)->first;
+    }
+
+
+
+
+};

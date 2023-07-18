@@ -31,17 +31,39 @@ void splitString(const std::string& str, std::string& beforePipe, std::string& a
 
 void parse_input_line_and_print_result(std::string line, BitcoinExchange &database) {
 
-    std::string beforePipe, afterPipe;
-    splitString(line, beforePipe, afterPipe);
-    beforePipe.pop_back();
+    std::string exchange_rate_date_str, principal_amount_str;
+    splitString(line, exchange_rate_date_str, principal_amount_str);
+    while (*(--exchange_rate_date_str.end()) == ' ')
+        exchange_rate_date_str.pop_back();  // removes trailing '' from string
 
+    if (principal_amount_str == "") {
+        std::cout << "Error: bad input => " << exchange_rate_date_str << std::endl;
+        return ;
+    }
 
-    Date date = Date(beforePipe);
-    Date correctedDate = database.floor(date);
-    float converted = std::atof(afterPipe.c_str());
-    float result = database[correctedDate] * converted;
+    float principal_amount = std::atof(principal_amount_str.c_str());
+    if (principal_amount < 0) {
+        std::cout << "Error: not a positive number." << std::endl;
+        return ;
+    }
 
-    std::cout << beforePipe << " =>" << afterPipe << " = " << result << "\n";
+    if (principal_amount > 2147483647.0) {
+        std::cout << "Error: too large a number." << std::endl;
+        return ;
+    }
+
+    Date exchange_rate_date;
+    try {
+        exchange_rate_date = Date(exchange_rate_date_str);
+    } catch(const std::exception& e) {
+        std::cerr << "Error: bad input => " << exchange_rate_date_str << ". " << e.what() << std::endl;
+        return ;
+    }
+
+    Date correctedDate = database.floor(exchange_rate_date);
+    float converted_amount = database[correctedDate] * principal_amount;
+
+    std::cout << exchange_rate_date_str << " =>" << principal_amount_str << " = " << converted_amount << "\n";
 }
 
 int main(int argc, char **argv) {

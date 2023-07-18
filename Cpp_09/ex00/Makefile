@@ -4,7 +4,7 @@ NAME = btc
 all: $(NAME)
 
 run: $(NAME)
-	./$^ input_good.txt
+	./$^ input.txt
 
 vava: $(NAME)
 	valgrind --leak-check=full --show-leak-kinds=all --quiet ./$(NAME) $(ARGS)
@@ -19,11 +19,13 @@ main.o: main.cpp
 	$(CC) -c $< -o $@
 
 clean:
-	rm -f BitcoinExchange.o
+	rm -f BitcoinExchange.o main.o
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all run vava clean fclean re
+rerun: re run
+
+.PHONY: all run vava clean fclean re rerun

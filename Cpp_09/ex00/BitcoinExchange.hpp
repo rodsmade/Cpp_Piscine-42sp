@@ -28,12 +28,14 @@ class Date {
         std::string _errorMessage;
     };
 
+    Date();
     Date(std::string dateString);
     ~Date();
     // Date(const Date &other);
     Date &operator=(const Date &other);
 
     // logical operator overload
+    bool operator!=(const Date &rhs) const;
     bool operator<(const Date &rhs) const;
 };
 

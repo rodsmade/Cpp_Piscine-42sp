@@ -1,5 +1,7 @@
 #include "BitcoinExchange.hpp"
 
+Date::Date() : _day(0), _month(0), _year(0) {};
+
 Date::Date(std::string dateString) {
     if (dateString.length() != 10 || dateString[4] != '-' || dateString[7] != '-')
         throw InvalidDateException("Invalid date format. Expected YYYY-MM-DD.");
@@ -16,13 +18,26 @@ Date::Date(std::string dateString) {
         throw InvalidDateException("Invalid day. Pick between [1, 31].");
     if  (
             ((_month == 4 || _month == 6 || _month == 9 || _month == 11) && _day == 31) ||
-            (_month == 2 && _day > 28) ||
+            (_year % 4 && _month == 2 && _day > 28) ||
             ((_year % 4 == 0) && _month == 2 && _day > 29)
         )
         throw InvalidDateException("You sneaky shmuck! Quit the shenanigans!");
 };
 
 Date::~Date(){};
+
+Date &Date::operator=(const Date &other) {
+    if (*this != other) {
+        _year = other._year;
+        _month = other._month;
+        _day = other._day;
+    }
+    return *this;
+};
+
+bool Date::operator!=(const Date& rhs) const {
+    return (_year != rhs._year || _month != rhs._month || _day != rhs._day);
+};
 
 bool Date::operator<(const Date& rhs) const {
     return  (

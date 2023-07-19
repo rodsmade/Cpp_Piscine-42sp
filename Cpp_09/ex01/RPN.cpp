@@ -21,7 +21,9 @@ void RPN::_performOperation(char op) {
     if (_stack.size() < 2)
         throw CalculationErrorException();
 
-    int lhs, rhs, result;
+    int lhs, rhs;
+    long result;
+
     rhs = _stack.top();
     _stack.pop();
     lhs = _stack.top();
@@ -32,19 +34,22 @@ void RPN::_performOperation(char op) {
             result = lhs * rhs;
             break;
         case '/':
+            if (rhs == 0)
+                throw CalculationErrorException();
             result = lhs / rhs;
             break;
         case '+':
             result = lhs + rhs;
             break;
-        case '-':
-            result = lhs - rhs;
-            break;
         default:
+            result = lhs - rhs;
             break;
     }
 
-    _stack.push(result);
+    if (result > INT_MAX || result < INT_MIN)
+        throw CalculationErrorException();
+
+    _stack.push(static_cast<int>(result));
 };
 
 void RPN::reckon(char *str) {

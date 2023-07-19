@@ -40,6 +40,7 @@ class BitcoinExchange {
         bool operator==(const Date &rhs) const;
         bool operator!=(const Date &rhs) const;
         bool operator<(const Date &rhs) const;
+        bool operator<=(const Date &rhs) const;
     };
 
     BitcoinExchange();  // loads .csv into map for faster lookup
@@ -48,7 +49,7 @@ class BitcoinExchange {
     BitcoinExchange &operator=(const BitcoinExchange &other);
 
     float &operator[](Date &key);
-    void load_database();
+    void loadDatabase();
     Date floor(const Date &date);  // returns the date inside `database` equal to or immediately smaller than `date`
 
    private:

@@ -51,6 +51,10 @@ bool BitcoinExchange::Date::operator<(const Date& rhs) const {
             );
 };
 
+bool BitcoinExchange::Date::operator<=(const Date &rhs) const {
+    return (*this == rhs || *this < rhs);
+};
+
 ////////////////////////////////////////////////////////////
 
 BitcoinExchange::BitcoinExchange(void) {};
@@ -61,31 +65,34 @@ float &BitcoinExchange::operator[](Date &key) {
     return _database[key];
 };
 
-void BitcoinExchange::load_database() {
-    std::ifstream database_file("cpp_09/data.csv");
-    if (!database_file.is_open())
+void BitcoinExchange::loadDatabase() {
+    std::ifstream databaseFile("cpp_09/data.csv");
+    if (!databaseFile.is_open())
         throw std::runtime_error("Failed to open the database file");
 
     try {
         std::string line;
-        std::getline(database_file, line);
-        while (std::getline(database_file, line)) {
+        std::getline(databaseFile, line);
+        while (std::getline(databaseFile, line)) {
             std::string key = line.substr(0, 10);
             std::string value = line.substr(10 + 1);
             _database[Date(key)] = std::atof(value.c_str());
         }
     } catch (const std::exception& e) {
-        database_file.close();
+        databaseFile.close();
         throw;
     }
 
-    database_file.close();
+    databaseFile.close();
 };
 
 BitcoinExchange::Date BitcoinExchange::floor(const Date &date) {
-    std::map<Date, float>::iterator res = _database.find(date);
-    if (res != _database.end())
-        return res->first;
+    if (date <= Date(std::string("2009-01-01")))
+        return _database.begin()->first;
+
+    std::map<Date, float>::iterator datePosition = _database.find(date);
+    if (datePosition != _database.end())
+        return datePosition->first;
 
     std::map<Date, float>::iterator it = _database.begin();
     while (true) {

@@ -1,4 +1,5 @@
 #include <cstdlib>  // exit()
+#include <cctype>   // isspace()
 
 #include "BitcoinExchange.hpp"
 
@@ -13,20 +14,31 @@ void splitString(const std::string& str, std::string& beforePipe, std::string& a
         beforePipe = str;
         afterPipe = "";
     }
-}
+};
 
-void parse_input_line_and_print_result(std::string line, BitcoinExchange &database) {
+void trimWhitespace(std::string &str) {
+    size_t i = -1;
+
+    while (isspace(str[++i]))
+        continue;
+    
+    str = str.substr(i);
+
+    while (isspace(*(--str.end())))
+        str.pop_back();
+};
+
+void parseInputAndPrintResult(std::string line, BitcoinExchange &bitcoinExchange) {
 
     std::string exchangeRateDateStr, principalAmountStr;
 
     splitString(line, exchangeRateDateStr, principalAmountStr);
-    // Remove trailing ' ' from string
-    while (*(--exchangeRateDateStr.end()) == ' ')
-        exchangeRateDateStr.pop_back();
+    trimWhitespace(exchangeRateDateStr);
+    trimWhitespace(principalAmountStr);
 
     if (principalAmountStr == "") {
         std::cout << "Error: bad input => " << line << std::endl;
-        return ;
+        return ; // da pra escrever uma funcao wrapper desse cout e limpar umas linhas dessa parse_input
     }
 
     float principalAmount = std::atof(principalAmountStr.c_str());
@@ -40,17 +52,17 @@ void parse_input_line_and_print_result(std::string line, BitcoinExchange &databa
         return ;
     }
 
-    BitcoinExchange::Date exchange_rate_date;
+    BitcoinExchange::Date exchangeRateDate;
     try {
-        exchange_rate_date = BitcoinExchange::Date(exchangeRateDateStr);
+        exchangeRateDate = BitcoinExchange::Date(exchangeRateDateStr);
     } catch(const std::exception& e) {
         std::cerr << "Error: bad input => " << exchangeRateDateStr << ". " << e.what() << std::endl;
         return ;
     }
 
-    BitcoinExchange::Date correctedDate = database.floor(exchange_rate_date);
-    float convertedAmount = database[correctedDate] * principalAmount;
-    std::cout << exchangeRateDateStr << " =>" << principalAmountStr << " = " << convertedAmount << "\n";
+    BitcoinExchange::Date correctedDate = bitcoinExchange.floor(exchangeRateDate);
+    float convertedAmount = bitcoinExchange[correctedDate] * principalAmount;
+    std::cout << exchangeRateDateStr << " => " << principalAmountStr << " = " << convertedAmount << "\n";
 }
 
 int main(int argc, char **argv) {
@@ -66,7 +78,7 @@ int main(int argc, char **argv) {
 
     BitcoinExchange bitcoinExchange;
     try {
-        bitcoinExchange.load_database();
+        bitcoinExchange.loadDatabase();
     } catch (const std::exception& e) {
         std::cerr << "An exception occurred: " << e.what() << std::endl;
         std::exit(EXIT_FAILURE);
@@ -74,9 +86,8 @@ int main(int argc, char **argv) {
 
     std::string line;
     std::getline(input_file, line); // pops first line (header)
-    while (std::getline(input_file, line)) {
-        parse_input_line_and_print_result(line, bitcoinExchange);
-    }
+    while (std::getline(input_file, line))
+        parseInputAndPrintResult(line, bitcoinExchange);
 
     input_file.close();
 

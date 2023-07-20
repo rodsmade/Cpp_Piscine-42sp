@@ -20,11 +20,9 @@ class BitcoinExchange {
        public:
         class InvalidDateException : public std::exception {
            public:
-            InvalidDateException(const std::string &message) : _errorMessage(message) {}
-            ~InvalidDateException() throw(){};
-            virtual const char *what() const throw() {
-                return _errorMessage.c_str();
-            }
+            InvalidDateException(const std::string &message);
+            ~InvalidDateException() throw();
+            virtual const char *what() const throw();
 
            private:
             std::string _errorMessage;

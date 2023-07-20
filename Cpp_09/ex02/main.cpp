@@ -1,4 +1,5 @@
 #include <cstdlib>  // exit()
+#include <deque>
 #include <iostream>
 
 bool isPositiveInteger(std::string str) {
@@ -21,22 +22,26 @@ int printErrorAndExit() {
     return (EXIT_FAILURE);
 };
 
-#include <set>
 
 int main(int argc, char **argv) {
     if (argc == 1)
         return (printErrorAndExit());
 
-    std::set<int> sequence;
+    std::deque<int> sequence;
     for (int i = 1; i < argc; i++) {
         // checks validity of argv[i]
         if (!isPositiveInteger(std::string(argv[i])))
             return (printErrorAndExit());
-        // inserts in set, if duplicate, halts execution
-        if (sequence.insert(std::atoi(argv[i])).second == false)
-            return (printErrorAndExit());
+        for (int j = 1; j < i; ++j) {
+            if (std::string(argv[j]) == std::string(argv[i]))
+                return (printErrorAndExit());
+        }
+        // inserts in deque
+        sequence.push_back(atoi(argv[i]));
     }
 
     std::cout << "inseriu " << sequence.size() << " ints\n";
+
+
     return 0;
 }

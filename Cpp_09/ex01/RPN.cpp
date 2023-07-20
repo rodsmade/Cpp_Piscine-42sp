@@ -1,5 +1,21 @@
 #include "RPN.hpp"
 
+RPN::ParsingErrorException::ParsingErrorException() {};
+
+RPN::ParsingErrorException::~ParsingErrorException() throw(){};
+
+const char *RPN::ParsingErrorException::what() const throw() {
+    return "Error";
+}
+
+RPN::CalculationErrorException::CalculationErrorException() {};
+
+RPN::CalculationErrorException::~CalculationErrorException() throw(){};
+
+const char *RPN::CalculationErrorException::what() const throw() {
+    return "Error";
+}
+
 RPN::RPN(){};
 
 RPN::~RPN(){};

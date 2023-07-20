@@ -15,19 +15,15 @@ class RPN {
    public:
     class ParsingErrorException : public std::exception {
        public:
-        ParsingErrorException() {}
-        ~ParsingErrorException() throw(){};
-        virtual const char *what() const throw() {
-            return "Error";
-        }
+        ParsingErrorException();
+        ~ParsingErrorException() throw();
+        virtual const char *what() const throw();
     };
     class CalculationErrorException : public std::exception {
        public:
-        CalculationErrorException() {}
-        ~CalculationErrorException() throw(){};
-        virtual const char *what() const throw() {
-            return "Error";
-        }
+        CalculationErrorException();
+        ~CalculationErrorException() throw();
+        virtual const char *what() const throw();
     };
 
     RPN();

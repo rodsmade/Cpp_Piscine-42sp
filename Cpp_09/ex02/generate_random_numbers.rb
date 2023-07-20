@@ -2,7 +2,7 @@
 x = 3000
 
 # Replace range_start and range_end with the desired range for random numbers
-range_start = 0
+range_start = 1
 range_end = 30000
 
 # Generate an array of numbers from range_start to range_end

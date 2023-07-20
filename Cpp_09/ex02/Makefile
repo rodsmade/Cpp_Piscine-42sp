@@ -1,14 +1,13 @@
 CC = c++ -Wall -Wextra -Werror -std=c++98 -g
 NAME = PmergeMe
-EXPR = "8 9 * 9 - 9 - 9 - 4 - 1 +"
 
 all: $(NAME)
 
-run: $(NAME)
-	./$< $(EXPR)
+run: $(NAME) generate_random_numbers.rb
+	ruby generate_random_numbers.rb | xargs ./$<
 
-vava: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all --quiet ./$< $(EXPR)
+vava: $(NAME) generate_random_numbers.rb
+	ruby generate_random_numbers.rb | xargs valgrind --leak-check=full --show-leak-kinds=all --quiet ./$<
 
 $(NAME): PmergeMe.o main.o
 	$(CC) $^ -o $@

@@ -1,7 +1,9 @@
 #include <cstdlib>  // exit()
 #include <deque>
 #include <iostream>
+#include <list>
 #include <sys/time.h>
+#include <vector>
 
 bool isPositiveInteger(std::string str) {
     if (str.length() == 0 || str.length() > 10)
@@ -51,6 +53,22 @@ int main(int argc, char **argv) {
     long long elapsed_micros = end_micros - start_micros;
 
     std::cout << "validou e inseriu " << sequence.size() << " ints em " << elapsed_micros << " microseconds\n";
+
+    // Step 1 - Group the elements of X into ⌊n/2⌋ pairs of elements, arbitrarily, leaving one element unpaired if there is an odd number of elements.
+    std::list<std::pair<int, int> > list;
+    int a, b;
+    for (std::deque<int>::iterator it = sequence.begin(); it != sequence.end(); it++) {
+        a = *(it++);
+        b = (it != sequence.end()) ? *it : 0;
+        std::pair<int, int> pair(a, b);
+        list.push_back(pair);
+        if (it == sequence.end())
+            break;
+    }
+
+    std::cout << "i now have " << list.size() << " pairs of numbers\n";
+    std::cout << "first pair is (" << list.front().first << ", " << list.front().second << ")\n";
+    std::cout << "last pair is (" << list.back().first << ", " << list.back().second << ")\n";
 
 
 

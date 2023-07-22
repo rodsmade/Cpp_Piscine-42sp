@@ -3,7 +3,6 @@
 #include <iostream>
 #include <list>
 #include <sys/time.h>
-#include <vector>
 
 bool isPositiveInteger(std::string str) {
     if (str.length() == 0 || str.length() > 10)
@@ -29,6 +28,61 @@ int printErrorAndExit() {
     return (EXIT_FAILURE);
 };
 
+bool operatorLessThanForSecondElement(std::pair<int, int> &lhs, std::pair<int, int> &rhs) {
+    return (lhs.second < rhs.second);
+}
+
+void merge(std::deque<std::pair<int, int> > &arr, std::deque<int>::size_type left, std::deque<int>::size_type middle, std::deque<int>::size_type right) {
+    std::deque<int>::size_type i, j, k;
+    std::deque<int>::size_type n1 = middle - left + 1;
+    std::deque<int>::size_type n2 = right - middle;
+
+    std::deque<std::pair<int, int> > L(n1);
+    std::deque<std::pair<int, int> > R(n2);
+
+    for (i = 0; i < n1; i++)
+        L[i] = arr[left + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[middle + 1 + j];
+
+    i = 0;
+    j = 0;
+    k = left;
+
+    while (i < n1 && j < n2) {
+        if (operatorLessThanForSecondElement(L[i], R[j])) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+void mergeSort(std::deque<std::pair<int, int> > &arr, std::deque<int>::size_type left, std::deque<int>::size_type right) {
+    if (left < right) {
+        std::deque<int>::size_type middle = left + (right - left) / 2;
+
+        mergeSort(arr, left, middle);
+        mergeSort(arr, middle + 1, right);
+
+        merge(arr, left, middle, right);
+    }
+}
 
 int main(int argc, char **argv) {
     if (argc == 1)
@@ -83,7 +137,13 @@ int main(int argc, char **argv) {
     }
 
     // Step 3 - Recursively sort the ⌊n/2⌋ larger elements from each pair, creating a sorted sequence S of ⌊n/2⌋ of the input elements, in ascending order.
-    
+    std::cout << "before sorting\n";
+    for (std::deque<std::pair<int, int> >::iterator it = deque.begin(); it != deque.end(); it++)
+        printPair(*it);
+    mergeSort(deque, 0, deque.size() - 1);
+    std::cout << "sorted by second element maybe we shall see\n";
+    for (std::deque<std::pair<int, int> >::iterator it = deque.begin(); it != deque.end(); it++)
+        printPair(*it);
 
     return 0;
 }

@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
     struct timeval start_time, end_time;
     gettimeofday(&start_time, NULL);
 
-    std::deque<int> sequence;
+    std::list<int> sequence;
     for (int i = 1; i < argc; i++) {
         // checks validity of argv[i]
         if (!isPositiveInteger(std::string(argv[i])))
@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
             if (std::string(argv[j]) == std::string(argv[i]))
                 return (printErrorAndExit());
         }
-        // inserts in deque
+        // inserts in list
         sequence.push_back(atoi(argv[i]));
     }
 
@@ -59,31 +59,31 @@ int main(int argc, char **argv) {
     std::cout << "validou e inseriu " << sequence.size() << " ints em " << elapsed_micros << " microseconds\n";
 
     // Step 1 - Group the elements of X into ⌊n/2⌋ pairs of elements, arbitrarily, leaving one element unpaired if there is an odd number of elements.
-    std::list<std::pair<int, int> > list;
+    std::deque<std::pair<int, int> > deque;
     int a, b;
-    for (std::deque<int>::iterator it = sequence.begin(); it != sequence.end(); it++) {
+    for (std::list<int>::iterator it = sequence.begin(); it != sequence.end(); it++) {
         a = *(it++);
         b = (it != sequence.end()) ? *it : 0;
         std::pair<int, int> pair(a, b);
-        list.push_back(pair);
+        deque.push_back(pair);
         if (it == sequence.end())
             break;
     }
 
-    std::cout << "i now have " << list.size() << " pairs of numbers\n";
+    std::cout << "i now have " << deque.size() << " pairs of numbers\n";
     std::cout << "first pair is: ";
-    printPair(list.front());
+    printPair(deque.front());
     std::cout << "last pair is: ";
-    printPair(list.back());
+    printPair(deque.back());
 
     // Step 2 - Perform ⌊ n/2 ⌋ comparisons, one per pair, to determine the larger of the two elements in each pair.
-    for (std::list<std::pair<int, int> >::iterator it = list.begin(); it != list.end(); it++) {
+    for (std::deque<std::pair<int, int> >::iterator it = deque.begin(); it != deque.end(); it++) {
         if (it->first > it->second)
             std::swap(it->first, it->second);
     }
 
     // Step 3 - Recursively sort the ⌊n/2⌋ larger elements from each pair, creating a sorted sequence S of ⌊n/2⌋ of the input elements, in ascending order.
-
+    
 
     return 0;
 }

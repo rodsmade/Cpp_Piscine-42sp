@@ -20,6 +20,10 @@ bool isPositiveInteger(std::string str) {
     return (true);
 };
 
+void    printPair(std::pair<int, int> pair) {
+    std::cout << "(" << pair.first << ", " << pair.second << ")" << std::endl;
+};
+
 int printErrorAndExit() {
     std::cout << "Error" << std::endl;
     return (EXIT_FAILURE);
@@ -67,10 +71,20 @@ int main(int argc, char **argv) {
     }
 
     std::cout << "i now have " << list.size() << " pairs of numbers\n";
-    std::cout << "first pair is (" << list.front().first << ", " << list.front().second << ")\n";
-    std::cout << "last pair is (" << list.back().first << ", " << list.back().second << ")\n";
+    std::cout << "first pair is: ";
+    printPair(list.front());
+    std::cout << "last pair is: ";
+    printPair(list.back());
 
+    // Step 2 - Perform ⌊ n/2 ⌋ comparisons, one per pair, to determine the larger of the two elements in each pair.
+    for (std::list<std::pair<int, int> >::iterator it = list.begin(); it != list.end(); it++) {
+        if (it->first > it->second)
+            std::swap(it->first, it->second);
+    }
+
+    // Step 3 - Recursively sort the ⌊n/2⌋ larger elements from each pair, creating a sorted sequence S of ⌊n/2⌋ of the input elements, in ascending order.
 
 
     return 0;
 }
+

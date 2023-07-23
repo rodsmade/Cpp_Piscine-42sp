@@ -28,8 +28,8 @@ int printErrorAndExit() {
     return (EXIT_FAILURE);
 };
 
-bool operatorLessThanForSecondElement(std::pair<int, int> &lhs, std::pair<int, int> &rhs) {
-    return (lhs.second < rhs.second);
+bool operatorLessThanForFirstElementInPair(std::pair<int, int> &lhs, std::pair<int, int> &rhs) {
+    return (lhs.first < rhs.first);
 }
 
 void merge(std::deque<std::pair<int, int> > &arr, std::deque<int>::size_type left, std::deque<int>::size_type middle, std::deque<int>::size_type right) {
@@ -50,7 +50,7 @@ void merge(std::deque<std::pair<int, int> > &arr, std::deque<int>::size_type lef
     k = left;
 
     while (i < n1 && j < n2) {
-        if (operatorLessThanForSecondElement(L[i], R[j])) {
+        if (operatorLessThanForFirstElementInPair(L[i], R[j])) {
             arr[k] = L[i];
             i++;
         } else {
@@ -104,6 +104,12 @@ int main(int argc, char **argv) {
         inputArgs.push_back(atoi(argv[i]));
     }
 
+    int widowed = 0;
+    if ((argc - 1) % 2) {  // qtd de numeros da sequencia eh impar
+        widowed = inputArgs.back();
+        inputArgs.pop_back();
+    }
+
     gettimeofday(&end_time, NULL);
     // Calculate the elapsed time in microseconds
     long long start_micros = start_time.tv_sec * 1000000LL + start_time.tv_usec;
@@ -117,11 +123,9 @@ int main(int argc, char **argv) {
     int a, b;
     for (std::list<int>::iterator it = inputArgs.begin(); it != inputArgs.end(); it++) {
         a = *(it++);
-        b = (it != inputArgs.end()) ? *it : 0;
+        b = *it;
         std::pair<int, int> pair(a, b);
         deque.push_back(pair);
-        if (it == inputArgs.end())
-            break;
     }
 
     // std::cout << "i now have " << deque.size() << " pairs of numbers\n";
@@ -132,7 +136,7 @@ int main(int argc, char **argv) {
 
     // Step 2 - Perform ⌊ n/2 ⌋ comparisons, one per pair, to determine the larger of the two elements in each pair.
     for (std::deque<std::pair<int, int> >::iterator it = deque.begin(); it != deque.end(); it++) {
-        if (it->first > it->second)
+        if (it->first < it->second)
             std::swap(it->first, it->second);
     }
 
@@ -141,25 +145,32 @@ int main(int argc, char **argv) {
     // for (std::deque<std::pair<int, int> >::iterator it = deque.begin(); it != deque.end(); it++)
     //     printPair(*it);
     mergeSort(deque, 0, deque.size() - 1);
-    std::cout << "sorted by second element maybe we shall see\n";
+    std::cout << "sorted by first element maybe we shall see\n";
     for (std::deque<std::pair<int, int> >::iterator it = deque.begin(); it != deque.end(); it++)
         printPair(*it);
 
-    std::deque<int> sequence;
+    std::deque<int> sequenceOfLargerEls;
+    std::deque<int> sequenceOfUnsortedEls;
 
-    for (std::deque<std::pair<int, int> >::iterator it = deque.begin(); it != deque.end(); it++)
-        sequence.push_back(it->second);
-    std::cout << "sequence final passo 3:\n";
-    for (std::deque<int>::iterator it = sequence.begin(); it != sequence.end(); it++)
-    std::cout << *it << std::endl;
+    for (std::deque<std::pair<int, int> >::iterator it = deque.begin(); it != deque.end(); it++) {
+        sequenceOfLargerEls.push_back(it->first);
+        if (it != deque.begin())
+            sequenceOfUnsortedEls.push_back(it->second);
+    }
 
     // Step 4 - Insert at the start of S the element that was paired with the first and smallest element of S
-    if (deque[0].first)
-        sequence.push_front(deque[0].first);
-    std::cout << "sequence final passo 4:\n";
-    for (std::deque<int>::iterator it = sequence.begin(); it != sequence.end(); it++)
-    std::cout << *it << std::endl;
+    sequenceOfLargerEls.push_front(deque[0].second);
+    if (widowed)
+        sequenceOfUnsortedEls.push_back(widowed);
 
+    std::cout << "sequence of largers final passo 4:\n";
+    for (std::deque<int>::iterator it = sequenceOfLargerEls.begin(); it != sequenceOfLargerEls.end(); it++)
+        std::cout << *it << std::endl;
+    std::cout << "sequence of unsorted final passo 4:\n";
+    for (std::deque<int>::iterator it = sequenceOfUnsortedEls.begin(); it != sequenceOfUnsortedEls.end(); it++)
+        std::cout << *it << std::endl;
+
+    // Step 5 - LETS GO
 
     return 0;
 }

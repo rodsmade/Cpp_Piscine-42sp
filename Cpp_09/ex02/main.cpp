@@ -72,7 +72,7 @@ void merge(std::deque<std::pair<int, int> > &arr, std::deque<int>::size_type lef
         j++;
         k++;
     }
-}
+};
 
 void mergeSort(std::deque<std::pair<int, int> > &arr, std::deque<int>::size_type left, std::deque<int>::size_type right) {
     if (left < right) {
@@ -86,75 +86,51 @@ void mergeSort(std::deque<std::pair<int, int> > &arr, std::deque<int>::size_type
 };
 
 double getNthTerm(double n) {
-    // term 1:  2 = 2.
-    // term 2:  2 = 2^2 - 2
-    // term 3:  6 = 2^3 - (2 ^2 - 2)
-    // term 4: 10 = 2^4 - (2ˆ3 - (2 ^2 - 2))
-    // term 5: 22 = 2^5 - (2^4 - (2ˆ3 - (2 ^2 - 2)))
-    // term 6: 42 = 2^6 - (2^5 - (2^4 - (2ˆ3 - (2 ^2 - 2))))
-    // term 7: 86 = 2^7 - (2^6 - (2^5 - (2^4 - (2ˆ3 - (2 ^2 - 2)))))
     if (n == 1)
         return 2;
     else
         return pow(2, n) - getNthTerm(n - 1);
 };
 
-std::pair<int, int> getPosition(int value, std::deque<std::pair<int, int> > *sortedSequence) {
-    size_t i = 0;
-    for (; i < sortedSequence->size(); i++) {
-        if ((*sortedSequence)[i].first == value)
-            return ((*sortedSequence)[i]);
-    }
-    return ((*sortedSequence)[--i]);
-};
-
-// int storedValue(int index, std::deque<std::pair<int, int> > *sortedSequence) {
-//     for (size_t i = 0; i < sortedSequence->size(); i++) {
-//         if ((*sortedSequence)[i].second == index)
-//             return ((*sortedSequence)[i].first);
-//     }
-//     return 0;
-// };
-
-size_t getIndexInSequenceByTermNumber(int termNumber, std::deque<std::pair<int, int> > *sortedSequence) {
+size_t getIndexInSequenceByTermNumber(int termNumber, std::deque<std::pair<int, int> > &sortedSequence) {
     size_t i = 0;
 
-    while ((*sortedSequence)[i].second != termNumber)
+    while (sortedSequence[i].second != termNumber)
         i++;
 
     return i;
 };
 
-void insertRecursive(int lowerLimit, int upperLimit, int elementToInsert, std::deque<std::pair<int, int> > *sortedSequence) {
-    if (elementToInsert < (*sortedSequence)[lowerLimit].first) {
-        std::deque<std::pair<int, int> >::iterator it = sortedSequence->begin();
-        while (it->first != (*sortedSequence)[lowerLimit].first)
+void insertRecursive(int lowerLimit, int upperLimit, int elementToInsert, std::deque<std::pair<int, int> > &sortedSequence) {
+    if (elementToInsert < sortedSequence[lowerLimit].first) {
+        std::deque<std::pair<int, int> >::iterator it = sortedSequence.begin();
+        while (it->first != sortedSequence[lowerLimit].first)
             ++it;
-        sortedSequence->insert(it, std::pair<int, int>(elementToInsert, -42));
+        sortedSequence.insert(it, std::pair<int, int>(elementToInsert, -42));
     }
-    else if (elementToInsert > (*sortedSequence)[upperLimit].first) {
-        std::deque<std::pair<int, int> >::iterator it = sortedSequence->begin();
-        while (it->first != (*sortedSequence)[upperLimit].first)
+    else if (elementToInsert > sortedSequence[upperLimit].first) {
+        std::deque<std::pair<int, int> >::iterator it = sortedSequence.begin();
+        while (it->first != sortedSequence[upperLimit].first)
             ++it;
         ++it;
-        sortedSequence->insert(it, std::pair<int, int>(elementToInsert, -42));
+        sortedSequence.insert(it, std::pair<int, int>(elementToInsert, -42));
     }
     else if (upperLimit - lowerLimit == 1) {
-        std::deque<std::pair<int, int> >::iterator it = sortedSequence->begin();
-        while (it->first != (*sortedSequence)[upperLimit].first)
+        std::deque<std::pair<int, int> >::iterator it = sortedSequence.begin();
+        while (it->first != sortedSequence[upperLimit].first)
             ++it;
-        sortedSequence->insert(it, std::pair<int, int>(elementToInsert, -42));
+        sortedSequence.insert(it, std::pair<int, int>(elementToInsert, -42));
     }
     else {
         int middlePoint = (lowerLimit + upperLimit) / 2;
-        if (elementToInsert < (*sortedSequence)[middlePoint].first)
+        if (elementToInsert < sortedSequence[middlePoint].first)
             insertRecursive(lowerLimit, middlePoint, elementToInsert, sortedSequence);
         else
             insertRecursive(middlePoint, upperLimit, elementToInsert, sortedSequence);
     }
 };
 
-void binaryInsert(const std::pair<int, int> &element, std::deque<std::pair<int, int> > *sortedSequence) {
+void binaryInsert(const std::pair<int, int> &element, std::deque<std::pair<int, int> > &sortedSequence) {
     int elementToInsert = element.first;
     int upperLimit = element.second - 1;
 
@@ -182,9 +158,9 @@ int main(int argc, char **argv) {
         inputArgs.push_back(atoi(argv[i]));
     }
 
-    int widow = 0;
-    if ((argc - 1) % 2) {  // qtd de numeros da sequencia eh impar
-        widow = inputArgs.back();
+    int unpairedElement = 0;
+    if ((argc - 1) % 2) {
+        unpairedElement = inputArgs.back();
         inputArgs.pop_back();
     }
 
@@ -206,12 +182,6 @@ int main(int argc, char **argv) {
         deque.push_back(pair);
     }
 
-    // std::cout << "i now have " << deque.size() << " pairs of numbers\n";
-    // std::cout << "first pair is: ";
-    // printPair(deque.front());
-    // std::cout << "last pair is: ";
-    // printPair(deque.back());
-
     // Step 2 - Perform ⌊ n/2 ⌋ comparisons, one per pair, to determine the larger of the two elements in each pair.
     for (std::deque<std::pair<int, int> >::iterator it = deque.begin(); it != deque.end(); it++) {
         if (it->first < it->second)
@@ -219,81 +189,61 @@ int main(int argc, char **argv) {
     }
 
     // Step 3 - Recursively sort the ⌊n/2⌋ larger elements from each pair, creating a sorted sequence S of ⌊n/2⌋ of the input elements, in ascending order.
-    // std::cout << "before sorting\n";
-    // for (std::deque<std::pair<int, int> >::iterator it = deque.begin(); it != deque.end(); it++)
-    //     printPair(*it);
     mergeSort(deque, 0, deque.size() - 1);
 
-    std::cout << "sorted by first element maybe we shall see\n";
-    for (std::deque<std::pair<int, int> >::iterator it = deque.begin(); it != deque.end(); it++)
-        printPair(*it);
-
-    std::deque<std::pair<int, int> > largerElementsSequence;
-    std::deque<std::pair<int, int> > unsortedElementsSequence;
-    unsortedElementsSequence.push_back(std::pair<int, int>(0, 0));
-    unsortedElementsSequence.push_back(std::pair<int, int>(0, 1));
+    std::deque<std::pair<int, int> > sortedSequence;
+    std::deque<std::pair<int, int> > unsortedSequence;
+    unsortedSequence.push_back(std::pair<int, int>(0, 0));
+    unsortedSequence.push_back(std::pair<int, int>(0, 1));
 
     std::deque<std::pair<int, int> >::iterator it = deque.begin();
     int index = 1;
-    largerElementsSequence.push_back(std::pair<int, int>(it->first, index));
+    sortedSequence.push_back(std::pair<int, int>(it->first, index));
     it++;
     index++;
     for (; it != deque.end(); it++) {
-        largerElementsSequence.push_back(std::pair<int, int>(it->first, index));
-        unsortedElementsSequence.push_back(std::pair<int, int>(it->second, index));
+        sortedSequence.push_back(std::pair<int, int>(it->first, index));
+        unsortedSequence.push_back(std::pair<int, int>(it->second, index));
         index++;
     }
 
     // Step 4 - Insert at the start of S the element that was paired with the first and smallest element of S
-    largerElementsSequence.push_front(std::pair<int, int>(deque[0].second, 0));
-    if (widow)
-        unsortedElementsSequence.push_back(std::pair<int, int>(widow, index));
-
-    std::cout << "sequence of largers final passo 4:\n";
-    for (std::deque<std::pair<int, int> >::iterator it = largerElementsSequence.begin(); it != largerElementsSequence.end(); it++)
-        std::cout << "[" << it->second << "] " << it->first << std::endl;
-    std::cout << "sequence of unsorted final passo 4:\n";
-    for (std::deque<std::pair<int, int> >::iterator it = unsortedElementsSequence.begin(); it != unsortedElementsSequence.end(); it++)
-        std::cout << "[" << it->second << "] " << it->first << std::endl;
+    sortedSequence.push_front(std::pair<int, int>(deque[0].second, 0));
+    if (unpairedElement)
+        unsortedSequence.push_back(std::pair<int, int>(unpairedElement, index));
 
     // Step 5 - LETS GO
-    // 5.1 - partition into groups
-    // 2, 2, 6, 10, 22, 42, 86,
-    // int totalUnsortedElements = unsortedElementsSequence.size() - 2;
-
-    // 5.2 - order elements by index in reverse order within their groups
-    // std::reverse(first, last);
+    // 5.1 - partition into groups and order elements by index in reverse order within their groups
+    // 2, 2, 6, 10, 22, 42, 86, etc.
     double n = 1;
-    double term, begin, end;
+    double begin, end, nthTerm;
     begin = 2;
-    double sequenceSize = unsortedElementsSequence.size();
-    while (sequenceSize > 0) {
-        end = begin + getNthTerm(n);
-        term = getNthTerm(n);
-        std::reverse(&unsortedElementsSequence[begin], &unsortedElementsSequence[end]);
+    double elementsLeft = unsortedSequence.size() - 2; // first 2 elements don't count !!
+    while (elementsLeft > 0) {
+        nthTerm = getNthTerm(n);
+        if (nthTerm <= elementsLeft)
+            end = begin + nthTerm;
+        else
+            end = begin + elementsLeft;
+        std::reverse(&unsortedSequence[begin], &unsortedSequence[end]);
         n++;
         begin = end;
-        sequenceSize -= term;
+        elementsLeft -= nthTerm;
     }
 
-    std::cout << "TESTE 123\n";
-
-    // std::cout << "sequence of unsorted revertido por subgrupo:\n";
-    // for (std::deque<std::pair<int, int> >::iterator it = unsortedElementsSequence.begin(); it != unsortedElementsSequence.end(); it++)
-    //     std::cout << "[" << it->second << "] " << it->first << std::endl;
-    
-    // 5.3 - insert elements into S. use binary search from the start of S up to but not including xi to determine where to insert yi.
-    unsortedElementsSequence.pop_front();
-    unsortedElementsSequence.pop_front();
-    while (unsortedElementsSequence.size() > 0) {
-        std::deque<std::pair<int, int> > *ponteiro = &largerElementsSequence;
-        binaryInsert(unsortedElementsSequence[0], ponteiro);
-        unsortedElementsSequence.pop_front();
+    // 5.2 - insert elements into S. use binary search from the start of S up to but not including xi to determine where to insert yi.
+    unsortedSequence.pop_front();
+    unsortedSequence.pop_front();
+    while (unsortedSequence.size() > 0) {
+        binaryInsert(unsortedSequence[0], sortedSequence);
+        unsortedSequence.pop_front();
     }
 
-    std::cout << "sequence of sorted final:\n";
-    for (std::deque<std::pair<int, int> >::iterator it = largerElementsSequence.begin(); it != largerElementsSequence.end(); it++)
-        std::cout << "[" << it->second << "] " << it->first << std::endl;
+    bool isSorted = true;
+    for (size_t i = 0; i < sortedSequence.size() - 1; i++)
+        isSorted = isSorted && (sortedSequence[i] < sortedSequence[i + 1]);
+
+    assert(isSorted);
 
     return 0;
 }

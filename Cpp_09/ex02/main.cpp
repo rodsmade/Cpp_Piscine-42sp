@@ -1,8 +1,9 @@
+#include <sys/time.h>
+
 #include <cstdlib>  // exit()
 #include <deque>
 #include <iostream>
 #include <list>
-#include <sys/time.h>
 
 bool isPositiveInteger(std::string str) {
     if (str.length() == 0 || str.length() > 10)
@@ -19,7 +20,7 @@ bool isPositiveInteger(std::string str) {
     return (true);
 };
 
-void    printPair(std::pair<int, int> pair) {
+void printPair(std::pair<int, int> pair) {
     std::cout << "(" << pair.first << ", " << pair.second << ")" << std::endl;
 };
 
@@ -82,7 +83,84 @@ void mergeSort(std::deque<std::pair<int, int> > &arr, std::deque<int>::size_type
 
         merge(arr, left, middle, right);
     }
-}
+};
+
+double getNthTerm(double n) {
+    // term 1:  2 = 2.
+    // term 2:  2 = 2^2 - 2
+    // term 3:  6 = 2^3 - (2 ^2 - 2)
+    // term 4: 10 = 2^4 - (2ˆ3 - (2 ^2 - 2))
+    // term 5: 22 = 2^5 - (2^4 - (2ˆ3 - (2 ^2 - 2)))
+    // term 6: 42 = 2^6 - (2^5 - (2^4 - (2ˆ3 - (2 ^2 - 2))))
+    // term 7: 86 = 2^7 - (2^6 - (2^5 - (2^4 - (2ˆ3 - (2 ^2 - 2)))))
+    if (n == 1)
+        return 2;
+    else
+        return pow(2, n) - getNthTerm(n - 1);
+};
+
+std::pair<int, int> getPosition(int value, std::deque<std::pair<int, int> > *sortedSequence) {
+    size_t i = 0;
+    for (; i < sortedSequence->size(); i++) {
+        if ((*sortedSequence)[i].first == value)
+            return ((*sortedSequence)[i]);
+    }
+    return ((*sortedSequence)[--i]);
+};
+
+// int storedValue(int index, std::deque<std::pair<int, int> > *sortedSequence) {
+//     for (size_t i = 0; i < sortedSequence->size(); i++) {
+//         if ((*sortedSequence)[i].second == index)
+//             return ((*sortedSequence)[i].first);
+//     }
+//     return 0;
+// };
+
+size_t getIndexInSequenceByTermNumber(int termNumber, std::deque<std::pair<int, int> > *sortedSequence) {
+    size_t i = 0;
+
+    while ((*sortedSequence)[i].second != termNumber)
+        i++;
+
+    return i;
+};
+
+void insertRecursive(int lowerLimit, int upperLimit, int elementToInsert, std::deque<std::pair<int, int> > *sortedSequence) {
+    if (elementToInsert < (*sortedSequence)[lowerLimit].first) {
+        std::deque<std::pair<int, int> >::iterator it = sortedSequence->begin();
+        while (it->first != (*sortedSequence)[lowerLimit].first)
+            ++it;
+        sortedSequence->insert(it, std::pair<int, int>(elementToInsert, -42));
+    }
+    else if (elementToInsert > (*sortedSequence)[upperLimit].first) {
+        std::deque<std::pair<int, int> >::iterator it = sortedSequence->begin();
+        while (it->first != (*sortedSequence)[upperLimit].first)
+            ++it;
+        ++it;
+        sortedSequence->insert(it, std::pair<int, int>(elementToInsert, -42));
+    }
+    else if (upperLimit - lowerLimit == 1) {
+        std::deque<std::pair<int, int> >::iterator it = sortedSequence->begin();
+        while (it->first != (*sortedSequence)[upperLimit].first)
+            ++it;
+        sortedSequence->insert(it, std::pair<int, int>(elementToInsert, -42));
+    }
+    else {
+        int middlePoint = (lowerLimit + upperLimit) / 2;
+        if (elementToInsert < (*sortedSequence)[middlePoint].first)
+            insertRecursive(lowerLimit, middlePoint, elementToInsert, sortedSequence);
+        else
+            insertRecursive(middlePoint, upperLimit, elementToInsert, sortedSequence);
+    }
+};
+
+void binaryInsert(const std::pair<int, int> &element, std::deque<std::pair<int, int> > *sortedSequence) {
+    int elementToInsert = element.first;
+    int upperLimit = element.second - 1;
+
+    insertRecursive(0, getIndexInSequenceByTermNumber(upperLimit, sortedSequence), elementToInsert, sortedSequence);
+    return;
+};
 
 int main(int argc, char **argv) {
     if (argc == 1)
@@ -104,9 +182,9 @@ int main(int argc, char **argv) {
         inputArgs.push_back(atoi(argv[i]));
     }
 
-    int widowed = 0;
+    int widow = 0;
     if ((argc - 1) % 2) {  // qtd de numeros da sequencia eh impar
-        widowed = inputArgs.back();
+        widow = inputArgs.back();
         inputArgs.pop_back();
     }
 
@@ -145,33 +223,77 @@ int main(int argc, char **argv) {
     // for (std::deque<std::pair<int, int> >::iterator it = deque.begin(); it != deque.end(); it++)
     //     printPair(*it);
     mergeSort(deque, 0, deque.size() - 1);
+
     std::cout << "sorted by first element maybe we shall see\n";
     for (std::deque<std::pair<int, int> >::iterator it = deque.begin(); it != deque.end(); it++)
         printPair(*it);
 
-    std::deque<int> sequenceOfLargerEls;
-    std::deque<int> sequenceOfUnsortedEls;
+    std::deque<std::pair<int, int> > largerElementsSequence;
+    std::deque<std::pair<int, int> > unsortedElementsSequence;
+    unsortedElementsSequence.push_back(std::pair<int, int>(0, 0));
+    unsortedElementsSequence.push_back(std::pair<int, int>(0, 1));
 
-    for (std::deque<std::pair<int, int> >::iterator it = deque.begin(); it != deque.end(); it++) {
-        sequenceOfLargerEls.push_back(it->first);
-        if (it != deque.begin())
-            sequenceOfUnsortedEls.push_back(it->second);
+    std::deque<std::pair<int, int> >::iterator it = deque.begin();
+    int index = 1;
+    largerElementsSequence.push_back(std::pair<int, int>(it->first, index));
+    it++;
+    index++;
+    for (; it != deque.end(); it++) {
+        largerElementsSequence.push_back(std::pair<int, int>(it->first, index));
+        unsortedElementsSequence.push_back(std::pair<int, int>(it->second, index));
+        index++;
     }
 
     // Step 4 - Insert at the start of S the element that was paired with the first and smallest element of S
-    sequenceOfLargerEls.push_front(deque[0].second);
-    if (widowed)
-        sequenceOfUnsortedEls.push_back(widowed);
+    largerElementsSequence.push_front(std::pair<int, int>(deque[0].second, 0));
+    if (widow)
+        unsortedElementsSequence.push_back(std::pair<int, int>(widow, index));
 
     std::cout << "sequence of largers final passo 4:\n";
-    for (std::deque<int>::iterator it = sequenceOfLargerEls.begin(); it != sequenceOfLargerEls.end(); it++)
-        std::cout << *it << std::endl;
+    for (std::deque<std::pair<int, int> >::iterator it = largerElementsSequence.begin(); it != largerElementsSequence.end(); it++)
+        std::cout << "[" << it->second << "] " << it->first << std::endl;
     std::cout << "sequence of unsorted final passo 4:\n";
-    for (std::deque<int>::iterator it = sequenceOfUnsortedEls.begin(); it != sequenceOfUnsortedEls.end(); it++)
-        std::cout << *it << std::endl;
+    for (std::deque<std::pair<int, int> >::iterator it = unsortedElementsSequence.begin(); it != unsortedElementsSequence.end(); it++)
+        std::cout << "[" << it->second << "] " << it->first << std::endl;
 
     // Step 5 - LETS GO
+    // 5.1 - partition into groups
+    // 2, 2, 6, 10, 22, 42, 86,
+    // int totalUnsortedElements = unsortedElementsSequence.size() - 2;
+
+    // 5.2 - order elements by index in reverse order within their groups
+    // std::reverse(first, last);
+    double n = 1;
+    double term, begin, end;
+    begin = 2;
+    double sequenceSize = unsortedElementsSequence.size();
+    while (sequenceSize > 0) {
+        end = begin + getNthTerm(n);
+        term = getNthTerm(n);
+        std::reverse(&unsortedElementsSequence[begin], &unsortedElementsSequence[end]);
+        n++;
+        begin = end;
+        sequenceSize -= term;
+    }
+
+    std::cout << "TESTE 123\n";
+
+    // std::cout << "sequence of unsorted revertido por subgrupo:\n";
+    // for (std::deque<std::pair<int, int> >::iterator it = unsortedElementsSequence.begin(); it != unsortedElementsSequence.end(); it++)
+    //     std::cout << "[" << it->second << "] " << it->first << std::endl;
+    
+    // 5.3 - insert elements into S. use binary search from the start of S up to but not including xi to determine where to insert yi.
+    unsortedElementsSequence.pop_front();
+    unsortedElementsSequence.pop_front();
+    while (unsortedElementsSequence.size() > 0) {
+        std::deque<std::pair<int, int> > *ponteiro = &largerElementsSequence;
+        binaryInsert(unsortedElementsSequence[0], ponteiro);
+        unsortedElementsSequence.pop_front();
+    }
+
+    std::cout << "sequence of sorted final:\n";
+    for (std::deque<std::pair<int, int> >::iterator it = largerElementsSequence.begin(); it != largerElementsSequence.end(); it++)
+        std::cout << "[" << it->second << "] " << it->first << std::endl;
 
     return 0;
 }
-

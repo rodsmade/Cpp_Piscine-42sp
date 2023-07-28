@@ -1,5 +1,5 @@
 # Replace x with the desired number of unique random numbers you want to generate
-x = 13
+x = 42
 
 # Replace range_start and range_end with the desired range for random numbers
 range_start = 1

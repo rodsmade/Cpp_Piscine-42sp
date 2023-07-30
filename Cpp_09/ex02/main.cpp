@@ -1,9 +1,10 @@
-#include <sys/time.h>
-
 #include <cstdlib>  // exit()
-#include <deque>
 #include <iostream>
+#include <deque>
 #include <list>
+
+std::deque<std::pair<int, int> > sortedSequence;
+std::deque<std::pair<int, int> > unsortedSequence;
 
 bool isPositiveInteger(std::string str) {
     if (str.length() == 0 || str.length() > 10)
@@ -92,7 +93,7 @@ double getNthTerm(double n) {
         return pow(2, n) - getNthTerm(n - 1);
 };
 
-size_t getIndexInSequenceByTermNumber(int termNumber, std::deque<std::pair<int, int> > &sortedSequence) {
+size_t getIndexInSequenceByTermNumber(int termNumber) {
     size_t i = 0;
 
     while (sortedSequence[i].second != termNumber)
@@ -101,7 +102,7 @@ size_t getIndexInSequenceByTermNumber(int termNumber, std::deque<std::pair<int, 
     return i;
 };
 
-void insertRecursive(int lowerLimit, int upperLimit, int elementToInsert, std::deque<std::pair<int, int> > &sortedSequence) {
+void insertRecursive(int lowerLimit, int upperLimit, int elementToInsert) {
     if (elementToInsert < sortedSequence[lowerLimit].first) {
         std::deque<std::pair<int, int> >::iterator it = sortedSequence.begin();
         while (it->first != sortedSequence[lowerLimit].first)
@@ -124,26 +125,41 @@ void insertRecursive(int lowerLimit, int upperLimit, int elementToInsert, std::d
     else {
         int middlePoint = (lowerLimit + upperLimit) / 2;
         if (elementToInsert < sortedSequence[middlePoint].first)
-            insertRecursive(lowerLimit, middlePoint, elementToInsert, sortedSequence);
+            insertRecursive(lowerLimit, middlePoint, elementToInsert);
         else
-            insertRecursive(middlePoint, upperLimit, elementToInsert, sortedSequence);
+            insertRecursive(middlePoint, upperLimit, elementToInsert);
     }
 };
 
-void binaryInsert(const std::pair<int, int> &element, std::deque<std::pair<int, int> > &sortedSequence) {
+void binaryInsert(const std::pair<int, int> &element) {
     int elementToInsert = element.first;
-    int upperLimit = element.second - 1;
+    int upperLimit = getIndexInSequenceByTermNumber(element.second) - 1;
 
-    insertRecursive(0, getIndexInSequenceByTermNumber(upperLimit, sortedSequence), elementToInsert, sortedSequence);
+    insertRecursive(0, upperLimit, elementToInsert);
     return;
 };
+
+template <typename C>
+void printSequence(C &sequence, std::string state) {
+    std::cout << state << ":\t";
+    for (typename C::iterator it = sequence.begin(); it != sequence.end(); it++) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+};
+
+void assertIsSorted() {
+    bool isSorted = true;
+
+    for (size_t i = 0; i < sortedSequence.size() - 1; i++)
+        isSorted = isSorted && (sortedSequence[i] < sortedSequence[i + 1]);
+
+    assert(isSorted);
+}
 
 int main(int argc, char **argv) {
     if (argc == 1)
         return (printErrorAndExit());
-
-    struct timeval start_time, end_time;
-    gettimeofday(&start_time, NULL);
 
     std::list<int> inputArgs;
     for (int i = 1; i < argc; i++) {
@@ -164,13 +180,7 @@ int main(int argc, char **argv) {
         inputArgs.pop_back();
     }
 
-    gettimeofday(&end_time, NULL);
-    // Calculate the elapsed time in microseconds
-    long long start_micros = start_time.tv_sec * 1000000LL + start_time.tv_usec;
-    long long end_micros = end_time.tv_sec * 1000000LL + end_time.tv_usec;
-    long long elapsed_micros = end_micros - start_micros;
-
-    std::cout << "validou e inseriu " << inputArgs.size() << " ints em " << elapsed_micros << " microseconds\n";
+    printSequence(inputArgs, std::string("Before"));
 
     // Step 1 - Group the elements of X into ⌊n/2⌋ pairs of elements, arbitrarily, leaving one element unpaired if there is an odd number of elements.
     std::deque<std::pair<int, int> > deque;
@@ -191,8 +201,8 @@ int main(int argc, char **argv) {
     // Step 3 - Recursively sort the ⌊n/2⌋ larger elements from each pair, creating a sorted sequence S of ⌊n/2⌋ of the input elements, in ascending order.
     mergeSort(deque, 0, deque.size() - 1);
 
-    std::deque<std::pair<int, int> > sortedSequence;
-    std::deque<std::pair<int, int> > unsortedSequence;
+    // Step 4 - Insert at the start of S the element that was paired with the first and smallest element of S
+
     unsortedSequence.push_back(std::pair<int, int>(0, 0));
     unsortedSequence.push_back(std::pair<int, int>(0, 1));
 
@@ -207,7 +217,6 @@ int main(int argc, char **argv) {
         index++;
     }
 
-    // Step 4 - Insert at the start of S the element that was paired with the first and smallest element of S
     sortedSequence.push_front(std::pair<int, int>(deque[0].second, 0));
     if (unpairedElement)
         unsortedSequence.push_back(std::pair<int, int>(unpairedElement, index));
@@ -235,15 +244,17 @@ int main(int argc, char **argv) {
     unsortedSequence.pop_front();
     unsortedSequence.pop_front();
     while (unsortedSequence.size() > 0) {
-        binaryInsert(unsortedSequence[0], sortedSequence);
+        binaryInsert(unsortedSequence[0]);
         unsortedSequence.pop_front();
     }
 
-    bool isSorted = true;
-    for (size_t i = 0; i < sortedSequence.size() - 1; i++)
-        isSorted = isSorted && (sortedSequence[i] < sortedSequence[i + 1]);
+    assertIsSorted();
 
-    assert(isSorted);
+    std::cout << "After:\t";
+    for (std::deque<std::pair<int, int> >::iterator it = sortedSequence.begin(); it != sortedSequence.end(); it++)
+        std::cout << it->first << " ";
+    std::cout << "\n";
+
 
     return 0;
 }

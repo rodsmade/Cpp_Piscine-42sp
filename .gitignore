@@ -2,6 +2,7 @@
 btc
 RPN
 PmergeMe
+last_input.txt
 
 # Prerequisites
 *.d

@@ -1,5 +1,10 @@
-# Replace x with the desired number of unique random numbers you want to generate
-x = 19
+if ARGV.length != 1
+    puts "Usage: ruby myscript.rb <integer_argument>"
+    exit
+  end
+
+# Number of unique random numbers you want to generate
+x = ARGV[0].to_i
 
 # Replace range_start and range_end with the desired range for random numbers
 range_start = 1

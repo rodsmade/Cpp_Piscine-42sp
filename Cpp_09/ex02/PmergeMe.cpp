@@ -78,10 +78,10 @@ double PmergeMe::_getNthTerm(double n) {
         return pow(2, n) - _getNthTerm(n - 1);
 };
 
-void PmergeMe::_merge(std::deque<std::pair<int, int> > &container, std::deque<int>::size_type left, std::deque<int>::size_type middle, std::deque<int>::size_type right) {
-    std::deque<int>::size_type i, j, k;
-    std::deque<int>::size_type n1 = middle - left + 1;
-    std::deque<int>::size_type n2 = right - middle;
+void PmergeMe::_merge(std::deque<std::pair<int, int> > &container, std::deque<std::pair<int, int> >::size_type left, std::deque<std::pair<int, int> >::size_type middle, std::deque<std::pair<int, int> >::size_type right) {
+    std::deque<std::pair<int, int> >::size_type i, j, k;
+    std::deque<std::pair<int, int> >::size_type n1 = middle - left + 1;
+    std::deque<std::pair<int, int> >::size_type n2 = right - middle;
 
     std::deque<std::pair<int, int> > L(n1);
     std::deque<std::pair<int, int> > R(n2);
@@ -119,9 +119,9 @@ void PmergeMe::_merge(std::deque<std::pair<int, int> > &container, std::deque<in
     }
 };
 
-void PmergeMe::_mergeSort(std::deque<std::pair<int, int> > &container, std::deque<int>::size_type left, std::deque<int>::size_type right) {
+void PmergeMe::_mergeSort(std::deque<std::pair<int, int> > &container, std::deque<std::pair<int, int> >::size_type left, std::deque<std::pair<int, int> >::size_type right) {
     if (left < right) {
-        std::deque<int>::size_type middle = left + (right - left) / 2;
+        std::deque<std::pair<int, int> >::size_type middle = left + (right - left) / 2;
 
         _mergeSort(container, left, middle);
         _mergeSort(container, middle + 1, right);
@@ -176,10 +176,10 @@ void PmergeMe::_binaryInsert(const std::pair<int, int> &element) {
     return;
 };
 
-void PmergeMe::_mergeVector(std::vector<std::pair<int, int> > &container, std::vector<int>::size_type left, std::vector<int>::size_type middle, std::vector<int>::size_type right) {
-    std::vector<int>::size_type i, j, k;
-    std::vector<int>::size_type n1 = middle - left + 1;
-    std::vector<int>::size_type n2 = right - middle;
+void PmergeMe::_mergeVector(std::vector<std::pair<int, int> > &container, std::vector<std::pair<int, int> >::size_type left, std::vector<std::pair<int, int> >::size_type middle, std::vector<std::pair<int, int> >::size_type right) {
+    std::vector<std::pair<int, int> >::size_type i, j, k;
+    std::vector<std::pair<int, int> >::size_type n1 = middle - left + 1;
+    std::vector<std::pair<int, int> >::size_type n2 = right - middle;
 
     std::vector<std::pair<int, int> > L(n1);
     std::vector<std::pair<int, int> > R(n2);
@@ -217,9 +217,9 @@ void PmergeMe::_mergeVector(std::vector<std::pair<int, int> > &container, std::v
     }
 };
 
-void PmergeMe::_mergeSortVector(std::vector<std::pair<int, int> > &container, std::vector<int>::size_type left, std::vector<int>::size_type right) {
+void PmergeMe::_mergeSortVector(std::vector<std::pair<int, int> > &container, std::vector<std::pair<int, int> >::size_type left, std::vector<std::pair<int, int> >::size_type right) {
     if (left < right) {
-        std::vector<int>::size_type middle = left + (right - left) / 2;
+        std::vector<std::pair<int, int> >::size_type middle = left + (right - left) / 2;
 
         _mergeSortVector(container, left, middle);
         _mergeSortVector(container, middle + 1, right);

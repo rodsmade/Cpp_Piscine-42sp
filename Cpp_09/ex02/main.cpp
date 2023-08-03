@@ -30,14 +30,14 @@ int main(int argc, char **argv) {
 
     printSequence(object.getInputArgs(), std::string("Before"));
 
-    // object.sortUsingDeque();
+    object.sortUsingDeque();
 
-    // assertIsSorted(object.sortedSequence);
+    assertIsSorted(object.sortedSequence);
 
-    // std::cout << "After Deque:\t";
-    // for (std::deque<std::pair<int, int> >::iterator it = object.sortedSequence.begin(); it != object.sortedSequence.end(); it++)
-    //     std::cout << it->first << " ";
-    // std::cout << "\n";
+    std::cout << "After Deque:\t";
+    for (std::deque<std::pair<int, int> >::iterator it = object.sortedSequence.begin(); it != object.sortedSequence.end(); it++)
+        std::cout << it->first << " ";
+    std::cout << "\n";
 
     object.sortUsingVector();
 

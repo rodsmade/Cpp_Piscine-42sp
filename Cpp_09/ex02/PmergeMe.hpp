@@ -5,25 +5,33 @@
 #include <deque>
 #include <iostream>
 #include <list>
+#include <sstream>
+#include <sys/time.h>
 #include <vector>
 
 class PmergeMe {
    public:
+    /*=============================================
+    ===      CONSTRUCTION / DESTRUCTION         ===
+    =============================================*/
     PmergeMe();
     PmergeMe(int argc, char **argv);
     ~PmergeMe();
     PmergeMe(const PmergeMe &other);
-    PmergeMe &operator=(const PmergeMe &other);
 
-    std::list<int> &getInputArgs();
-    int &getOddOneOut();
+    /*=============================================
+    ===           OPERATOR OVERLOADS            ===
+    =============================================*/
+    PmergeMe        &operator=(const PmergeMe &other);
 
-    // All of this will GO eventually
-    void sortUsingDeque();
-    void sortUsingVector();
+    /*=============================================
+    ===            GETTERS/SETTERS              ===
+    =============================================*/
+    std::list<int>  &getInputArgs();
+    int             &getOddOneOut();
 
     template <typename Container>
-    Container mergeInsertionSortGENERIC() {
+    Container       mergeInsertionSort() {
         // Step 1 - Group the elements of X into ⌊n/2⌋ pairs of elements, arbitrarily, leaving one element unpaired if there is an odd number of elements.
         Container pairs;
         int a, b;
@@ -41,7 +49,7 @@ class PmergeMe {
         }
 
         // Step 3 - Recursively sort the ⌊n/2⌋ larger elements from each pair, creating a sorted sequence S of ⌊n/2⌋ of the input elements, in ascending order.
-        _mergeSortGENERIC(pairs, 0, pairs.size() - 1);
+        _mergeSortRecursive(pairs, 0, pairs.size() - 1);
 
         // Step 4 - Insert at the start of S the element that was paired with the first and smallest element of S
         Container sortedSequence;
@@ -88,45 +96,31 @@ class PmergeMe {
         unsortedSequence.erase(unsortedSequence.begin());
         unsortedSequence.erase(unsortedSequence.begin());
         while (unsortedSequence.size() > 0) {
-            _binaryInsertGENERIC(unsortedSequence[0], sortedSequence);
+            _binaryInsert(unsortedSequence[0], sortedSequence);
             unsortedSequence.erase(unsortedSequence.begin());
         }
 
         return (sortedSequence);
     };
 
-    // All of this will GO eventually
-    std::deque<std::pair<int, int> > sortedSequence;
-    std::deque<std::pair<int, int> > unsortedSequence;
-    std::vector<std::pair<int, int> > sortedSequenceVector;
-    std::vector<std::pair<int, int> > unsortedSequenceVector;
-
    private:
-    int _oddOneOut;
-    std::list<int> _inputArgs;
+    /*=============================================
+    ===              ATTRIBUTES                 ===
+    =============================================*/
+    int             _oddOneOut;
+    std::list<int>  _inputArgs;
 
+    /*=============================================
+    ===        PRIVATE MEMBER FUNCTIONS         ===
+    =============================================*/
     // General use
-    bool _isPositiveInteger(std::string str);
-    bool _operatorLessThanForFirstElementInPair(std::pair<int, int> &lhs, std::pair<int, int> &rhs);
-    double _getNthTerm(double n);
-
-    // Deque-specific
-    void _merge(std::deque<std::pair<int, int> > &arr, std::deque<std::pair<int, int> >::size_type left, std::deque<std::pair<int, int> >::size_type middle, std::deque<std::pair<int, int> >::size_type right);
-    void _mergeSort(std::deque<std::pair<int, int> > &arr, std::deque<std::pair<int, int> >::size_type left, std::deque<std::pair<int, int> >::size_type right);
-    size_t _getIndexInSequenceByTermNumber(int termNumber);
-    void _insertRecursive(int lowerLimit, int upperLimit, int elementToInsert);
-    void _binaryInsert(const std::pair<int, int> &element);
-
-    // Vector-specific
-    void _mergeVector(std::vector<std::pair<int, int> > &arr, std::vector<std::pair<int, int> >::size_type left, std::vector<std::pair<int, int> >::size_type middle, std::vector<std::pair<int, int> >::size_type right);
-    void _mergeSortVector(std::vector<std::pair<int, int> > &arr, std::vector<std::pair<int, int> >::size_type left, std::vector<std::pair<int, int> >::size_type right);
-    size_t _getIndexInSequenceByTermNumberVector(int termNumber);
-    void _insertRecursiveVector(int lowerLimit, int upperLimit, int elementToInsert);
-    void _binaryInsertVector(const std::pair<int, int> &element);
+    bool            _isPositiveInteger(std::string str);
+    bool            _operatorLessThanForFirstElementInPair(std::pair<int, int> &lhs, std::pair<int, int> &rhs);
+    double          _getNthTerm(double n);
 
     // GENERIC BABES
     template <typename Container>
-    void _mergeGENERIC(Container &container, typename Container::size_type left, typename Container::size_type middle, typename Container::size_type right) {
+    void            _merge(Container &container, typename Container::size_type left, typename Container::size_type middle, typename Container::size_type right) {
         typename Container::size_type i, j, k;
         typename Container::size_type n1 = middle - left + 1;
         typename Container::size_type n2 = right - middle;
@@ -168,19 +162,19 @@ class PmergeMe {
     };
 
     template <typename Container>
-    void _mergeSortGENERIC(Container &container, typename Container::size_type left, typename Container::size_type right) {
+    void            _mergeSortRecursive(Container &container, typename Container::size_type left, typename Container::size_type right) {
         if (left < right) {
             typename Container::size_type middle = left + (right - left) / 2;
 
-            _mergeSortGENERIC(container, left, middle);
-            _mergeSortGENERIC(container, middle + 1, right);
+            _mergeSortRecursive(container, left, middle);
+            _mergeSortRecursive(container, middle + 1, right);
 
-            _mergeGENERIC(container, left, middle, right);
+            _merge(container, left, middle, right);
         }
     };
 
     template <typename Container>
-    size_t _getIndexInSequenceByTermNumberGENERIC(int termNumber, Container &sortedSequence) {
+    size_t          _getIndexInSequenceByTermNumber(int termNumber, Container &sortedSequence) {
         size_t i = 0;
 
         while (sortedSequence[i].second != termNumber)
@@ -190,7 +184,7 @@ class PmergeMe {
     };
 
     template <typename Container>
-    void _insertRecursiveGENERIC(int lowerLimit, int upperLimit, int elementToInsert, Container &sortedSequence) {
+    void            _insertRecursive(int lowerLimit, int upperLimit, int elementToInsert, Container &sortedSequence) {
         if (elementToInsert < sortedSequence[lowerLimit].first) {
             typename Container::iterator it = sortedSequence.begin();
             while (it->first != sortedSequence[lowerLimit].first)
@@ -210,18 +204,18 @@ class PmergeMe {
         } else {
             int middlePoint = (lowerLimit + upperLimit) / 2;
             if (elementToInsert < sortedSequence[middlePoint].first)
-                _insertRecursiveGENERIC(lowerLimit, middlePoint, elementToInsert, sortedSequence);
+                _insertRecursive(lowerLimit, middlePoint, elementToInsert, sortedSequence);
             else
-                _insertRecursiveGENERIC(middlePoint, upperLimit, elementToInsert, sortedSequence);
+                _insertRecursive(middlePoint, upperLimit, elementToInsert, sortedSequence);
         }
     };
 
     template <typename Container>
-    void _binaryInsertGENERIC(const std::pair<int, int> &element, Container &sortedSequence) {
+    void            _binaryInsert(const std::pair<int, int> &element, Container &sortedSequence) {
         int elementToInsert = element.first;
-        int upperLimit = _getIndexInSequenceByTermNumberGENERIC(element.second, sortedSequence) - 1;
+        int upperLimit = _getIndexInSequenceByTermNumber(element.second, sortedSequence) - 1;
 
-        _insertRecursiveGENERIC(0, upperLimit, elementToInsert, sortedSequence);
+        _insertRecursive(0, upperLimit, elementToInsert, sortedSequence);
         return;
     };
 };

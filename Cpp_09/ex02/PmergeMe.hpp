@@ -8,6 +8,7 @@
 #include <iostream>
 #include <list>
 #include <math.h>
+#include <sys/time.h>
 #include <vector>
 
 class PmergeMe {

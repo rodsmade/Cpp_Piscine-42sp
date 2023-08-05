@@ -28,27 +28,33 @@ int main(int argc, char **argv) {
         return (EXIT_FAILURE);
     }
 
-    std::cout << "ARGC - 1: " << (argc - 1) << "\n";
-
     printSequence(object.getInputArgs(), std::string("Before"));
 
+    // TIMER
+    struct timeval start_time, end_time;
+    long long elapsed_micros_deque, elapsed_micros_vector;
+
+    gettimeofday(&start_time, NULL);
     object.sortUsingDeque();
+    gettimeofday(&end_time, NULL);
 
     assertIsSorted(object.sortedSequence);
+    elapsed_micros_deque = (end_time.tv_sec * 1000000LL + end_time.tv_usec) - (start_time.tv_sec * 1000000LL + start_time.tv_usec);
 
-    std::cout << "After Deque:\t";
+    gettimeofday(&start_time, NULL);
+    object.sortUsingVector();
+    gettimeofday(&end_time, NULL);
+
+    assertIsSorted(object.sortedSequenceVector);
+    elapsed_micros_vector = (end_time.tv_sec * 1000000LL + end_time.tv_usec) - (start_time.tv_sec * 1000000LL + start_time.tv_usec);
+
+    std::cout << "After:\t";
     for (std::deque<std::pair<int, int> >::iterator it = object.sortedSequence.begin(); it != object.sortedSequence.end(); it++)
         std::cout << it->first << " ";
     std::cout << "\n";
 
-    object.sortUsingVector();
-
-    assertIsSorted(object.sortedSequenceVector);
-
-    std::cout << "After Vector:\t";
-    for (std::vector<std::pair<int, int> >::iterator it = object.sortedSequenceVector.begin(); it != object.sortedSequenceVector.end(); it++)
-        std::cout << it->first << " ";
-    std::cout << "\n";
+    std::cout << "Time to process a range of " << (argc - 1) << " elements with std::deque : " << elapsed_micros_deque << " us" << std::endl;
+    std::cout << "Time to process a range of " << (argc - 1) << " elements with std::vector : " << elapsed_micros_vector << " us" << std::endl;
 
     return 0;
 }

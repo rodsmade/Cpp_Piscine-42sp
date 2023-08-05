@@ -1,15 +1,6 @@
 #include "PmergeMe.hpp"
 
 template <typename C>
-void printSequence(C &sequence, std::string state) {
-    std::cout << state << ":\t";
-    for (typename C::iterator it = sequence.begin(); it != sequence.end(); it++) {
-        std::cout << *it << " ";
-    }
-    std::cout << std::endl;
-};
-
-template <typename C>
 void assertIsSorted(C &sequence) {
     bool isSorted = true;
 
@@ -19,37 +10,46 @@ void assertIsSorted(C &sequence) {
     assert(isSorted);
 }
 
+/**
+ * Esse é o código mais seboso que eu já fiz na vida. Perdão.
+*/
 int main(int argc, char **argv) {
-    PmergeMe object;
+    PmergeMe mergeInsertSorter;
     try {
-        object = PmergeMe(argc, argv);
+        mergeInsertSorter = PmergeMe(argc, argv);
     } catch(const std::exception& e) {
         std::cerr << "Error\n";
         return (EXIT_FAILURE);
     }
 
-    printSequence(object.getInputArgs(), std::string("Before"));
+    std::cout << "Before:\t";
+    for (std::list<int>::iterator it = mergeInsertSorter.getInputArgs().begin(); it != mergeInsertSorter.getInputArgs().end(); it++) {
+        std::cout << *it << " ";
+    }
+    if (mergeInsertSorter.getOddOneOut())
+        std::cout << mergeInsertSorter.getOddOneOut();
+    std::cout << std::endl;
 
     // TIMER
     struct timeval start_time, end_time;
     long long elapsed_micros_deque, elapsed_micros_vector;
 
     gettimeofday(&start_time, NULL);
-    object.sortUsingDeque();
+    mergeInsertSorter.sortUsingDeque();
     gettimeofday(&end_time, NULL);
 
-    assertIsSorted(object.sortedSequence);
+    assertIsSorted(mergeInsertSorter.sortedSequence);
     elapsed_micros_deque = (end_time.tv_sec * 1000000LL + end_time.tv_usec) - (start_time.tv_sec * 1000000LL + start_time.tv_usec);
 
     gettimeofday(&start_time, NULL);
-    object.sortUsingVector();
+    mergeInsertSorter.sortUsingVector();
     gettimeofday(&end_time, NULL);
 
-    assertIsSorted(object.sortedSequenceVector);
+    assertIsSorted(mergeInsertSorter.sortedSequenceVector);
     elapsed_micros_vector = (end_time.tv_sec * 1000000LL + end_time.tv_usec) - (start_time.tv_sec * 1000000LL + start_time.tv_usec);
 
     std::cout << "After:\t";
-    for (std::deque<std::pair<int, int> >::iterator it = object.sortedSequence.begin(); it != object.sortedSequence.end(); it++)
+    for (std::deque<std::pair<int, int> >::iterator it = mergeInsertSorter.sortedSequence.begin(); it != mergeInsertSorter.sortedSequence.end(); it++)
         std::cout << it->first << " ";
     std::cout << "\n";
 

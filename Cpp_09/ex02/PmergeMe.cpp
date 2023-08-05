@@ -145,9 +145,6 @@ void PmergeMe::_mergeSort(std::deque<std::pair<int, int> > &container, std::dequ
 size_t PmergeMe::_getIndexInSequenceByTermNumber(int termNumber) {
     size_t i = 0;
 
-    // while (sortedSequence[i].second != termNumber)
-    //     i++;
-
     try {
         while (sortedSequence.at(i).second != termNumber)
             i++;
@@ -259,9 +256,6 @@ void PmergeMe::_mergeSortVector(std::vector<std::pair<int, int> > &container, st
 
 size_t PmergeMe::_getIndexInSequenceByTermNumberVector(int termNumber) {
     size_t i = 0;
-
-    // while (sortedSequenceVector[i].second != termNumber)
-    //     i++;
 
     try {
         while (sortedSequenceVector.at(i).second != termNumber)

@@ -1,10 +1,13 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+#include <cassert>  // assert()
+#include <climits>  // INT_MAX
 #include <cstdlib>  // exit()
-#include <iostream>
 #include <deque>
+#include <iostream>
 #include <list>
+#include <math.h>
 #include <vector>
 
 class PmergeMe {
@@ -34,12 +37,14 @@ class PmergeMe {
     bool    _operatorLessThanForFirstElementInPair(std::pair<int, int> &lhs, std::pair<int, int> &rhs);
     double  _getNthTerm(double n);
 
+    void    _reversePairsInRange(double begin, double end);
     void    _merge(std::deque<std::pair<int, int> > &arr, std::deque<int>::size_type left, std::deque<int>::size_type middle, std::deque<int>::size_type right);
     void    _mergeSort(std::deque<std::pair<int, int> > &arr, std::deque<int>::size_type left, std::deque<int>::size_type right);
     size_t  _getIndexInSequenceByTermNumber(int termNumber);
     void    _insertRecursive(int lowerLimit, int upperLimit, int elementToInsert);
     void    _binaryInsert(const std::pair<int, int> &element);
 
+    void    _reversePairsInRangeVector(double begin, double end);
     void    _mergeVector(std::vector<std::pair<int, int> > &arr, std::vector<int>::size_type left, std::vector<int>::size_type middle, std::vector<int>::size_type right);
     void    _mergeSortVector(std::vector<std::pair<int, int> > &arr, std::vector<int>::size_type left, std::vector<int>::size_type right);
     size_t  _getIndexInSequenceByTermNumberVector(int termNumber);

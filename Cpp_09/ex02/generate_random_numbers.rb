@@ -1,5 +1,5 @@
 # Replace x with the desired number of unique random numbers you want to generate
-x = 19
+x = 3000
 
 # Replace range_start and range_end with the desired range for random numbers
 range_start = 1

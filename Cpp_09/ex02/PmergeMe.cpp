@@ -3,9 +3,9 @@
 // -------------------------------
 // CANONICAL FORM
 // -------------------------------
-PmergeMe::PmergeMe() {};
+PmergeMe::PmergeMe() : _oddOneOut(0) {};
 
-PmergeMe::PmergeMe(int argc, char **argv) {
+PmergeMe::PmergeMe(int argc, char **argv) : _oddOneOut(0) {
     if (argc < 2)
         throw std::exception();
     
@@ -31,10 +31,12 @@ PmergeMe::~PmergeMe() {};
 
 PmergeMe::PmergeMe(const PmergeMe &other) {
     _inputArgs = other._inputArgs;
+    _oddOneOut = other._oddOneOut;
 };
 
 PmergeMe &PmergeMe::operator=(const PmergeMe &other) {
     _inputArgs = other._inputArgs;
+    _oddOneOut = other._oddOneOut;
     return *this;
 };
 
@@ -77,6 +79,16 @@ double PmergeMe::_getNthTerm(double n) {
     else
         return pow(2, n) - _getNthTerm(n - 1);
 };
+
+void PmergeMe::_reversePairsInRange(double begin, double end) {
+    double count = (end - begin) / 2;
+
+    for (double i = 0; i < count; i++) {
+        std::pair<int, int> temp = unsortedSequence[begin + i];
+        unsortedSequence[begin + i] = unsortedSequence[end - 1 - i];
+        unsortedSequence[end - 1 - i] = temp;
+    }
+}
 
 void PmergeMe::_merge(std::deque<std::pair<int, int> > &container, std::deque<int>::size_type left, std::deque<int>::size_type middle, std::deque<int>::size_type right) {
     std::deque<int>::size_type i, j, k;
@@ -175,6 +187,16 @@ void PmergeMe::_binaryInsert(const std::pair<int, int> &element) {
     _insertRecursive(0, upperLimit, elementToInsert);
     return;
 };
+
+void PmergeMe::_reversePairsInRangeVector(double begin, double end) {
+    double count = (end - begin) / 2;
+
+    for (double i = 0; i < count; i++) {
+        std::pair<int, int> temp = unsortedSequenceVector[begin + i];
+        unsortedSequenceVector[begin + i] = unsortedSequenceVector[end - 1 - i];
+        unsortedSequenceVector[end - 1 - i] = temp;
+    }
+}
 
 void PmergeMe::_mergeVector(std::vector<std::pair<int, int> > &container, std::vector<int>::size_type left, std::vector<int>::size_type middle, std::vector<int>::size_type right) {
     std::vector<int>::size_type i, j, k;
@@ -331,7 +353,7 @@ void PmergeMe::sortUsingDeque() {
             end = begin + nthTerm;
         else
             end = begin + elementsLeft;
-        std::reverse(&unsortedSequence[begin], &unsortedSequence[end]);
+        _reversePairsInRange(begin, end);
         n++;
         begin = end;
         elementsLeft -= nthTerm;
@@ -399,7 +421,7 @@ void PmergeMe::sortUsingVector() {
             end = begin + nthTerm;
         else
             end = begin + elementsLeft;
-        std::reverse(&unsortedSequenceVector[begin], &unsortedSequenceVector[end]);
+        _reversePairsInRangeVector(begin, end);
         n++;
         begin = end;
         elementsLeft -= nthTerm;
